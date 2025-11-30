@@ -1,3 +1,28 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "profile",
+      "description": "A portrait of a student.",
+      "imageUrl": "https://images.unsplash.com/photo-1680506718179-5e1d97b6a90a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cG9ydHJhaXQlMjBwZXJzb258ZW58MHx8fHwxNzY0MzkwOTk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "portrait person"
+    },
+    {
+      "id": "project-code",
+      "description": "A blurry screenshot of code on a screen.",
+      "imageUrl": "https://images.unsplash.com/photo-1608742213509-815b97c30b36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjb2RlJTIwc2NyZWVufGVufDB8fHx8MTc2NDM4OTM4N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "code screen"
+    },
+    {
+      "id": "project-music",
+      "description": "Abstract visualization of sound waves.",
+      "imageUrl": "https://images.unsplash.com/photo-1655138629937-0f21671e1d1f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzb3VuZCUyMHdhdmVzfGVufDB8fHx8MTc2NDQyMTc3NXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "sound waves"
+    },
+    {
+      "id": "project-webapp",
+      "description": "A diagram of a web application architecture.",
+      "imageUrl": "https://images.unsplash.com/photo-1610477746458-b96000783ff5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx3ZWIlMjBhcmNoaXRlY3R1cmV8ZW58MHx8fHwxNzY0NDcyNDc0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "web architecture"
+    }
+  ]
 }
