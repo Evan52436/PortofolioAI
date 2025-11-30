@@ -8,7 +8,7 @@ const getImage = (id: string): ImagePlaceholder => {
 export const studentData = {
     name: 'Evan Pranawa Armansyah',
     major: 'Computer Science & Music',
-    bio: 'A passionate vocational student blending the logical world of code with the creative art of music. Eager to build innovative applications and compose moving soundscapes.',
+    bio: 'A tech enthusiast based in Bogor, Indonesia. Currently still in school but I\'ve worked on various personal projects including home class servers and network mapping that have helped me develop a strong foundation in Cybersecurity. I also have experience in music industry such as performing on stage, playing with DAW and many more',
     profilePicture: getImage('profile'),
 };
 
