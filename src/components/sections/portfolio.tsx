@@ -13,7 +13,7 @@ export function Portfolio() {
         </div>
         <div className="flex space-x-6 overflow-x-auto pb-4 -mx-4 px-4">
           {projects.map((project) => (
-            <div key={project.id} className="min-w-[300px] flex-shrink-0 sm:min-w-[350px]">
+            <div key={project.id} className="w-[300px] flex-shrink-0">
               <ProjectCard project={project} />
             </div>
           ))}
