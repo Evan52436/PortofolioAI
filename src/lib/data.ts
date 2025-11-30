@@ -103,10 +103,10 @@ export const resume = {
     ],
     experience: [
         {
-            company: 'Indie Game Studio (Freelance)',
-            role: 'Sound Designer & Tools Developer',
-            period: 'Summer 2023',
-            description: 'Composed adaptive soundtracks for a 2D platformer and developed a custom Unity plugin to manage audio assets.',
+            company: 'Personal Project',
+            role: 'Building a small home server',
+            period: 'Ongoing',
+            description: 'Designed and built a home lab server for hosting various services, including a media server, local file storage, and a private cloud. This project involved hardware selection, OS installation (Linux), network configuration, and containerization with Docker.',
         }
     ],
     skills: skills
