@@ -31,7 +31,6 @@ export function Header() {
             <Code className="h-6 w-6 text-primary" />
             <Music className="h-6 w-6 text-accent" />
           </div>
-          <span className="font-bold sm:inline-block">Code & Cadence</span>
         </Link>
 
         <nav className="hidden flex-1 items-center md:flex">

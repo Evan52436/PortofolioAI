@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { AppThemeProvider } from '@/context/theme-provider';
 
 export const metadata: Metadata = {
-  title: 'Code & Cadence',
+  title: 'Student Portfolio',
   description: 'A portfolio for vocational high school students majoring in computer science and music.',
 };
 

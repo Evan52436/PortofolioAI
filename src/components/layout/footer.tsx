@@ -3,7 +3,7 @@ export function Footer() {
     <footer className="border-t">
       <div className="container flex h-16 items-center justify-center">
         <p className="text-sm text-muted-foreground">
-          &copy; {new Date().getFullYear()} Code & Cadence. All rights reserved.
+          &copy; {new Date().getFullYear()} All rights reserved.
         </p>
       </div>
     </footer>
