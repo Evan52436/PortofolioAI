@@ -19,7 +19,7 @@ const skills = [
   {
     name: 'Backend',
     icon: <Server className="h-10 w-10 text-primary" />,
-    description: 'Python, C++, Node.js, Docker',
+    description: 'Docker',
   },
   {
     name: 'Databases',
@@ -29,7 +29,7 @@ const skills = [
   {
     name: 'Cybersecurity',
     icon: <BrainCircuit className="h-10 w-10 text-primary" />,
-    description: 'Network Analysis, CTF Tools',
+    description: 'Networking & CTF',
   },
   {
     name: 'Music Production',
@@ -39,7 +39,7 @@ const skills = [
   {
     name: 'Instruments',
     icon: <Guitar className="h-10 w-10 text-primary" />,
-    description: 'Piano, Guitar',
+    description: 'Piano & Guitar',
   },
 ];
 
@@ -62,7 +62,7 @@ export function Skills() {
               key={skill.name}
               className="flex flex-col items-center justify-center p-6 text-center"
             >
-              <CardHeader className="p-0">
+              <CardHeader className="p-0 flex items-center">
                 {skill.icon}
                 <CardTitle className="mt-4">{skill.name}</CardTitle>
               </CardHeader>
