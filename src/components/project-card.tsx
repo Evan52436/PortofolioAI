@@ -26,6 +26,7 @@ export function ProjectCard({ project }: { project: Project }) {
             layout="fill"
             objectFit="cover"
             data-ai-hint={project.image.imageHint}
+            className="transition-transform duration-300 group-hover:scale-105"
           />
         </div>
         <CardTitle className="flex items-center justify-between">

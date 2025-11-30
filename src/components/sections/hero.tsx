@@ -18,7 +18,7 @@ export function Hero() {
             <p className="max-w-xl text-muted-foreground md:text-lg">
               {studentData.bio}
             </p>
-            <Button asChild size="lg" className="mt-8">
+            <Button asChild size="lg" className="mt-8 transition-transform duration-300 hover:scale-105">
               <a href="#contact">
                 Get in Touch <ArrowDown className="ml-2 h-5 w-5" />
               </a>

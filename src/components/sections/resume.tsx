@@ -14,7 +14,7 @@ export function Resume() {
           </p>
         </div>
         <div className="mx-auto max-w-4xl space-y-8">
-          <Card>
+          <Card className="transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
                 <GraduationCap className="h-6 w-6 text-primary" />
@@ -33,7 +33,7 @@ export function Resume() {
               ))}
             </CardContent>
           </Card>
-          <Card>
+          <Card className="transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
                 <Briefcase className="h-6 w-6 text-primary" />
@@ -55,7 +55,7 @@ export function Resume() {
           </Card>
         </div>
         <div className="mt-12 text-center">
-          <Button size="lg">
+          <Button size="lg" className="transition-transform duration-300 hover:scale-105">
             <Download className="mr-2 h-5 w-5" />
             Download PDF Resume
           </Button>
