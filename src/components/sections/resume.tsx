@@ -1,7 +1,6 @@
 import { resume } from '@/lib/data';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Download, Briefcase, GraduationCap } from 'lucide-react';
+import { Briefcase, GraduationCap } from 'lucide-react';
 
 export function Resume() {
   return (
@@ -53,12 +52,6 @@ export function Resume() {
               ))}
             </CardContent>
           </Card>
-        </div>
-        <div className="mt-12 text-center">
-          <Button size="lg" className="transition-transform duration-300 hover:scale-105">
-            <Download className="mr-2 h-5 w-5" />
-            Download PDF Resume
-          </Button>
         </div>
       </div>
     </section>
