@@ -1,3 +1,5 @@
+'use client';
+
 import {
   BrainCircuit,
   Database,
@@ -12,7 +14,7 @@ const skills = [
   {
     name: 'Web Development',
     icon: <Globe className="h-10 w-10 text-primary" />,
-    description: 'HTML5, CSS3, JavaScript (React, Next.js)',
+    description: 'HTML5, CSS3, JavaScript, Java',
   },
   {
     name: 'Backend',
@@ -22,7 +24,7 @@ const skills = [
   {
     name: 'Databases',
     icon: <Database className="h-10 w-10 text-primary" />,
-    description: 'SQL (PostgreSQL), NoSQL (MongoDB)',
+    description: 'SQL dan MariaDB',
   },
   {
     name: 'Cybersecurity',
@@ -32,7 +34,7 @@ const skills = [
   {
     name: 'Music Production',
     icon: <Music className="h-10 w-10 text-primary" />,
-    description: 'Ableton Live, Logic Pro X, Music Theory',
+    description: 'Presonus Studio One & Vocaloid',
   },
   {
     name: 'Instruments',
