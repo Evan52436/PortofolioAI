@@ -13,32 +13,32 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 const skills = [
   {
     name: 'Web Development',
-    icon: <Globe className="h-10 w-10 text-primary" />,
+    icon: <Globe className="h-10 w-10 text-primary mb-4" />,
     description: 'HTML5, CSS3, JavaScript, Java',
   },
   {
     name: 'Backend',
-    icon: <Server className="h-10 w-10 text-primary" />,
+    icon: <Server className="h-10 w-10 text-primary mb-4" />,
     description: 'Docker',
   },
   {
     name: 'Databases',
-    icon: <Database className="h-10 w-10 text-primary" />,
+    icon: <Database className="h-10 w-10 text-primary mb-4" />,
     description: 'SQL dan MariaDB',
   },
   {
     name: 'Cybersecurity',
-    icon: <BrainCircuit className="h-10 w-10 text-primary" />,
+    icon: <BrainCircuit className="h-10 w-10 text-primary mb-4" />,
     description: 'Networking & CTF',
   },
   {
     name: 'Music Production',
-    icon: <Music className="h-10 w-10 text-primary" />,
+    icon: <Music className="h-10 w-10 text-primary mb-4" />,
     description: 'Presonus Studio One & Vocaloid',
   },
   {
     name: 'Instruments',
-    icon: <Guitar className="h-10 w-10 text-primary" />,
+    icon: <Guitar className="h-10 w-10 text-primary mb-4" />,
     description: 'Piano & Guitar',
   },
 ];
