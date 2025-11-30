@@ -1,5 +1,12 @@
 import { projects } from '@/lib/data';
 import { ProjectCard } from '@/components/project-card';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 export function Portfolio() {
   return (
@@ -11,11 +18,24 @@ export function Portfolio() {
             A collection of my favorite projects in code and music.
           </p>
         </div>
-        <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
+        <Carousel
+          opts={{
+            align: "start",
+          }}
+          className="mx-auto w-full max-w-sm sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-6xl"
+        >
+          <CarouselContent>
+            {projects.map((project) => (
+              <CarouselItem key={project.id} className="md:basis-1/2 lg:basis-1/3">
+                <div className="p-1 h-full">
+                  <ProjectCard project={project} />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
       </div>
     </section>
   );
