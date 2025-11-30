@@ -111,7 +111,7 @@ export const resume = {
         {
             company: 'School Project',
             role: 'School E-commerce System',
-            period: '2024',
+            period: 'Ongoing',
             description: 'Developed a full-stack e-commerce platform for a school project. The system included product listings, a shopping cart, user authentication, and an admin dashboard for managing inventory. This project demonstrated skills in both front-end and back-end development, as well as database management.'
         }
     ],
