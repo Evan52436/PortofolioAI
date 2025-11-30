@@ -107,6 +107,12 @@ export const resume = {
             role: 'Building a small home server',
             period: 'Ongoing',
             description: 'Designed and built a home lab server for hosting various services, including a media server, local file storage, and a private cloud. This project involved hardware selection, OS installation (Linux), network configuration, and containerization with Docker.',
+        },
+        {
+            company: 'School Project',
+            role: 'School E-commerce System',
+            period: '2024',
+            description: 'Developed a full-stack e-commerce platform for a school project. The system included product listings, a shopping cart, user authentication, and an admin dashboard for managing inventory. This project demonstrated skills in both front-end and back-end development, as well as database management.'
         }
     ],
     skills: skills
