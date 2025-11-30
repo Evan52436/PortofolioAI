@@ -11,7 +11,6 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { AIFeedbackModal } from './ai-feedback-modal';
 import type { projects } from '@/lib/data';
 
 type Project = (typeof projects)[0];
@@ -48,9 +47,6 @@ export function ProjectCard({ project }: { project: Project }) {
           ))}
         </div>
       </CardContent>
-      <CardFooter>
-        <AIFeedbackModal project={project} />
-      </CardFooter>
     </Card>
   );
 }
