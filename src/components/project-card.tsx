@@ -1,12 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import { Code, Music } from 'lucide-react';
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
@@ -23,19 +21,14 @@ export function ProjectCard({ project }: { project: Project }) {
           <Image
             src={project.image.imageUrl}
             alt={project.image.description}
-            layout="fill"
-            objectFit="cover"
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
             data-ai-hint={project.image.imageHint}
-            className="transition-transform duration-300 group-hover:scale-105"
           />
         </div>
         <CardTitle className="flex items-center justify-between">
           <span>{project.title}</span>
-          {project.category === 'code' ? (
-            <Code className="h-5 w-5 text-accent" />
-          ) : (
-            <Music className="h-5 w-5 text-accent" />
-          )}
+          <Image src="/logo.png" alt="logo" width={20} height={20} />
         </CardTitle>
         <CardDescription>{project.description}</CardDescription>
       </CardHeader>

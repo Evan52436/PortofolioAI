@@ -29,9 +29,8 @@ export function Hero() {
               <Image
                 src={studentData.profilePicture.imageUrl}
                 alt={studentData.profilePicture.description}
-                layout="fill"
-                objectFit="cover"
-                className="transition-transform duration-300 hover:scale-105"
+                fill
+                className="object-cover transition-transform duration-300 hover:scale-105"
                 data-ai-hint={studentData.profilePicture.imageHint}
               />
             </div>
