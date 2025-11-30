@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { Code, Menu, Music } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import {
   Sheet,
@@ -10,6 +10,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { NavLink } from './nav-link';
+import Image from 'next/image';
 
 const navLinks = [
   { href: '#portfolio', label: 'Portfolio' },
@@ -27,10 +28,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
         <Link href="/" className="mr-6 flex items-center space-x-2">
-          <div className="flex items-center justify-center">
-            <Code className="h-6 w-6 text-primary" />
-            <Music className="h-6 w-6 text-accent" />
-          </div>
+          <Image src="/logo.png" alt="logo" width={150} height={40} />
         </Link>
 
         <nav className="hidden flex-1 items-center md:flex">
