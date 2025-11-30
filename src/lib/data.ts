@@ -39,6 +39,33 @@ export const projects = [
         technologies: ['React', 'TypeScript', 'Web Audio API'],
         image: getImage('project-webapp'),
         content: 'const audioCtx = new (window.AudioContext || window.webkitAudioContext)();'
+    },
+    {
+        id: 'project-4',
+        title: 'Interactive Music Visualizer',
+        category: 'code',
+        description: 'A real-time music visualizer that uses p5.js to create stunning geometric patterns based on audio input. Deployed as a static web page.',
+        technologies: ['p5.js', 'JavaScript', 'HTML5 Canvas'],
+        image: getImage('project-visualizer'),
+        content: 'function draw() { background(0); ellipse(width / 2, height / 2, 50, 50); }'
+    },
+    {
+        id: 'project-5',
+        title: 'Cybersecurity CTF Tools',
+        category: 'code',
+        description: 'A collection of Python scripts for automating common Capture The Flag (CTF) challenges, including cryptography and network analysis.',
+        technologies: ['Python', 'Cryptography', 'Networking'],
+        image: getImage('project-ctf'),
+        content: 'A collection of Python scripts for automating common Capture The Flag (CTF) challenges.'
+    },
+    {
+        id: 'project-6',
+        title: 'Acoustic EP "City Lights"',
+        category: 'music',
+        description: 'A 5-track acoustic EP written, performed, and produced independently. Features intricate guitar work and heartfelt lyrics.',
+        technologies: ['Acoustic Guitar', 'Vocals', 'Logic Pro X'],
+        image: getImage('project-acoustic'),
+        content: 'A 5-track acoustic EP.'
     }
 ];
 

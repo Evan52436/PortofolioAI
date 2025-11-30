@@ -23,6 +23,24 @@
       "description": "A diagram of a web application architecture.",
       "imageUrl": "https://images.unsplash.com/photo-1610477746458-b96000783ff5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx3ZWIlMjBhcmNoaXRlY3R1cmV8ZW58MHx8fHwxNzY0NDcyNDc0fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "web architecture"
+    },
+    {
+      "id": "project-visualizer",
+      "description": "Abstract geometric patterns from a music visualizer.",
+      "imageUrl": "https://images.unsplash.com/photo-1489648022186-8f49310909a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMGdlb21ldHJpY3xlbnwwfHx8fDE3NjQ0MTY1MTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract geometric"
+    },
+    {
+      "id": "project-ctf",
+      "description": "A computer screen with code and a terminal for cybersecurity tasks.",
+      "imageUrl": "https://images.unsplash.com/photo-1714846201670-1c5721196c7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxoYWNrZXIlMjB0ZXJtaW5hbHxlbnwwfHx8fDE3NjQ0NzM4ODV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "hacker terminal"
+    },
+    {
+      "id": "project-acoustic",
+      "description": "A person playing an acoustic guitar in a cozy setting.",
+      "imageUrl": "https://images.unsplash.com/photo-1588690224648-20426ab6274a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxhY291c3RpYyUyMGd1aXRhcnxlbnwwfHx8fDE3NjQ0MTUzODd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "acoustic guitar"
     }
   ]
 }
