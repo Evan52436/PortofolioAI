@@ -20,7 +20,7 @@ export function Hero() {
             </p>
             <Button asChild size="lg" className="mt-8 transition-transform duration-300 hover:scale-105">
               <a href="#contact">
-                Get in Touch <ArrowDown className="ml-2 h-5 w-5" />
+                Let's Connect <ArrowDown className="ml-2 h-5 w-5" />
               </a>
             </Button>
           </div>
