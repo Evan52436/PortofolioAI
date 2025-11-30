@@ -12,9 +12,11 @@ export function Hero() {
             <h1 className="mb-4 text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
               {studentData.name}
             </h1>
-            <p className="mb-2 text-lg font-medium text-primary md:text-xl">
-              {studentData.major}
-            </p>
+            <div className="mb-2 text-lg font-medium text-primary md:text-xl">
+              {studentData.major.split(' & ').map((part, index) => (
+                <p key={index}>{part}</p>
+              ))}
+            </div>
             <p className="max-w-xl text-muted-foreground md:text-lg">
               {studentData.bio}
             </p>

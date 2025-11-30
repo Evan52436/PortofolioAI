@@ -28,7 +28,6 @@ export function ProjectCard({ project }: { project: Project }) {
         </div>
         <CardTitle className="flex items-center justify-between">
           <span>{project.title}</span>
-          <Image src="/logo.png" alt="logo" width={20} height={20} />
         </CardTitle>
         <CardDescription>{project.description}</CardDescription>
       </CardHeader>
