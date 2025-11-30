@@ -6,7 +6,7 @@ const getImage = (id: string): ImagePlaceholder => {
 };
 
 export const studentData = {
-    name: 'Alex Doe',
+    name: 'Evan Pranawa Armansyah',
     major: 'Computer Science & Music',
     bio: 'A passionate vocational student blending the logical world of code with the creative art of music. Eager to build innovative applications and compose moving soundscapes.',
     profilePicture: getImage('profile'),

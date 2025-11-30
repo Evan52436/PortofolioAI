@@ -3,8 +3,8 @@
     {
       "id": "profile",
       "description": "A portrait of a student.",
-      "imageUrl": "https://images.unsplash.com/photo-1680506718179-5e1d97b6a90a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cG9ydHJhaXQlMjBwZXJzb258ZW58MHx8fHwxNzY0MzkwOTk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "portrait person"
+      "imageUrl": "https://storage.googleapis.com/alt-firestore-backend-project.appspot.com/1/yI3t3sZ7gN8.jpg",
+      "imageHint": "person city"
     },
     {
       "id": "project-code",
