@@ -86,9 +86,9 @@ export const skills = [
 export const resume = {
     education: [
         {
-            institution: 'SMK Plus Pelita Nusantara',
-            degree: 'Rekayasa Perangkat Lunak',
-            period: '2021 - Present',
+            institution: 'SD Islam At-Taqwa',
+            degree: 'Elementary School',
+            period: '2012 - 2018',
         },
         {
             institution: 'SMP School Of Universe',
@@ -96,9 +96,9 @@ export const resume = {
             period: '2018 - 2021',
         },
         {
-            institution: 'SD Islam At-Taqwa',
-            degree: 'Elementary School',
-            period: '2012 - 2018',
+            institution: 'SMK Plus Pelita Nusantara',
+            degree: 'Rekayasa Perangkat Lunak',
+            period: '2021 - Present',
         }
     ],
     experience: [
