@@ -85,8 +85,8 @@ export const skills = [
 export const resume = {
     education: [
         {
-            institution: 'Vocational High School of Arts & Technology',
-            degree: 'Diploma, Computer Science & Music',
+            institution: 'SMK Plus Pelita Nusantara',
+            degree: 'Rekayasa Perangkat Lunak',
             period: '2021 - Present',
         }
     ],
