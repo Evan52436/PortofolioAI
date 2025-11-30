@@ -22,11 +22,11 @@ export function Portfolio() {
           opts={{
             align: "start",
           }}
-          className="mx-auto w-full max-w-sm sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-6xl"
+          className="w-full"
         >
-          <CarouselContent>
+          <CarouselContent className="-ml-4">
             {projects.map((project) => (
-              <CarouselItem key={project.id} className="md:basis-1/2 lg:basis-1/3">
+              <CarouselItem key={project.id} className="basis-full pl-4 sm:basis-1/2 lg:basis-1/3">
                 <div className="p-1 h-full">
                   <ProjectCard project={project} />
                 </div>
