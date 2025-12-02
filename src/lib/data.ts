@@ -18,8 +18,8 @@ export const projects = [
         id: 'project-1',
         title: 'Portfolio Website',
         category: 'code',
-        description: 'A personal portfolio website built with Next.js and Tailwind CSS to showcase my skills and projects.',
-        technologies: ['Next.js', 'Tailwind CSS', 'Shadcn UI', 'Framer Motion'],
+        description: 'A personal portfolio website built with Next.js and Tailwind CSS. This responsive site was created to showcase my skills, projects, and professional journey.',
+        technologies: ['Next.js', 'Tailwind CSS', 'Google AI Studio', 'TypeScript'],
         image: getImage('project-code'),
         content: 'This is the website you are currently viewing.'
     },
