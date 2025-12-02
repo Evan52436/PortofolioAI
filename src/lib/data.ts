@@ -25,12 +25,12 @@ export const projects = [
     },
     {
         id: 'project-2',
-        title: 'Generative Lo-fi Beats',
-        category: 'music',
-        description: 'An album of lo-fi hip-hop tracks generated using a custom-trained machine learning model. The model learns patterns from classic tracks to create new, original compositions.',
-        technologies: ['Python', 'Magenta', 'Ableton Live'],
+        title: 'Teachable Machine Demo',
+        category: 'code',
+        description: 'A team project demonstrating machine learning with Google\'s Teachable Machine, allowing users to train a model to recognize images.',
+        technologies: ['HTML', 'Tailwind CSS', 'React.js'],
         image: getImage('project-music'),
-        content: 'A sample of the generative music produced by the model.'
+        content: 'A demonstration of a machine learning model built by our team.'
     },
     {
         id: 'project-3',
