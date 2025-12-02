@@ -15,7 +15,7 @@ import Image from 'next/image';
 const navLinks = [
   { href: '#portfolio', label: 'Portfolio' },
   { href: '#skills', label: 'Skills' },
-  { href: '#resume', label: 'Resume' },
+  { href: '#resume', label: 'Journey' },
   { href: '#contact', label: 'Contact' },
 ];
 
