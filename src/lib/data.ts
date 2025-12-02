@@ -28,7 +28,7 @@ export const projects = [
         title: 'Teachable Machine Demo',
         category: 'code',
         description: 'A team project demonstrating machine learning with Google\'s Teachable Machine, allowing users to train a model to recognize images.',
-        technologies: ['HTML', 'Tailwind CSS', 'React.js'],
+        technologies: ['HTML', 'Tailwind CSS', 'React.js', 'Google Stitch'],
         image: getImage('project-music'),
         content: 'A demonstration of a machine learning model built by our team.'
     },
