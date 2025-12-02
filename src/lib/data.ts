@@ -16,12 +16,12 @@ export const studentData = {
 export const projects = [
     {
         id: 'project-1',
-        title: 'Symphony OS',
+        title: 'Portfolio Website',
         category: 'code',
-        description: 'A custom-built, lightweight operating system kernel designed for real-time audio processing. Explores low-level system programming and memory management.',
-        technologies: ['C++', 'Assembly', 'Linux Kernel'],
+        description: 'A personal portfolio website built with Next.js and Tailwind CSS to showcase my skills and projects.',
+        technologies: ['Next.js', 'Tailwind CSS', 'Shadcn UI', 'Framer Motion'],
         image: getImage('project-code'),
-        content: 'int main() { printf("Hello, Symphony OS!"); return 0; }'
+        content: 'This is the website you are currently viewing.'
     },
     {
         id: 'project-2',
