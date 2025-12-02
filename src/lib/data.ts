@@ -97,7 +97,7 @@ export const resume = {
         },
         {
             institution: 'SMK Plus Pelita Nusantara',
-            degree: 'Rekayasa Perangkat Lunak',
+            degree: 'Vocational High School',
             period: '2025 - Present',
         }
     ],
