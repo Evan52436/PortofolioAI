@@ -49,24 +49,6 @@ export const projects = [
         technologies: ['p5.js', 'JavaScript', 'HTML5 Canvas'],
         image: getImage('project-visualizer'),
         content: 'function draw() { background(0); ellipse(width / 2, height / 2, 50, 50); }'
-    },
-    {
-        id: 'project-5',
-        title: 'Cybersecurity CTF Tools',
-        category: 'code',
-        description: 'A collection of Python scripts for automating common Capture The Flag (CTF) challenges, including cryptography and network analysis.',
-        technologies: ['Python', 'Cryptography', 'Networking'],
-        image: getImage('project-ctf'),
-        content: 'A collection of Python scripts for automating common Capture The Flag (CTF) challenges.'
-    },
-    {
-        id: 'project-6',
-        title: 'Acoustic EP "City Lights"',
-        category: 'music',
-        description: 'A 5-track acoustic EP written, performed, and produced independently. Features intricate guitar work and heartfelt lyrics.',
-        technologies: ['Acoustic Guitar', 'Vocals', 'Logic Pro X'],
-        image: getImage('project-acoustic'),
-        content: 'A 5-track acoustic EP.'
     }
 ];
 
