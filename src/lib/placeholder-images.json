@@ -21,7 +21,7 @@
     {
       "id": "project-webapp",
       "description": "Clash of Cyber Heist, Regional Cybersecurity Competition",
-      "imageUrl": "https://images.unsplash.com/photo-1610477746458-b96000783ff5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx3ZWIlMjBhcmNoaXRlY3R1cmV8ZW58MHx8fHwxNzY0NDcyNDc0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "/public/sert.png",
       "imageHint": "Cybersecurity Competition"
     }
   ]
