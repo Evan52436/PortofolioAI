@@ -2,8 +2,8 @@
   "placeholderImages": [
     {
       "id": "profile",
-      "description": "A portrait of a student.",
-      "imageUrl": "https://storage.googleapis.com/alt-firestore-backend-project.appspot.com/1/yI3t3sZ7gN8.jpg",
+      "description": "Evan Pranawa Armansyah.",
+      "imageUrl": "/img/main.jpeg",
       "imageHint": "person city"
     },
     {
