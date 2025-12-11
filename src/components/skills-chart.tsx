@@ -1,6 +1,5 @@
 'use client';
 
-import { useAppTheme } from '@/context/theme-provider';
 import {
   Bar,
   BarChart,
@@ -23,12 +22,6 @@ type Skill = {
 };
 
 export function SkillsChart({ skills }: { skills: Skill[] }) {
-  const { theme } = useAppTheme();
-  
-  const filteredSkills = skills.filter(skill => 
-    theme === 'coding' ? skill.category === 'code' : skill.category === 'music'
-  );
-
   const chartConfig = {
     proficiency: {
       label: "Proficiency",
@@ -39,13 +32,13 @@ export function SkillsChart({ skills }: { skills: Skill[] }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="capitalize">{theme} Skills</CardTitle>
+        <CardTitle className="capitalize">Coding Skills</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="h-[400px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <ChartContainer config={chartConfig} className="h-full w-full">
-              <BarChart data={filteredSkills} layout="vertical" margin={{ left: 10 }}>
+              <BarChart data={skills.filter(s => s.category === 'code')} layout="vertical" margin={{ left: 10 }}>
                 <CartesianGrid horizontal={false} />
                 <YAxis
                   dataKey="name"
