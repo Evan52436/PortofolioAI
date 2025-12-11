@@ -26,7 +26,7 @@ export function ProjectCard({ project }: { project: Project }) {
             data-ai-hint={project.image.imageHint}
           />
         </div>
-        <CardTitle className="my-2 flex items-center justify-between">
+        <CardTitle className="my-4 flex items-center justify-between">
           <span>{project.title}</span>
         </CardTitle>
         <CardDescription>{project.description}</CardDescription>
