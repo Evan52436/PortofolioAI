@@ -34,21 +34,12 @@ export const projects = [
     },
     {
         id: 'project-3',
-        title: 'Web-Based Synthesizer',
+        title: 'Top 10 Clash of Cyberheist',
         category: 'code',
-        description: 'An interactive synthesizer built with the Web Audio API. Users can create and manipulate sounds directly in their browser, with support for MIDI keyboards.',
-        technologies: ['React', 'TypeScript', 'Web Audio API'],
+        description: 'Positioned in top 10 on a Regional Cybersecurity competition',
+        technologies: ['Pyton', 'HackerRank', 'MyDigiLearn'],
         image: getImage('project-webapp'),
         content: 'const audioCtx = new (window.AudioContext || window.webkitAudioContext)();'
-    },
-    {
-        id: 'project-4',
-        title: 'Interactive Music Visualizer',
-        category: 'code',
-        description: 'A real-time music visualizer that uses p5.js to create stunning geometric patterns based on audio input. Deployed as a static web page.',
-        technologies: ['p5.js', 'JavaScript', 'HTML5 Canvas'],
-        image: getImage('project-visualizer'),
-        content: 'function draw() { background(0); ellipse(width / 2, height / 2, 50, 50); }'
     }
 ];
 
