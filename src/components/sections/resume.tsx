@@ -1,6 +1,6 @@
 import { resume } from '@/lib/data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Briefcase, GraduationCap } from 'lucide-react';
+import { Briefcase } from 'lucide-react';
 
 export function Resume() {
   return (
@@ -9,29 +9,10 @@ export function Resume() {
         <div className="mb-12 text-center">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">My Journey</h2>
           <p className="mx-auto mt-4 max-w-3xl text-muted-foreground md:text-xl">
-            A timeline of my education and professional experience.
+            A timeline of my professional experience.
           </p>
         </div>
         <div className="mx-auto max-w-4xl space-y-8">
-          <Card className="transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-3">
-                <GraduationCap className="h-6 w-6 text-primary" />
-                <span>Education</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {resume.education.map((edu, index) => (
-                <div key={index}>
-                  <div className="flex justify-between">
-                    <h3 className="font-semibold">{edu.institution}</h3>
-                    <p className="text-sm text-muted-foreground">{edu.period}</p>
-                  </div>
-                  <p className="text-muted-foreground">{edu.degree}</p>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
           <Card className="transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
