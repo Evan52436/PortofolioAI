@@ -8,7 +8,7 @@ const getImage = (id: string): ImagePlaceholder => {
 
 export const studentData = {
     name: 'Evan Pranawa Armansyah',
-    major: 'Rekayasa Perangkat Lunak & Audio Engineering',
+    major: 'Rekayasa Perangkat Lunak',
     bio: 'A tech enthusiast based in Bogor, Indonesia. Currently still in school but I\'ve worked on various personal projects including home class servers and network mapping that have helped me develop a strong foundation in Cybersecurity. I also have experience in music industry such as performing on stage, playing with DAW and many more',
     profilePicture: getImage('profile'),
 };
@@ -18,11 +18,11 @@ export const projects = [
         id: 'project-1',
         title: 'Portfolio Website',
         category: 'code',
-        description: 'A personal portfolio website built with Next.js and Tailwind CSS. This responsive site was created to showcase my skills, projects, and professional journey as a developer and musician.',
+        description: 'My old personal portfolio website built with HTML, CSS and JavaScript. This responsive site was Handmade by Me to show off my skill.',
         technologies: ['HTML', 'CSS', 'JavaScript'],
         image: getImage('project-code'),
-        url: '#',
-        content: 'This is the website you are currently viewing.'
+        url: 'https://evanpranawa.my.id/',
+        content: 'My Personal HandMade Portofolio.'
     },
     {
         id: 'project-2',
@@ -31,17 +31,17 @@ export const projects = [
         description: 'A team project demonstrating machine learning with Google\'s Teachable Machine, allowing users to train a model to recognize images.',
         technologies: ['HTML', 'Tailwind CSS', 'React.js', 'Google Stitch'],
         image: getImage('project-music'),
-        url: 'https://google.com',
+        url: 'https://tim-erpeel.netlify.app/',
         content: 'A demonstration of a machine learning model built by our team.'
     },
     {
         id: 'project-3',
         title: 'Top 10 Clash of Cyberheist',
-        category: 'code',
-        description: 'Positioned in top 10 on a Regional Cybersecurity competition',
+        category: 'competition',
+        description: 'Positioned in top 10 on a province class Cybersecurity competition',
         technologies: ['Pyton', 'HackerRank', 'MyDigiLearn'],
         image: getImage('project-webapp'),
-        url: 'https://google.com',
+        url: '#',
         content: 'const audioCtx = new (window.AudioContext || window.webkitAudioContext)();'
     }
 ];

@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: 'Evan Pranawa Armansyah',
-  description: 'A portfolio for vocational high school students majoring in computer science and music.',
+  description: 'A portfolio for vocational high school students majoring in computer science.',
 };
 
 export default function RootLayout({
