@@ -1,5 +1,6 @@
 import { projects } from '@/lib/data';
 import { ProjectCard } from '@/components/project-card';
+import Link from 'next/link';
 
 export function Portfolio() {
   return (
@@ -14,7 +15,9 @@ export function Portfolio() {
         <div className="flex flex-wrap justify-center gap-6 pb-4">
           {projects.map((project) => (
             <div key={project.id} className="w-[300px]">
-              <ProjectCard project={project} />
+              <a href={project.url} target="_blank" rel="noopener noreferrer" className="block h-full">
+                <ProjectCard project={project} />
+              </a>
             </div>
           ))}
         </div>

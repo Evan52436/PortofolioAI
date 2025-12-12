@@ -21,6 +21,7 @@ export const projects = [
         description: 'A personal portfolio website built with Next.js and Tailwind CSS. This responsive site was created to showcase my skills, projects, and professional journey as a developer and musician.',
         technologies: ['HTML', 'CSS', 'JavaScript'],
         image: getImage('project-code'),
+        url: '#',
         content: 'This is the website you are currently viewing.'
     },
     {
@@ -30,6 +31,7 @@ export const projects = [
         description: 'A team project demonstrating machine learning with Google\'s Teachable Machine, allowing users to train a model to recognize images.',
         technologies: ['HTML', 'Tailwind CSS', 'React.js', 'Google Stitch'],
         image: getImage('project-music'),
+        url: 'https://google.com',
         content: 'A demonstration of a machine learning model built by our team.'
     },
     {
@@ -39,6 +41,7 @@ export const projects = [
         description: 'Positioned in top 10 on a Regional Cybersecurity competition',
         technologies: ['Pyton', 'HackerRank', 'MyDigiLearn'],
         image: getImage('project-webapp'),
+        url: 'https://google.com',
         content: 'const audioCtx = new (window.AudioContext || window.webkitAudioContext)();'
     }
 ];
