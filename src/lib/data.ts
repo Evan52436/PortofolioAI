@@ -39,7 +39,7 @@ export const projects = [
         title: 'Top 10 Clash of Cyberheist',
         category: 'competition',
         description: 'Positioned in top 10 on a province class Cybersecurity competition',
-        technologies: ['Pyton', 'HackerRank', 'MyDigiLearn'],
+        technologies: ['Python', 'HackerRank', 'MyDigiLearn'],
         image: getImage('project-webapp'),
         url: '#',
         content: 'const audioCtx = new (window.AudioContext || window.webkitAudioContext)();'
@@ -61,21 +61,7 @@ export const skills = [
 
 export const resume = {
     education: [
-        {
-            institution: 'SD Islam At-Taqwa',
-            degree: 'Elementary School',
-            period: '2015 - 2021',
-        },
-        {
-            institution: 'SMP School Of Universe',
-            degree: 'Middle School',
-            period: '2022 - 2024',
-        },
-        {
-            institution: 'SMK Plus Pelita Nusantara',
-            degree: 'Vocational High School',
-            period: '2025 - Present',
-        }
+
     ],
     experience: [
         {

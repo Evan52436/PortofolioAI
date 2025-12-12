@@ -8,6 +8,7 @@ import { Portfolio } from '@/components/sections/portfolio';
 import { Resume } from '@/components/sections/resume';
 import { Contact } from '@/components/sections/contact';
 import { LoadingScreen } from '@/components/loading-screen';
+import { Skills } from '@/components/sections/skills';
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -22,6 +23,7 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <Portfolio />
+        <Skills />
         <Resume />
         <Contact />
       </main>
