@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 export function ContactForm() {
   return (
     <Card>
-      <form action="https://formsubmit.co/your-email@example.com" method="POST">
+      <form action="https://formsubmit.co/evan.pranawaa@gmail.com" method="POST">
         <CardContent className="space-y-6 pt-6">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div className="space-y-2">
