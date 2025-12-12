@@ -9,7 +9,7 @@ export function Resume() {
         <div className="mb-12 text-center">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">My Experience</h2>
           <p className="mx-auto mt-4 max-w-3xl text-muted-foreground md:text-xl">
-            A list project from my experience.
+            A list of projects from my experience.
           </p>
         </div>
         <div className="mx-auto max-w-4xl space-y-8">

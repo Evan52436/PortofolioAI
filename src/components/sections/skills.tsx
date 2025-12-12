@@ -4,7 +4,7 @@ import {
   BrainCircuit,
   Database,
   Globe,
-  Guitar,
+  Piano,
   Music,
   Server,
 } from 'lucide-react';
@@ -14,12 +14,12 @@ const skills = [
   {
     name: 'Web Development',
     icon: <Globe className="h-10 w-10 text-primary mb-4" />,
-    description: 'HTML5, CSS3, JavaScript, Java',
+    description: 'HTML, CSS, JS, PHP',
   },
   {
     name: 'Backend',
     icon: <Server className="h-10 w-10 text-primary mb-4" />,
-    description: 'Docker',
+    description: 'PHP, Linux Systems',
   },
   {
     name: 'Databases',
@@ -34,11 +34,11 @@ const skills = [
   {
     name: 'Music Production',
     icon: <Music className="h-10 w-10 text-primary mb-4" />,
-    description: 'Presonus Studio One & Vocaloid',
+    description: 'Studio One & Vocaloid',
   },
   {
     name: 'Instruments',
-    icon: <Guitar className="h-10 w-10 text-primary mb-4" />,
+    icon: <Piano className="h-10 w-10 text-primary mb-4" />,
     description: 'Piano & Guitar',
   },
 ];
@@ -52,8 +52,7 @@ export function Skills() {
             My Skills
           </h2>
           <p className="mx-auto mt-4 max-w-3xl text-muted-foreground md:text-xl">
-            A look at my proficiency in various technologies and musical
-            talents.
+            My Skills in Rekayasa Perangkat Lunak
           </p>
         </div>
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
