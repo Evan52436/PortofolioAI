@@ -21,7 +21,7 @@ export const projects = [
         description: 'My old personal portfolio website built with HTML, CSS and JavaScript. This responsive site was Handmade by Me to show off my skill.',
         technologies: ['HTML', 'CSS', 'JavaScript'],
         image: getImage('project-code'),
-        url: 'https://evanpranawa.my.id/',
+        url: 'https://portofolio-wip-evanpranawa.vercel.app/',
         content: 'My Personal HandMade Portofolio.'
     },
     {
