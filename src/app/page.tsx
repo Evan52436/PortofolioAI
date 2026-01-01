@@ -20,7 +20,7 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Snowfall />
+      <Snowfall color="#83a3ca" />
       <Header />
       <main className="flex-1">
         <Hero />
