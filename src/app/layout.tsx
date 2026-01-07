@@ -45,6 +45,12 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
+    other: {
+      'Google-Extended': ['disallow: /'],
+      'GPTBot': ['disallow: /'],
+      'CCBot': ['disallow: /'],
+      'anthropic-ai': ['disallow: /'],
+    }
   },
 };
 
