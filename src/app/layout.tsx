@@ -5,18 +5,18 @@ import { Toaster } from "@/components/ui/toaster";
 export const metadata: Metadata = {
   title: 'Evan Pranawa Armansyah - Software Engineer & Cybersecurity Enthusiast',
   description: 'The portfolio of Evan Pranawa Armansyah, a vocational high school student specializing in software engineering (Rekayasa Perangkat Lunak) and cybersecurity. Explore my projects, skills, and journey in the world of technology.',
-  keywords: ['Evan Pranawa Armansyah', 'Portfolio', 'Software Engineer', 'Cybersecurity', 'Rekayasa Perangkat Lunak', 'Web Developer', 'Bogor', 'Indonesia'],
-  authors: [{ name: 'Evan Pranawa Armansyah', url: 'https://evanpranawa.com' }], // Replace with your domain later
+  keywords: ['Evan Pranawa Armansyah', 'Evan', 'Pranawa', 'Armansyah', 'Portfolio', 'Software Engineer', 'Cybersecurity', 'Rekayasa Perangkat Lunak', 'Web Developer', 'Bogor', 'Indonesia'],
+  authors: [{ name: 'Evan Pranawa Armansyah', url: 'https://evanpranawa.my.id' }],
   creator: 'Evan Pranawa Armansyah',
   publisher: 'Evan Pranawa Armansyah',
-  metadataBase: new URL('https://evanpranawa.com'), // Replace with your domain later
+  metadataBase: new URL('https://evanpranawa.my.id'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'Evan Pranawa Armansyah - Software Engineer & Cybersecurity Enthusiast',
     description: 'Explore the portfolio of Evan Pranawa Armansyah, showcasing projects in software engineering and cybersecurity.',
-    url: 'https://evanpranawa.com', // Replace with your domain later
+    url: 'https://evanpranawa.my.id',
     siteName: 'Evan Pranawa Armansyah Portfolio',
     images: [
       {
