@@ -35,24 +35,34 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="flex flex-1 items-center justify-end gap-2 md:hidden">
-          <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Menu />
-                <span className="sr-only">Toggle navigation menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right">
-              <div className="mt-8 flex flex-col space-y-4">
-                {navLinks.map((link) => (
-                   <NavLink key={link.href} href={link.href} onClick={closeSheet} className="text-lg">
-                    {link.label}
-                  </NavLink>
-                ))}
-              </div>
-            </SheetContent>
-          </Sheet>
+        <div className="flex flex-1 items-center justify-end gap-2">
+          <Button asChild variant="outline" className="hidden md:inline-flex">
+            <a href="/PortofolioLegacy/index.html" target="_blank">
+              Legacy Site
+            </a>
+          </Button>
+          <div className="md:hidden">
+            <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu />
+                  <span className="sr-only">Toggle navigation menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right">
+                <div className="mt-8 flex flex-col space-y-4">
+                  {navLinks.map((link) => (
+                    <NavLink key={link.href} href={link.href} onClick={closeSheet} className="text-lg">
+                      {link.label}
+                    </NavLink>
+                  ))}
+                   <a href="/PortofolioLegacy/index.html" target="_blank" className="text-lg text-muted-foreground transition-colors hover:text-primary" onClick={closeSheet}>
+                    Legacy Site
+                  </a>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </header>

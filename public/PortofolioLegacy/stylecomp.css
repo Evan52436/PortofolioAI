@@ -1,0 +1,358 @@
+*{
+  margin: 0;
+  padding: 0;
+
+  transition: 0.3s all;
+}
+
+body {
+    background-image: url(./evan.png);
+    position: static;
+    top: 0;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: contain;
+    background-color: #83a3ca;
+    animation: fadeOut 2s forwards;
+}
+
+.seperate {
+  display: flex;
+  margin-top: 700px;
+  margin-bottom: 0px;
+}
+
+.nama {
+    margin-top: 40px;
+    margin-right: 600px;
+    margin-bottom: 30px;
+    font-size: 50pt;
+    line-height: 70px;
+    font-weight: 800;
+}
+
+.detailme {
+    font-size: 16pt;
+    margin-right: 400px;
+}
+
+html {
+    font-family: Poppins, helvetica;
+    color: white;
+    scroll-behavior: smooth;
+}
+
+.poppins-black {
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+  }
+
+.homepage {
+    margin-top: 10px;
+}
+
+.divider {
+   background-color: white; 
+   margin-bottom: 10px;
+}
+
+.border {
+  background-color: white;
+  margin-top: 170px;
+}
+
+.navbar {
+  list-style-type: none;
+  padding: 0;
+  overflow: hidden;
+  font-size: 17pt;
+  margin-right: 60px;
+  margin-left: 0px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 90%;
+  height: 100px;
+  font-weight: 700;
+  z-index: 100;
+  padding-left: 35px;
+  padding-top: 20px;
+  border-radius: 24px;
+  padding-top: 0px;
+  }
+  
+.navbar:focus {
+  outline: none;
+}
+
+.navbarcont {
+  float: left;
+  backdrop-filter: blur(2px);
+  border-radius: 10px;
+  }
+  
+.navbarcont a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 5px;
+  text-decoration: none;
+  margin-left: 40px;
+  }
+  
+.navbarcont a:hover {
+    outline-width: 4px;
+    padding: 15px;
+    text-decoration: underline;
+    text-underline-offset: 10px;
+    text-decoration-thickness: 4px;
+    font-weight: 700;
+  }
+
+.skills {
+    margin-top: 100px;
+    padding-top: 10px;
+    text-align: center;
+    font-size: 50pt;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+.frontend {
+    outline-width: 4px;
+    padding: 40px;
+    text-align: center;
+  }
+
+.experience {
+    margin-top: 100px;
+    padding-top: 10px;
+    text-align: center;
+    font-size: 50pt;
+    font-weight: 700;
+    margin-bottom: 80px;
+  }
+
+.yearflex {
+    font-size: 19pt;
+    padding-left: 250px;
+  }
+
+.detailyear {
+  font-size: 18pt;
+  font-weight: 500;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+.year {
+  text-decoration: underline;
+  text-underline-offset: 10px;
+}
+
+hr {
+  display: block;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: solid;
+  border-width: 3px;
+}
+
+.year {
+  font-weight: 700;
+}
+
+.skillsdetail {
+  vertical-align: middle;
+  display: flex;
+  justify-content: center;
+}
+
+.IMAGE:hover {
+  margin-bottom: 5px;
+  margin-top: 0px;
+  border-radius: 10px;
+  box-shadow: -9px 10px 27px 0px rgba(0,0,0,0.46);
+  -moz-box-shadow: -9px 10px 27px 0px rgba(0,0,0,0.46);
+  -webkit-box-shadow: -9px 10px 27px 0px rgba(0,0,0,0.46);
+}
+
+.IMAGE {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 0px;
+  margin-top: 5px;
+  border-radius: 10px;
+  box-shadow: -6px 12px 27px -7px rgba(0,0,0,0.46);
+  -webkit-box-shadow: -6px 12px 27px -7px rgba(0,0,0,0.46);
+  -moz-box-shadow: -6px 12px 27px -7px rgba(0,0,0,0.46);
+}
+
+.custico {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 0px;
+  margin-top: 5px;
+  border-radius: 10px;
+  box-shadow: -6px 12px 27px -7px rgba(0,0,0,0.46);
+  -webkit-box-shadow: -6px 12px 27px -7px rgba(0,0,0,0.46);
+  -moz-box-shadow: -6px 12px 27px -7px rgba(0,0,0,0.46);
+}
+
+.custico:hover {
+  margin-bottom: 5px;
+  margin-top: 0px;
+  border-radius: 10px;
+  box-shadow: -9px 10px 27px 0px rgba(0,0,0,0.46);
+  -moz-box-shadow: -9px 10px 27px 0px rgba(0,0,0,0.46);
+  -webkit-box-shadow: -9px 10px 27px 0px rgba(0,0,0,0.46);
+}
+
+.detailskill {
+  margin-top: 10px;
+  font-weight: 500;
+  font-size: 16pt;
+  text-align: center;
+}
+
+.acclink {
+  margin-left: 92px;
+  background-color: #516c8d;
+  padding-top: 6px;
+  padding-left: 7px;
+  margin-right: 1371px;
+  border-radius: 10px;
+  backdrop-filter: blur(2px);
+}
+
+.flexbox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  margin-right: 1300px;
+}
+
+@media (max-width: 800px) {
+  .navbar {
+    flex-direction: column;
+  }
+}
+
+.flexboxlink {
+  margin-top: 10px;
+margin-right: 5px;
+}
+
+.about {
+  background-color: rgb(13, 13, 13);
+  padding-left: 250px;
+}
+
+.About {
+  font-size: 24pt;
+  font-weight: 600;
+  padding-top: 50px;
+}
+
+.cr {
+  color: grey;
+  margin-bottom: 0px;
+}
+
+.detailmine {
+  color: rgb(255, 255, 255);
+  padding-top: 15px;
+  font-weight: 400;
+  padding-bottom: 15px;
+  padding-right: 450px;
+}
+
+.col {
+  padding-bottom: 5px;
+}
+
+.form-control {
+  padding-bottom: 8px;
+  padding-top: 8px;
+  padding-left: 8px;
+  padding-right: 200px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 3px;
+  border-bottom: 3px solid rgb(82, 194, 255);
+  background-color: rgb(13, 13, 13);
+  color: white;
+}
+
+.form-control:focus {
+  outline: none;
+}
+
+.btn {
+  width: 100px;
+  height: 30px;
+  margin-bottom: 20px;
+  background-color: #83a3ca;
+  border-radius: 5px;
+  border: 0px;
+  color: white;
+  font-weight: 600;
+}
+
+input[type=text]::placeholder{
+  color:grey;
+ }
+ input[type=email]::placeholder{
+  color:grey;
+ }
+ .social-links {
+  margin-top: 10px;
+  padding-bottom: 20px;
+  margin-right: 50px;
+ }
+
+ .links {
+  padding-right: 5px;
+ }
+
+ .sertificate {
+  width: 200px;
+  height: 400px;
+ }
+
+ /* MEDIA QUERY // RESPONSIVE CSS */
+
+
+@media (max-aspect-ratio: 4/3) {
+  .yearflex {
+    justify-content: center;
+    text-align: center;
+    padding-left: 0px;
+    padding: 50px;
+ }
+ body {
+   justify-content: left;
+   margin: 0px;
+ }
+ .about {
+  padding-left: 0px;
+  justify-content: center;
+  text-align: center;
+  padding: 50px;
+ }
+ .about {
+  font-size: 9pt;
+ }
+ .skil {
+  margin-left: 30px;
+  margin-right: 30px;
+ }
+ .experience {
+  margin-top: 10px;
+ }
+ .detailmine {
+  padding-right: 0px;
+ }
+}
