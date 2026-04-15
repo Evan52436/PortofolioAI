@@ -56,7 +56,7 @@ export function Header() {
                       {link.label}
                     </NavLink>
                   ))}
-                   <a href="/PortofolioLegacy/index.html" target="_blank" className="text-lg text-muted-foreground transition-colors hover:text-primary" onClick={closeSheet}>
+                   <a href="https://old.evanpranawa.my.id/" target="_blank" className="text-lg text-muted-foreground transition-colors hover:text-primary" onClick={closeSheet}>
                     Legacy Site
                   </a>
                 </div>
