@@ -37,7 +37,7 @@ export function Header() {
 
         <div className="flex flex-1 items-center justify-end gap-2">
           <Button asChild variant="outline" className="hidden md:inline-flex">
-            <a href="/PortofolioLegacy/index.html" target="_blank">
+            <a href="https://old.evanpranawa.my.id" target="_blank">
               Legacy Site
             </a>
           </Button>
