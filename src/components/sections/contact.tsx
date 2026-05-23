@@ -1,5 +1,5 @@
 import { ContactForm } from '@/components/contact-form';
-import Link from 'next/link';
+
 import { Button } from '@/components/ui/button';
 
 export function Contact() {
@@ -16,9 +16,9 @@ export function Contact() {
           <ContactForm />
           <div className="mt-8 flex justify-center">
             <Button asChild size="lg" className="w-full sm:w-64">
-              <Link href="https://s.id/chargerleptp" target="_blank" rel="noopener noreferrer">
+              <a href="https://s.id/chargerleptp" rel="noopener noreferrer">
                 More Contact Details
-              </Link>
+              </a>
             </Button>
           </div>
         </div>
