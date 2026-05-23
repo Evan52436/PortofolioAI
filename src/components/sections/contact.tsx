@@ -1,6 +1,7 @@
 import { ContactForm } from '@/components/contact-form';
 
 import { Button } from '@/components/ui/button';
+import { Link } from 'lucide-react';
 
 export function Contact() {
   return (
@@ -16,9 +17,9 @@ export function Contact() {
           <ContactForm />
           <div className="mt-8 flex justify-center">
             <Button asChild size="lg" className="w-full sm:w-64">
-              <a href="https://s.id/chargerleptp" rel="noopener noreferrer">
+              <Link href="https://s.id/chargerleptp" rel="noopener noreferrer">
                 More Contact Details
-              </a>
+              </Link>
             </Button>
           </div>
         </div>
