@@ -1,4 +1,6 @@
 import { ContactForm } from '@/components/contact-form';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export function Contact() {
   return (
@@ -12,6 +14,13 @@ export function Contact() {
         </div>
         <div className="mx-auto mt-12 max-w-xl">
           <ContactForm />
+          <div className="mt-8 flex justify-center">
+            <Button asChild size="lg" className="w-full sm:w-64">
+              <Link href="https://s.id/chargerleptp" target="_blank" rel="noopener noreferrer">
+                More Contact Details
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </section>
