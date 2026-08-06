@@ -47,7 +47,7 @@ export const projects = [
         title: `Portfolio Website (Legacy)`,
         category: 'code',
         description: 'My old personal portfolio website built with HTML, CSS and JavaScript. This responsive site was Handmade by Me to show off my skill.',
-        technologies: ['HTML', 'CSS', 'JavaScript'],
+        technologies: ['HTML', 'CSS', 'JavaScript', 'Vercel'],
         image: getImage('project-code'),
         gallery: [
             getImage('project-code'),
@@ -64,7 +64,7 @@ export const projects = [
         title: 'Decoupled Storage System',
         category: 'code',
         description: 'A CRUD Storage system with JavaScript and TypeScript FrontEnd and ARMBIAN Network Attached Storage (NAS)',
-        technologies: ['Debian', 'Docker', 'MinIO', 'JavaScript', 'TypeScript'],
+        technologies: ['Docker', 'MinIO', 'SupaBase', 'JavaScript', 'TypeScript'],
         image: getImage('Dashboard_Desktop.png'),
         gallery: [
             getImage('Dashboard_Desktop.png'),
@@ -79,6 +79,42 @@ export const projects = [
     },
     {
         id: 'project-4',
+        title: 'Hackathon at GDG Binus',
+        category: 'code',
+        description: 'A Hackathon Project built while attending the event "Google Developer Group" at Binus Alam Sutera.',
+        technologies: ['GDG', 'PostgreSQL', 'TypeScript', 'JavaScript'],
+        image: getImage('ruanglokal_dashboard.png'),
+        gallery: [
+            getImage('ruanglokal_dashboard.png'),
+            getImage('ruanglokal_guru.png'),
+            getImage('ruanglokal_muridbaca.png'),
+            getImage('ruanglokal_murid-landing.png'),
+            getImage('ruanglokal_dashboard.png')
+        ],
+        url: 'https://hackathon.ackteams.com/',
+        githubUrl: 'https://github.com/Evan52436/Hackaton_GDG-Binus',
+        content: 'A helper for both student and teacher to build/play quiz'
+    },
+    {
+        id: 'project-5',
+        title: 'Truck Packer Simulator',
+        category: 'code',
+        description: 'A Prototype Project for a competition held by President University',
+        technologies: ['Three.js', 'Flask', 'TypeScript', 'JavaScript'],
+        image: getImage('PREVIEW.png'),
+        gallery: [
+            getImage('truckpolos.png'),
+            getImage('truckisi1.png'),
+            getImage('truckisi2.png'),
+            getImage('truckisi3.png'),
+            getImage('truckisi4.png')
+        ],
+        url: 'https://packer.evanpranawa.my.id/',
+        githubUrl: 'https://github.com/Evan52436/truck-packer-ui',
+        content: 'A Prototype Project to fit as many box into a truck.'
+    },
+    {
+        id: 'project-6',
         title: 'Top 10 Clash of Cyberheist',
         category: 'competition',
         description: 'Positioned in top 10 on a province class Cybersecurity competition',
@@ -86,9 +122,7 @@ export const projects = [
         image: getImage('project-webapp'),
         gallery: [
             getImage('project-webapp'),
-            getImage('project-code'),
-            getImage('project-music'),
-            getImage('profile')
+            getImage('sertifkelompok.png'),
         ],
         url: '#',
         githubUrl: 'https://github.com',
