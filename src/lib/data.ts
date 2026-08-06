@@ -27,23 +27,6 @@ export const studentData = {
 export const projects = [
     {
         id: 'project-1',
-        title: `Portfolio Website (Legacy)`,
-        category: 'code',
-        description: 'My old personal portfolio website built with HTML, CSS and JavaScript. This responsive site was Handmade by Me to show off my skill.',
-        technologies: ['HTML', 'CSS', 'JavaScript'],
-        image: getImage('project-code'),
-        gallery: [
-            getImage('project-code'),
-            getImage('project-music'),
-            getImage('project-webapp'),
-            getImage('profile')
-        ],
-        url: 'https://legacy.evanpranawa.my.id',
-        githubUrl: 'https://github.com',
-        content: 'My Personal HandMade Portofolio featuring custom responsive design, smooth transitions, and showcased projects.'
-    },
-    {
-        id: 'project-2',
         title: 'Teachable Machine Demo',
         category: 'code',
         description: 'A team project demonstrating machine learning with Google\'s Teachable Machine, allowing users to train a model to recognize images.',
@@ -58,6 +41,23 @@ export const projects = [
         url: 'https://tim-erpeel.netlify.app/',
         githubUrl: 'https://github.com/Evan52436/Website-Erpeel',
         content: 'A demonstration of a machine learning model built by our team. Features realtime browser image recognition model training.'
+    },
+    {
+        id: 'project-2',
+        title: `Portfolio Website (Legacy)`,
+        category: 'code',
+        description: 'My old personal portfolio website built with HTML, CSS and JavaScript. This responsive site was Handmade by Me to show off my skill.',
+        technologies: ['HTML', 'CSS', 'JavaScript'],
+        image: getImage('project-code'),
+        gallery: [
+            getImage('project-code'),
+            getImage('project-music'),
+            getImage('project-webapp'),
+            getImage('profile')
+        ],
+        url: 'https://legacy.evanpranawa.my.id',
+        githubUrl: 'https://github.com',
+        content: 'My Personal HandMade Portofolio featuring custom responsive design, smooth transitions, and showcased projects.'
     },
     {
         id: 'project-3',
