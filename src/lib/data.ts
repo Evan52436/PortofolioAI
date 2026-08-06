@@ -27,40 +27,6 @@ export const studentData = {
 export const projects = [
     {
         id: 'project-1',
-        title: 'Teachable Machine Demo',
-        category: 'code',
-        description: 'A team project demonstrating machine learning with Google\'s Teachable Machine, allowing users to train a model to recognize images.',
-        technologies: ['HTML', 'Tailwind CSS', 'React.js', 'Google Stitch'],
-        image: getImage('project-music'),
-        gallery: [
-            getImage('project-music'),
-            getImage('Teachablemachine2.png'),
-            getImage('Teachablemachine3.png'),
-            getImage('erpeel.jpeg')
-        ],
-        url: 'https://tim-erpeel.netlify.app/',
-        githubUrl: 'https://github.com/Evan52436/Website-Erpeel',
-        content: 'A demonstration of a machine learning model built by our team. Features realtime browser image recognition model training.'
-    },
-    {
-        id: 'project-2',
-        title: `Portfolio Website (Legacy)`,
-        category: 'code',
-        description: 'My old personal portfolio website built with HTML, CSS and JavaScript. This responsive site was Handmade by Me to show off my skill.',
-        technologies: ['HTML', 'CSS', 'JavaScript', 'Vercel'],
-        image: getImage('project-code'),
-        gallery: [
-            getImage('project-code'),
-            getImage('project-music'),
-            getImage('project-webapp'),
-            getImage('profile')
-        ],
-        url: 'https://legacy.evanpranawa.my.id',
-        githubUrl: 'https://github.com',
-        content: 'My Personal HandMade Portofolio featuring custom responsive design, smooth transitions, and showcased projects.'
-    },
-    {
-        id: 'project-3',
         title: 'Decoupled Storage System',
         category: 'code',
         description: 'A CRUD Storage system with JavaScript and TypeScript FrontEnd and ARMBIAN Network Attached Storage (NAS)',
@@ -78,7 +44,7 @@ export const projects = [
         content: 'Decoupled architecture separation between frontend client interfaces and backend Armbian NAS minIO object storage instances.'
     },
     {
-        id: 'project-4',
+        id: 'project-2',
         title: 'Hackathon at GDG Binus',
         category: 'code',
         description: 'A Hackathon Project built while attending the event "Google Developer Group" at Binus Alam Sutera.',
@@ -96,7 +62,7 @@ export const projects = [
         content: 'A helper for both student and teacher to build/play quiz'
     },
     {
-        id: 'project-5',
+        id: 'project-3',
         title: 'Truck Packer Simulator',
         category: 'code',
         description: 'A Prototype Project for a competition held by President University',
@@ -114,7 +80,24 @@ export const projects = [
         content: 'A Prototype Project to fit as many box into a truck.'
     },
     {
-        id: 'project-6',
+        id: 'project-5',
+        title: `Portfolio Website (Legacy)`,
+        category: 'code',
+        description: 'My old personal portfolio website built with HTML, CSS and JavaScript. This responsive site was Handmade by Me to show off my skill.',
+        technologies: ['HTML', 'CSS', 'JavaScript', 'Vercel'],
+        image: getImage('project-code'),
+        gallery: [
+            getImage('project-code'),
+            getImage('project-music'),
+            getImage('project-webapp'),
+            getImage('profile')
+        ],
+        url: 'https://legacy.evanpranawa.my.id',
+        githubUrl: 'https://github.com',
+        content: 'My Personal HandMade Portofolio featuring custom responsive design, smooth transitions, and showcased projects.'
+    },
+    {
+        id: 'project-4',
         title: 'Top 10 Clash of Cyberheist',
         category: 'competition',
         description: 'Positioned in top 10 on a province class Cybersecurity competition',
