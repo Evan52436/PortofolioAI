@@ -13,9 +13,18 @@ import type { projects } from '@/lib/data';
 
 type Project = (typeof projects)[0];
 
-export function ProjectCard({ project }: { project: Project }) {
+export function ProjectCard({
+  project,
+  onClick,
+}: {
+  project: Project;
+  onClick?: () => void;
+}) {
   return (
-    <Card className="flex h-full transform flex-col overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl">
+    <Card
+      onClick={onClick}
+      className="group flex h-full cursor-pointer transform flex-col overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-primary/50"
+    >
       <CardHeader>
         <div className="relative mb-4 h-48 w-full overflow-hidden rounded-lg">
           <Image
@@ -25,11 +34,16 @@ export function ProjectCard({ project }: { project: Project }) {
             className="object-cover transition-transform duration-300 group-hover:scale-105"
             data-ai-hint={project.image.imageHint}
           />
+          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span className="text-white text-xs font-semibold px-3 py-1.5 rounded-full bg-primary/80 backdrop-blur-sm shadow-md">
+              Click to Preview
+            </span>
+          </div>
         </div>
-        <CardTitle className="my-4 flex items-center justify-between">
+        <CardTitle className="my-2 flex items-center justify-between">
           <span>{project.title}</span>
         </CardTitle>
-        <CardDescription>{project.description}</CardDescription>
+        <CardDescription className="line-clamp-2">{project.description}</CardDescription>
       </CardHeader>
       <CardContent className="flex-grow">
         <div className="flex flex-wrap gap-2">
