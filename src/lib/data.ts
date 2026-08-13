@@ -22,13 +22,18 @@ export const studentData = {
     major: 'Rekayasa Perangkat Lunak & Cybersecurity',
     bio: 'A tech enthusiast based in Bogor, Indonesia. Currently still in school but I\'ve worked on various personal projects including home class servers and network mapping that have helped me develop a strong foundation in Cybersecurity. I also have experience in music industry such as performing on stage, playing with DAW and many more',
     profilePicture: getImage('profile'),
+    profilePictures: [
+        getImage('profile'),
+        getImage('profile-placeholder'),
+        getImage('profile-alt'),
+    ],
 };
 
 export const projects = [
     {
         id: 'project-1',
         title: 'Decoupled Storage System',
-        category: 'code',
+        category: 'code-maintenance',
         description: 'A CRUD Storage system with JavaScript and TypeScript FrontEnd and ARMBIAN Network Attached Storage (NAS)',
         technologies: ['Docker', 'MinIO', 'SupaBase', 'JavaScript', 'TypeScript'],
         image: getImage('Dashboard_Desktop.png'),
@@ -132,21 +137,33 @@ export const resume = {
     ],
     experience: [
         {
+            company: 'Magang / Internship',
+            role: 'Internship',
+            period: 'Finished | 2024',
+            description: 'Internship at Askarphotography. Assisted lead photographers and videographers in capturing 10+ weddings, and managing lighting equipment. Edited a high-resolution RAW photos and 4K video of highlights using Adobe Premiere to ensuring timely delivery of premium client galleries.)',
+        },
+        {
+            company: 'Magang / Internship',
+            role: 'Internship',
+            period: 'Finished | 2025',
+            description: 'Internship at School IT Department.Supported school IT infrastructure by troubleshooting hardware and network issues for students and staff. Managed device deployments, updated system software, and resolved technical issues to ensure minimal downtime for  educational operations and school administration.)',
+        },
+        {
             company: 'Personal Project',
             role: 'Building a small home server',
-            period: 'Ongoing',
+            period: 'Finished | 2025',
             description: 'Designed and built a home lab server for hosting various services, including a media server, local file storage, and a private cloud. This project involved hardware selection, OS installation (Linux), network configuration, and containerization with Docker.',
         },
         {
             company: 'School Project',
             role: 'School E-commerce System',
-            period: 'Ongoing',
+            period: 'Ongoing | 2024',
             description: 'Focused on the front-end (UI/UX) development for an e-commerce platform for a school project. The work included designing and implementing product listings, a shopping cart, and user authentication flows. This project demonstrated skills in front-end development and creating an intuitive user interface.'
         },
         {
             company: 'Praktik Kerja Lapangan (PKL) / Internship',
             role: 'Internship',
-            period: 'Upcoming',
+            period: 'Upcoming | 2027',
             description: 'Ongoing Internship Process at BRIN (Badan Riset dan Inovasi Nasional). Starting on January 2027 Until June 2027 (Estimated to be 6 Months)',
         },
     ],

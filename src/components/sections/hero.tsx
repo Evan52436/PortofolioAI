@@ -1,9 +1,40 @@
+'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
 import { studentData } from '@/lib/data';
 import { Button } from '@/components/ui/button';
-import { ArrowDown } from 'lucide-react';
+import { ArrowDown, RefreshCw, Sparkles } from 'lucide-react';
 
 export function Hero() {
+  const photos = studentData.profilePictures && studentData.profilePictures.length > 0
+    ? studentData.profilePictures
+    : [studentData.profilePicture];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  // front & back images for 3D flip effect
+  const frontImageIndex = isFlipped ? (currentIndex + 1) % photos.length : currentIndex;
+  const backImageIndex = isFlipped ? currentIndex : (currentIndex + 1) % photos.length;
+
+  const handlePhotoClick = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    
+    setIsFlipped(!isFlipped);
+    
+    // update current index halfway or after transition
+    setTimeout(() => {
+      setCurrentIndex((prev) => (prev + 1) % photos.length);
+      setIsAnimating(false);
+    }, 600);
+  };
+
+  const frontPhoto = photos[currentIndex];
+  const nextPhoto = photos[(currentIndex + 1) % photos.length];
+
   return (
     <section id="home" className="relative overflow-hidden py-20 md:py-32">
       <div className="container">
@@ -26,21 +57,68 @@ export function Hero() {
               </a>
             </Button>
           </div>
+
           <div className="relative mx-auto w-fit">
-            <div className="relative h-64 w-64 overflow-hidden rounded-full shadow-lg transition-all duration-300 hover:shadow-2xl md:h-80 md:w-80 lg:h-96 lg:w-96">
-              <Image
-                src={studentData.profilePicture.imageUrl}
-                alt={studentData.profilePicture.description}
-                fill
-                className="object-cover transition-transform duration-300 hover:scale-105"
-                data-ai-hint={studentData.profilePicture.imageHint}
-              />
+            {/* Interactive 3D Flip Profile Container */}
+            <div
+              onClick={handlePhotoClick}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handlePhotoClick();
+                }
+              }}
+              tabIndex={0}
+              role="button"
+              aria-label="Click to flip profile photo"
+              className="group relative cursor-pointer perspective-1000 focus:outline-none"
+            >
+              <div
+                className={`relative h-64 w-64 rounded-full shadow-lg transition-all duration-600 ease-in-out transform-style-3d md:h-80 md:w-80 lg:h-96 lg:w-96 group-hover:shadow-2xl group-hover:ring-4 group-hover:ring-primary/40 ${
+                  isFlipped ? 'rotate-y-180' : ''
+                }`}
+              >
+                {/* Front Side */}
+                <div className="absolute inset-0 overflow-hidden rounded-full backface-hidden border-4 border-background/60">
+                  <Image
+                    src={frontPhoto.imageUrl}
+                    alt={frontPhoto.description}
+                    fill
+                    sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 384px"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    data-ai-hint={frontPhoto.imageHint}
+                    priority
+                  />
+                </div>
+
+                {/* Back Side */}
+                <div className="absolute inset-0 overflow-hidden rounded-full backface-hidden rotate-y-180 border-4 border-background/60">
+                  <Image
+                    src={nextPhoto.imageUrl}
+                    alt={nextPhoto.description}
+                    fill
+                    sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 384px"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    data-ai-hint={nextPhoto.imageHint}
+                  />
+                </div>
+              </div>
+
+              {/* Click to Change Floating Badge */}
+              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 rounded-full bg-background/90 px-3.5 py-1.5 text-xs font-semibold shadow-lg backdrop-blur-md border border-border/80 transition-all duration-300 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary select-none z-10">
+                <RefreshCw className={`h-3.5 w-3.5 transition-transform duration-500 ${isAnimating ? 'animate-spin' : 'group-hover:rotate-180'}`} />
+                <span>Click photo ({currentIndex + 1}/{photos.length})</span>
+                <Sparkles className="h-3 w-3 text-amber-400 group-hover:text-primary-foreground" />
+              </div>
             </div>
-            <div className="absolute -bottom-4 -right-4 h-24 w-24 rounded-full bg-accent opacity-20 blur-2xl" />
-            <div className="absolute -top-4 -left-4 h-24 w-24 rounded-full bg-primary opacity-20 blur-2xl" />
+
+            {/* Glowing Backdrop Ambient Lights */}
+            <div className="absolute -bottom-4 -right-4 h-24 w-24 rounded-full bg-accent opacity-20 blur-2xl pointer-events-none" />
+            <div className="absolute -top-4 -left-4 h-24 w-24 rounded-full bg-primary opacity-20 blur-2xl pointer-events-none" />
           </div>
         </div>
       </div>
     </section>
   );
 }
+

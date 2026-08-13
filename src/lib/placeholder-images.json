@@ -2,9 +2,21 @@
   "placeholderImages": [
     {
       "id": "profile",
-      "description": "Evan Pranawa Armansyah.",
+      "description": "Evan Pranawa Armansyah",
       "imageUrl": "/main.jpeg",
       "imageHint": "person city"
+    },
+    {
+      "id": "profile-placeholder",
+      "description": "Developer Avatar Placeholder",
+      "imageUrl": "/profile-placeholder.svg",
+      "imageHint": "developer avatar placeholder"
+    },
+    {
+      "id": "profile-alt",
+      "description": "Teachable Machine Photo",
+      "imageUrl": "/erpeel.jpeg",
+      "imageHint": "alternate profile photo"
     },
     {
       "id": "project-code",
