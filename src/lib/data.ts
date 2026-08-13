@@ -24,8 +24,7 @@ export const studentData = {
     profilePicture: getImage('profile'),
     profilePictures: [
         getImage('profile'),
-        getImage('profile-placeholder'),
-        getImage('profile-alt'),
+        getImage('iroha.jpeg'),
     ],
 };
 

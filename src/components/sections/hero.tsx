@@ -11,29 +11,14 @@ export function Hero() {
     ? studentData.profilePictures
     : [studentData.profilePicture];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
-
-  // front & back images for 3D flip effect
-  const frontImageIndex = isFlipped ? (currentIndex + 1) % photos.length : currentIndex;
-  const backImageIndex = isFlipped ? currentIndex : (currentIndex + 1) % photos.length;
 
   const handlePhotoClick = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    
-    setIsFlipped(!isFlipped);
-    
-    // update current index halfway or after transition
-    setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % photos.length);
-      setIsAnimating(false);
-    }, 600);
+    setIsFlipped((prev) => !prev);
   };
 
-  const frontPhoto = photos[currentIndex];
-  const nextPhoto = photos[(currentIndex + 1) % photos.length];
+  const frontPhoto = photos[0];
+  const backPhoto = photos[1] || photos[0];
 
   return (
     <section id="home" className="relative overflow-hidden py-20 md:py-32">
@@ -94,21 +79,20 @@ export function Hero() {
                 {/* Back Side */}
                 <div className="absolute inset-0 overflow-hidden rounded-full backface-hidden rotate-y-180 border-4 border-background/60">
                   <Image
-                    src={nextPhoto.imageUrl}
-                    alt={nextPhoto.description}
+                    src={backPhoto.imageUrl}
+                    alt={backPhoto.description}
                     fill
                     sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 384px"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    data-ai-hint={nextPhoto.imageHint}
+                    data-ai-hint={backPhoto.imageHint}
                   />
                 </div>
               </div>
 
-              {/* Click to Change Floating Badge */}
-              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 rounded-full bg-background/90 px-3.5 py-1.5 text-xs font-semibold shadow-lg backdrop-blur-md border border-border/80 transition-all duration-300 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary select-none z-10">
-                <RefreshCw className={`h-3.5 w-3.5 transition-transform duration-500 ${isAnimating ? 'animate-spin' : 'group-hover:rotate-180'}`} />
-                <span>Click photo ({currentIndex + 1}/{photos.length})</span>
-                <Sparkles className="h-3 w-3 text-amber-400 group-hover:text-primary-foreground" />
+              {/* Subtle Easter-Egg Hint Badge */}
+              <div className="absolute bottom-2 right-2 flex items-center gap-1.5 rounded-full bg-background/80 px-2.5 py-1 text-[11px] font-medium text-muted-foreground shadow-md backdrop-blur-md border border-border/50 opacity-40 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105 group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary select-none z-10">
+                <RefreshCw className="h-3 w-3 transition-transform duration-500 group-hover:rotate-180" />
+                <span className="hidden group-hover:inline transition-all duration-300">flip</span>
               </div>
             </div>
 
