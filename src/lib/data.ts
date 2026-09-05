@@ -21,6 +21,7 @@ export const studentData = {
     name: 'Evan Pranawa Armansyah',
     major: 'Rekayasa Perangkat Lunak & Cybersecurity',
     bio: 'A tech enthusiast based in Bogor, Indonesia. Currently still in school but I\'ve worked on various personal projects including home class servers and network mapping that have helped me develop a strong foundation in Cybersecurity. I also have experience in music industry such as performing on stage, playing with DAW and many more',
+    
     profilePicture: getImage('profile'),
     profilePictures: [
         getImage('profile'),
@@ -32,7 +33,7 @@ export const projects = [
     {
         id: 'project-1',
         title: 'Decoupled Storage System',
-        category: 'code-maintenance',
+        category: 'code',
         description: 'A CRUD Storage system with JavaScript and TypeScript FrontEnd and ARMBIAN Network Attached Storage (NAS)',
         technologies: ['Docker', 'MinIO', 'SupaBase', 'JavaScript', 'TypeScript'],
         image: getImage('Dashboard_Desktop.png'),
@@ -49,6 +50,23 @@ export const projects = [
     },
     {
         id: 'project-2',
+        title: 'Laravel MVC Gallery',
+        category: 'code',
+        description: 'A CRUD Gallery system with Laravel FrontEnd and a Network Attached Storage (NAS) running ARMBIAN Linux And MySQL database',
+        technologies: ['Docker', 'Laravel', 'MySQL', 'ARMBIAN', 'MinIO'],
+        image: getImage('Thumbnail Laravel.png'),
+        gallery: [
+            getImage('Laravel Dashboard.png'),
+            getImage('File Preview.png'),
+            getImage('Folder Feature.png'),
+            getImage('Selecting Files.png')
+        ],
+        url: 'https://gallery.evanpranawa.my.id',
+        githubUrl: 'https://github.com/Evan52436/larapel-pkl',
+        content: 'Decoupled architecture separation between frontend client interfaces and backend Armbian NAS minIO object storage instances.'
+    },
+    {
+        id: 'project-3',
         title: 'Hackathon at GDG Binus',
         category: 'code',
         description: 'A Hackathon Project built while attending the event "Google Developer Group" at Binus Alam Sutera.',
@@ -66,7 +84,7 @@ export const projects = [
         content: 'A helper for both student and teacher to build/play quiz'
     },
     {
-        id: 'project-3',
+        id: 'project-4',
         title: 'Truck Packer Simulator',
         category: 'code',
         description: 'A Prototype Project for a competition held by President University',
@@ -101,9 +119,9 @@ export const projects = [
         content: 'My Personal HandMade Portofolio featuring custom responsive design, smooth transitions, and showcased projects.'
     },
     {
-        id: 'project-4',
+        id: 'project-6',
         title: 'Top 10 Clash of Cyberheist',
-        category: 'competition',
+        category: 'Sertificate',
         description: 'Positioned in top 10 on a province class Cybersecurity competition',
         technologies: ['Python', 'HackerRank', 'MyDigiLearn'],
         image: getImage('project-webapp'),
@@ -117,18 +135,18 @@ export const projects = [
     }
 ];
 
-export const skills = [
-    { name: 'JavaScript', proficiency: 90, category: 'code' },
-    { name: 'Python', proficiency: 85, category: 'code' },
-    { name: 'C++', proficiency: 75, category: 'code' },
-    { name: 'HTML/CSS', proficiency: 95, category: 'code' },
-    { name: 'React', proficiency: 80, category: 'code' },
-    { name: 'Piano', proficiency: 95, category: 'music' },
-    { name: 'Guitar', proficiency: 80, category: 'music' },
-    { name: 'Music Theory', proficiency: 90, category: 'music' },
-    { name: 'Ableton Live', proficiency: 85, category: 'music' },
-    { name: 'Figma', proficiency: 70, category: 'software' },
-];
+// export const skills = [
+//     { name: 'JavaScript', proficiency: 90, category: 'code' },
+//     { name: 'Python', proficiency: 85, category: 'code' },
+//     { name: 'C++', proficiency: 75, category: 'code' },
+//     { name: 'HTML/CSS', proficiency: 95, category: 'code' },
+//     { name: 'React', proficiency: 80, category: 'code' },
+//     { name: 'Piano', proficiency: 95, category: 'music' },
+//     { name: 'Guitar', proficiency: 80, category: 'music' },
+//     { name: 'Music Theory', proficiency: 90, category: 'music' },
+//     { name: 'Ableton Live', proficiency: 85, category: 'music' },
+//     { name: 'Figma', proficiency: 70, category: 'software' },
+// ];
 
 export const resume = {
     education: [
@@ -156,15 +174,15 @@ export const resume = {
         {
             company: 'School Project',
             role: 'School E-commerce System',
-            period: 'Ongoing | 2024',
+            period: 'Finished | 2024',
             description: 'Focused on the front-end (UI/UX) development for an e-commerce platform for a school project. The work included designing and implementing product listings, a shopping cart, and user authentication flows. This project demonstrated skills in front-end development and creating an intuitive user interface.'
         },
-        {
-            company: 'Praktik Kerja Lapangan (PKL) / Internship',
-            role: 'Internship',
-            period: 'Upcoming | 2027',
-            description: 'Ongoing Internship Process at BRIN (Badan Riset dan Inovasi Nasional). Starting on January 2027 Until June 2027 (Estimated to be 6 Months)',
-        },
+        // {
+        //     company: 'Praktik Kerja Lapangan (PKL) / Internship',
+        //     role: 'Internship',
+        //     period: 'Upcoming | 2027',
+        //     description: 'Ongoing Internship Process at BRIN (Badan Riset dan Inovasi Nasional). Starting on January 2027 Until June 2027 (Estimated to be 6 Months)',
+        // },
     ],
-    skills: skills
+    // skills: skills
 };
