@@ -35,6 +35,8 @@ export function Hero() {
             </div>
             <p className="max-w-xl text-muted-foreground md:text-lg">
               {studentData.bio}
+              <img style={{ marginTop: '20px', marginBottom: '0px' }} src="https://skillicons.dev/icons?i=arch,vscode,bash,cloudflare,docker,nginx" alt="My Skills" />
+              <img style={{ marginTop: '10px', marginBottom: '0px' }} src="https://skillicons.dev/icons?i=cmake,figma,blender,ts,js" alt="My Skills"/>
             </p>
             <Button asChild size="lg" className="mt-8 transition-transform duration-300 hover:scale-105">
               <a href="#contact">
@@ -59,9 +61,8 @@ export function Hero() {
               className="group relative cursor-pointer perspective-1000 focus:outline-none"
             >
               <div
-                className={`relative h-64 w-64 rounded-full shadow-lg transition-all duration-600 ease-in-out transform-style-3d md:h-80 md:w-80 lg:h-96 lg:w-96 group-hover:shadow-2xl group-hover:ring-4 group-hover:ring-primary/40 ${
-                  isFlipped ? 'rotate-y-180' : ''
-                }`}
+                className={`relative h-64 w-64 rounded-full shadow-lg transition-all duration-600 ease-in-out transform-style-3d md:h-80 md:w-80 lg:h-96 lg:w-96 group-hover:shadow-2xl group-hover:ring-4 group-hover:ring-primary/40 ${isFlipped ? 'rotate-y-180' : ''
+                  }`}
               >
                 {/* Front Side */}
                 <div className="absolute inset-0 overflow-hidden rounded-full backface-hidden border-4 border-background/60">

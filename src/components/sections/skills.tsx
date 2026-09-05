@@ -14,32 +14,32 @@ const skills = [
   {
     name: 'Web Development',
     icon: <Globe className="h-10 w-10 text-primary mb-4" />,
-    description: 'HTML, CSS, JS, PHP',
+    description: 'TypeScript, JavaScript, PHP',
   },
   {
     name: 'Backend',
     icon: <Server className="h-10 w-10 text-primary mb-4" />,
-    description: 'PHP, Linux Systems',
+    description: 'PHP, Linux Ecosystems',
   },
   {
     name: 'Databases',
     icon: <Database className="h-10 w-10 text-primary mb-4" />,
-    description: 'SQL dan MariaDB',
+    description: 'MySQL, PostgreSQL',
   },
   {
     name: 'Cybersecurity',
     icon: <BrainCircuit className="h-10 w-10 text-primary mb-4" />,
-    description: 'Networking & CTF',
+    description: 'Networking, Linux, CTF',
   },
   {
     name: 'Music Production',
     icon: <Music className="h-10 w-10 text-primary mb-4" />,
-    description: 'Studio One & Vocaloid',
+    description: 'Studio One, Ableton Live',
   },
   {
     name: 'Instruments',
     icon: <Piano className="h-10 w-10 text-primary mb-4" />,
-    description: 'Piano & Guitar',
+    description: 'Piano, Guitar, Drums',
   },
 ];
 
