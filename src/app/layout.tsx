@@ -81,13 +81,6 @@ export default function RootLayout({
 
         {/* Global Footer injected here so it appears across the whole site */}
         <footer className="w-full py-8 flex flex-col items-center justify-center gap-2">
-
-          <img
-            src="https://skillicons.dev/icons?i=blender,bash,vscode,php,figma,discord"
-            alt="My Tech Stack: Blender, Bash, VS Code, PHP, Figma, and Discord"
-            // Adding a little Tailwind padding so it doesn't touch the edges on mobile screens
-            className="max-w-full px-4"
-          />
           <br /> {/* The properly closed JSX break tag */}
 
           <p className="text-sm text-gray-500 font-medium">
