@@ -129,10 +129,38 @@ export const projects = [
             getImage('project-webapp'),
             getImage('sertifkelompok.png'),
         ],
-        url: '#',
-        githubUrl: 'https://github.com',
+        url: 'https://drive.google.com/drive/folders/16Pfrm09J6RPiQidAWItv1YO6y2peF88s?usp=sharing',
+        githubUrl: 'https://drive.google.com/file/d/103eKeoEpHEEu9y9HRo6iesdZ7z6P5qCm/view?usp=drive_link',
         content: 'Competed in province-level Cybersecurity challenges covering cryptography, web exploitation, and reverse engineering.'
-    }
+    },
+    {
+        id: 'project-7',
+        title: 'ID-Networkers - Introduction to CTF',
+        category: 'Sertificate',
+        description: 'Attended a Webinar for Introduction to Capture The Flah from ID-Networkers 02 August 2025',
+        technologies: ['Webinar', 'CTF', 'ID-Networkers'],
+        image: getImage('ctf intro.png'),
+        gallery: [
+            getImage('ctf intro.png')
+        ],
+        url: 'https://drive.google.com/drive/folders/16Pfrm09J6RPiQidAWItv1YO6y2peF88s?usp=sharing',
+        githubUrl: 'https://drive.google.com/file/d/1KOuzVR1jl0Vu4Q2gTDnshkiPRRfPihxl/view?usp=drive_link',
+        content: 'Attended a Webinar for Introduction to Capture The Flah from ID-Networkers 02 August 2025'
+    },
+    {
+        id: 'project-8',
+        title: 'Project Owner of the "Decoupled Storage System" ',
+        category: 'Sertificate',
+        description: 'Project Owner of "Decoupled Storage System" at school project showcase',
+        technologies: ['Next.js', 'TypeScript', 'Supabase', 'PostgreSQL'],
+        image: getImage('depakto.png'),
+        gallery: [
+            getImage('depakto.png')
+        ],
+        url: 'https://drive.google.com/drive/folders/16Pfrm09J6RPiQidAWItv1YO6y2peF88s?usp=sharing',
+        githubUrl: 'https://drive.google.com/file/d/1JQGwmah74LS3t4j9rrVzhQRno6HHlJ7g/view?usp=drive_link',
+        content: 'Competed in province-level Cybersecurity challenges covering cryptography, web exploitation, and reverse engineering.'
+    },
 ];
 
 // export const skills = [
