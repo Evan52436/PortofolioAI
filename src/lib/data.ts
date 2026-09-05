@@ -21,11 +21,11 @@ export const studentData = {
     name: 'Evan Pranawa Armansyah',
     major: 'Rekayasa Perangkat Lunak & Cybersecurity',
     bio: 'A tech enthusiast based in Bogor, Indonesia. Currently still in school but I\'ve worked on various personal projects including home class servers and network mapping that have helped me develop a strong foundation in Cybersecurity. I also have experience in music industry such as performing on stage, playing with DAW and many more',
-    
+
     profilePicture: getImage('profile'),
     profilePictures: [
-        getImage('profile'),
-        getImage('iroha.jpeg'),
+        getImage('epuy.jpeg'),
+        getImage('belakang.jpeg'),
     ],
 };
 
