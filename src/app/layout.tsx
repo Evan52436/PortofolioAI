@@ -64,7 +64,7 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Archivo+Black&display=swap" rel="stylesheet" />
       </head>
 
       {/* 
@@ -78,15 +78,6 @@ export default function RootLayout({
         <main className="flex-grow">
           {children}
         </main>
-
-        {/* Global Footer injected here so it appears across the whole site */}
-        <footer className="w-full py-8 flex flex-col items-center justify-center gap-2">
-          <br /> {/* The properly closed JSX break tag */}
-
-          <p className="text-sm text-gray-500 font-medium">
-            © {new Date().getFullYear()} Evan Pranawa Armansyah.
-          </p>
-        </footer>
 
         <Toaster />
       </body>
