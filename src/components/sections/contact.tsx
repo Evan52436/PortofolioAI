@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 
 export function Contact() {
   return (
-    <section id="contact" className="py-20 md:py-28">
+    <section id="contact" className="pt-20 pb-4 md:pt-28 md:pb-6">
       <div className="container">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Contact Me</h2>
