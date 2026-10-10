@@ -14,16 +14,16 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'Evan Pranawa Armansyah - Software Engineer & Cybersecurity Enthusiast',
-    description: 'Explore the portfolio of Evan Pranawa Armansyah, showcasing projects in software engineering and cybersecurity.',
+    title: 'Evan Pranawa Armansyah - Software Engineering Student - SysAdmin Administrator',
+    description: 'Portofolio of Evan Pranawa Armansyah. Showcasing works by Evan',
     url: 'https://evanpranawa.my.id',
-    siteName: 'Evan Pranawa Armansyah Portfolio',
+    siteName: 'Evan Pranawa Armansyah',
     images: [
       {
-        url: '/main.jpeg', // Should be a path to a good OG image
+        url: '/ev-og.png', // Should be a path to a good OG image
         width: 1200,
         height: 630,
-        alt: 'Evan Pranawa Armansyah Portfolio',
+        alt: 'Card of Evan Pranawa Armansyah',
       },
     ],
     locale: 'en_US',
