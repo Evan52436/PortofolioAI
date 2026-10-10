@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'Evan Pranawa Armansyah - Software Engineering Student - SysAdmin Administrator',
+    title: 'Evan Pranawa Armansyah - Software Engineering Student - SysAdmin',
     description: 'Portofolio of Evan Pranawa Armansyah. Showcasing works by Evan',
     url: 'https://evanpranawa.my.id',
     siteName: 'Evan Pranawa Armansyah',
