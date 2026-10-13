@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   GenieTerminalTransition,
+  type GenieHandle,
   type GenieTarget,
 } from '@/components/genie-terminal-transition';
 
@@ -25,21 +26,40 @@ function Prompt() {
 export function LoadingScreen({ onLoaded }: { onLoaded: () => void }) {
   const [progress, setProgress] = useState(0);
   const [ready, setReady] = useState(false);
-  // Lamp mouth: bottom-center anchor, measured on mount for both genies.
+  // Lamp mouth: bottom-center anchor, measured on mount for the exit genie.
   const [target, setTarget] = useState<GenieTarget>({ x: 0, y: 0 });
-  // Entrance genie: blur shows first, then the terminal shoots UP out of the lamp.
-  const [enterGenie, setEnterGenie] = useState(false);
-  // Exit genie: suck the card down, then fade the whole overlay away.
-  const [exitGenie, setExitGenie] = useState(false);
+  // Entrance: blur shows first, then the card squash-pops out of the lamp (CSS).
+  const [terminalIn, setTerminalIn] = useState(false);
+  // Exit genie: suck the card down into the lamp, then fade the overlay away.
+  const [geniePlay, setGeniePlay] = useState(false);
   const [genieDone, setGenieDone] = useState(false);
   const [overlayHidden, setOverlayHidden] = useState(false);
+
+  const genieRef = useRef<GenieHandle>(null);
 
   useEffect(() => {
     setTarget({ x: window.innerWidth / 2, y: window.innerHeight - 48 });
   }, []);
 
+  // Pre-warm the genie texture as soon as the card has popped in. Rasterising
+  // here (rather than at exit time) is what keeps the exit from stalling.
   useEffect(() => {
-    const popIn = setTimeout(() => setEnterGenie(true), 350);
+    if (!terminalIn) return;
+    const warm = setTimeout(() => void genieRef.current?.warmUp(), 250);
+    return () => clearTimeout(warm);
+  }, [terminalIn]);
+
+  // The terminal reveals its lines progressively, so the warm-up texture is a
+  // near-empty terminal. Once the load has finished and the final prompt has
+  // faded in, re-capture so the genie warps the FULL terminal, not a blank one.
+  useEffect(() => {
+    if (!ready) return;
+    const recapture = setTimeout(() => void genieRef.current?.warmUp(), 550);
+    return () => clearTimeout(recapture);
+  }, [ready]);
+
+  useEffect(() => {
+    const popIn = setTimeout(() => setTerminalIn(true), 350);
     const timer = setTimeout(() => {
       const interval = setInterval(() => {
         setProgress((prev) => {
@@ -47,7 +67,7 @@ export function LoadingScreen({ onLoaded }: { onLoaded: () => void }) {
             clearInterval(interval);
             // Loading done: hold, reveal the finished prompt, then genie out.
             setTimeout(() => setReady(true), 1000);
-            setTimeout(() => setExitGenie(true), 1800);
+            setTimeout(() => setGeniePlay(true), 2400);
             return 100;
           }
           return prev + 1;
@@ -91,12 +111,13 @@ export function LoadingScreen({ onLoaded }: { onLoaded: () => void }) {
     >
       {!genieDone && (
         <GenieTerminalTransition
-          className="w-full max-w-4xl overflow-hidden rounded-xl border border-border bg-card/75 shadow-2xl backdrop-blur-md"
-          sliceClassName="rounded-xl border border-border bg-card/95"
+          ref={genieRef}
+          className={`w-full max-w-4xl overflow-hidden rounded-xl border border-border bg-card/75 shadow-2xl backdrop-blur-md ${
+            terminalIn ? 'terminal-genie' : 'opacity-0'
+          }`}
           target={target}
-          enter={enterGenie}
-          exit={exitGenie}
-          onExitComplete={handleGenieComplete}
+          play={geniePlay}
+          onComplete={handleGenieComplete}
         >
           {/* Title bar */}
           <div className="flex items-center gap-2 border-b border-border bg-muted/40 px-5 py-3">

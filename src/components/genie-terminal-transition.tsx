@@ -1,192 +1,173 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import gsap from 'gsap';
+import {
+  renderGenie,
+  snapshotCard,
+  type GenieGeo,
+  type Snapshot,
+} from '@/lib/genie';
 
 /**
- * macOS Genie / Magic Lamp — Pure CSS 30-Slice Method, BOTH directions.
+ * macOS Genie / Magic Lamp exit — canvas mesh warp.
  *
- * No canvas, no `html-to-image`, no single-element scale. The card is cloned
- * into N absolutely-positioned slices, each clipped to a 1/N height band with
- * `clip-path: inset(...)`. GSAP tweens a single scalar `t` and every frame we
- * write one GPU transform (translate3d + skewX + scaleX/scaleY) per slice.
+ * See `src/lib/genie.ts` for the warp itself. The contract here is:
  *
- *  - exit : t 0 -> 1, slices get sucked DOWN into the lamp target.
- *  - enter: t 1 -> 0, slices shoot UP out of the lamp target into place.
+ *   warmUp()  rasterise the card while the progress bar is still running, so
+ *             the exit is instant instead of stalling on a snapshot.
+ *   play      swap the live card for the warped sheet and pour it into the lamp.
  *
- * `will-change: transform` keeps each band on its own compositor layer.
+ * The sheet is a single warped mesh, so there are no slice seams to hide.
  */
 
-/** Number of horizontal bands the card is cut into. */
-export const SLICES = 30;
-
-/** The "mouth of the lamp": viewport px the card collapses into. */
+/** The "mouth of the lamp": viewport px the card pours into. */
 export interface GenieTarget {
   x: number;
   y: number;
 }
 
-interface Rect {
-  left: number;
-  top: number;
-  width: number;
-  height: number;
+/** Imperative handle so the loader can pre-warm the snapshot. */
+export interface GenieHandle {
+  warmUp: () => Promise<void>;
 }
 
 interface GenieTerminalTransitionProps {
-  /** The terminal card markup (cloned once per slice while a genie runs). */
   children: React.ReactNode;
-  /** Point the card is sucked into / shot out of (viewport coordinates). */
   target: GenieTarget;
-  /** Flip to true to run the entrance genie (lamp -> card). */
-  enter?: boolean;
-  /** Flip to true to run the exit genie (card -> lamp). */
-  exit?: boolean;
-  /** Called after the entrance slice layer is torn down. */
-  onEnterComplete?: () => void;
-  /** Called after the exit slice layer is torn down. */
-  onExitComplete?: () => void;
-  /** Duration of each genie, ms. macOS sits around 600-800. */
+  /** Flip to true to pour the card into the lamp. */
+  play: boolean;
+  /** Called after the mesh has finished and the overlay is torn down. */
+  onComplete: () => void;
+  /** Duration in ms. macOS sits around 600-800. */
   duration?: number;
   /** Classes for the real card. */
   className?: string;
-  /**
-   * Classes for the cloned slices. Should be the card's *chrome* only
-   * (background, border, radius) — NOT the entrance animation, and ideally
-   * without `backdrop-blur` (30 blurred layers is expensive).
-   */
-  sliceClassName?: string;
-  /**
-   * Hide the real card until the first entrance completes. Defaults to true
-   * because this app always enters; pass false for exit-only usage.
-   */
-  startHidden?: boolean;
+  /** Mesh resolution overrides. */
+  cols?: number;
+  rows?: number;
 }
 
-const nextFrame = () => new Promise<void>((r) => requestAnimationFrame(() => r()));
+const MAX_DPR = 2;
 
-export function GenieTerminalTransition({
-  children,
-  target,
-  enter = false,
-  exit = false,
-  onEnterComplete,
-  onExitComplete,
-  duration = 600,
-  className,
-  sliceClassName,
-  startHidden = true,
-}: GenieTerminalTransitionProps) {
+export const GenieTerminalTransition = forwardRef<
+  GenieHandle,
+  GenieTerminalTransitionProps
+>(function GenieTerminalTransition(
+  { children, target, play, onComplete, duration = 700, className, cols, rows },
+  ref,
+) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const sliceRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const snapRef = useRef<Snapshot | null>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
-  const direction = useRef<'enter' | 'exit'>('exit');
+  const runningRef = useRef(false);
 
-  const [rect, setRect] = useState<Rect | null>(null);
-  const [active, setActive] = useState(false); // slice layer mounted?
-  const [cardHidden, setCardHidden] = useState(startHidden);
+  const [showCanvas, setShowCanvas] = useState(false);
+  const [cardHidden, setCardHidden] = useState(false);
 
-  /**
-   * Per-slice deformation. `t` 0→1 (exit), `yn` = band position (0 top → 1 bottom).
-   *
-   *  - translateX : deltaX * t^1.5 * sin((yn*PI)/2)   → S-curve drift toward the lamp
-   *  - scaleX     : max(0, 1 - t*(0.3 + 0.7*yn^2))    → bottom pinches faster (trapezoid)
-   *  - translateY : (targetY - bandCenterY) * t^1.3   → all bands converge down into the lamp
-   *  - scaleY     : max(0, 1 - t*(0.35 + 0.65*yn))    → lower bands flatten hardest (pile-up)
-   *  - skewX      : tiny lean toward the target        → the organic curved-S look
-   *
-   * The entrance simply runs `t` from 1→0, so the same math plays in reverse.
-   */
-  const applySlices = (t: number, g: Rect) => {
-    const N = SLICES;
-    const bandH = g.height / N;
-    const centerX = g.left + g.width / 2;
-    const deltaX = target.x - centerX;
-    const leanSign = deltaX < 0 ? -1 : 1;
-
-    const easeX = Math.pow(t, 1.5);
-    const easeY = Math.pow(t, 1.3);
-
-    for (let i = 0; i < N; i++) {
-      const el = sliceRefs.current[i];
-      if (!el) continue;
-
-      const yn = i / (N - 1);
-      const bandCenterY = g.top + (i + 0.5) * bandH;
-
-      const translateX = deltaX * easeX * Math.sin((yn * Math.PI) / 2);
-      const scaleX = Math.max(0, 1 - t * (0.3 + 0.7 * yn * yn));
-      const translateY = (target.y - bandCenterY) * easeY;
-      const scaleY = Math.max(0, 1 - t * (0.35 + 0.65 * yn));
-      const skewX = -leanSign * t * 0.2 * yn;
-
-      el.style.transform =
-        `translate3d(${translateX.toFixed(2)}px, ${translateY.toFixed(2)}px, 0) ` +
-        `skewX(${skewX.toFixed(3)}deg) ` +
-        `scaleX(${scaleX.toFixed(4)}) scaleY(${scaleY.toFixed(4)})`;
-
-      // Progressive opacity fall-off only at the tail of t (near the lamp).
-      el.style.opacity = t > 0.85 ? (1 - (t - 0.85) / 0.15).toFixed(3) : '1';
-    }
-  };
-
-  const measure = () => {
+  /** Rasterise the card. Safe to call repeatedly; the last one wins. */
+  const warmUp = useCallback(async () => {
     const card = cardRef.current;
     if (!card) return;
-    const r = card.getBoundingClientRect();
-    setRect({ left: r.left, top: r.top, width: r.width, height: r.height });
-  };
+    try {
+      const snap = await snapshotCard(card, MAX_DPR);
+      if (snap) snapRef.current = snap;
+    } catch (err) {
+      // Surfaced deliberately: a silent failure here means the genie degrades
+      // to an instant cut, which is very hard to diagnose from the outside.
+      console.error('[genie] card snapshot failed — falling back to a cut', err);
+    }
+  }, []);
 
-  // Entrance trigger: hide the card at once and mount slices at the lamp.
+  useImperativeHandle(ref, () => ({ warmUp }), [warmUp]);
+
+  // Pour the sheet once `play` flips.
   useEffect(() => {
-    if (!enter) return;
-    direction.current = 'enter';
-    setCardHidden(true);
-    measure();
-    setActive(true);
-  }, [enter]);
+    if (!play || runningRef.current) return;
+    runningRef.current = true;
 
-  // Exit trigger: keep the card visible; slices mount on top, then swap.
-  useEffect(() => {
-    if (!exit) return;
-    direction.current = 'exit';
-    measure();
-    setActive(true);
-  }, [exit]);
-
-  // Play the genie once the slice layer is mounted and measured.
-  useEffect(() => {
-    if (!active || !rect) return;
-
-    const dir = direction.current;
-    const from = dir === 'enter' ? 1 : 0;
-    const to = dir === 'enter' ? 0 : 1;
-
-    applySlices(from, rect);
+    const card = cardRef.current;
+    const canvas = canvasRef.current;
+    if (!card || !canvas) return;
 
     let tl: gsap.core.Timeline | null = null;
     let cancelled = false;
 
     (async () => {
-      // Commit the first slice frame before hiding the real card → no flash.
-      await nextFrame();
+      // Prefer the pre-warmed texture; snapshot on the spot only if we must.
+      let snap = snapRef.current;
+      if (!snap) {
+        await warmUp();
+        snap = snapRef.current;
+      }
+
+      // Measure fresh: the card may have moved since the warm-up.
+      const r = card.getBoundingClientRect();
+      const geo: GenieGeo = {
+        left: r.left,
+        top: r.top,
+        width: r.width,
+        height: r.height,
+      };
+      if (!r.width || !r.height) {
+        onComplete();
+        return;
+      }
+
+      const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
+      canvas.width = Math.round(window.innerWidth * dpr);
+      canvas.height = Math.round(window.innerHeight * dpr);
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+
+      const ctx = canvas.getContext('2d');
+      if (!ctx || !snap) {
+        // No texture available: hand off immediately rather than show a
+        // half-drawn frame.
+        setCardHidden(true);
+        setShowCanvas(false);
+        onComplete();
+        return;
+      }
+
+      setShowCanvas(true);
+
+      const paint = (t: number) => {
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        renderGenie(ctx, snap!.tex, geo, target, t, dpr, { cols, rows });
+      };
+
+      // Frame zero: the mesh is the identity transform, so the canvas is
+      // pixel-identical to the live card. Only then do we hide the card.
+      paint(0);
+      await new Promise<void>((res) => requestAnimationFrame(() => res()));
       if (cancelled) return;
       setCardHidden(true);
 
-      const state = { t: from };
+      const state = { t: 0 };
       tl = gsap.timeline({
         onComplete: () => {
-          setActive(false); // unmount the slice layer
-          setCardHidden(false); // reveal the real card
-          direction.current === 'enter' ? onEnterComplete?.() : onExitComplete?.();
+          setShowCanvas(false);
+          setCardHidden(false);
+          runningRef.current = false;
+          onComplete();
         },
       });
       tl.to(state, {
-        t: to,
+        t: 1,
         duration: duration / 1000,
-        // exit accelerates INTO the lamp; enter bursts OUT and settles.
-        ease: dir === 'enter' ? 'power2.out' : 'power2.in',
-        onUpdate: () => applySlices(state.t, rect),
+        // Slow start, fast pour, then the trailing top edge lingers in.
+        ease: 'power2.inOut',
+        onUpdate: () => paint(state.t),
       });
       tlRef.current = tl;
     })();
@@ -194,9 +175,10 @@ export function GenieTerminalTransition({
     return () => {
       cancelled = true;
       tl?.kill();
+      runningRef.current = false;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [active, rect]);
+  }, [play]);
 
   useEffect(() => {
     return () => {
@@ -215,36 +197,15 @@ export function GenieTerminalTransition({
         {children}
       </div>
 
-      {active && rect && (
-        <div className="pointer-events-none fixed inset-0 z-[80]">
-          {Array.from({ length: SLICES }).map((_, i) => (
-            <div
-              key={i}
-              ref={(el) => {
-                sliceRefs.current[i] = el;
-              }}
-              className="absolute will-change-transform"
-              style={{
-                left: rect.left,
-                top: rect.top,
-                width: rect.width,
-                height: rect.height,
-                // Cut this clone down to its 1/N band.
-                clipPath: `inset(${(i / SLICES) * 100}% 0 ${
-                  (1 - (i + 1) / SLICES) * 100
-                }% 0)`,
-                // Scale around the band's own centre so the pinch reads cleanly.
-                transformOrigin: `50% ${(((i + 0.5) / SLICES) * 100).toFixed(4)}%`,
-                backfaceVisibility: 'hidden',
-              }}
-            >
-              <div className={sliceClassName} style={{ width: '100%', height: '100%' }}>
-                {children}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      {/* The canvas must exist in the DOM before the effect paints to it, so
+          it's always mounted; only its visibility is switched. */}
+      <canvas
+        ref={canvasRef}
+        className={
+          showCanvas ? 'pointer-events-none fixed inset-0 z-[80]' : 'hidden'
+        }
+        aria-hidden
+      />
     </>
   );
-}
+});

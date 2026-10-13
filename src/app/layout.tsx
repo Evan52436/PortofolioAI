@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
+import { fontClassNames } from './fonts';
 
 export const metadata: Metadata = {
   title: 'Evan Pranawa Armansyah - Software Engineer & Cybersecurity Enthusiast',
@@ -60,17 +61,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-      </head>
-
-      {/* 
-        NERD TWEAK: Added flex, flex-col, and min-h-screen. 
-        This is a classic CSS trick to ensure the footer always pushes to the bottom 
-        even if the page content (children) is completely empty! 
+    <html lang="en" suppressHydrationWarning className={fontClassNames}>
+      {/*
+        NERD TWEAK: Added flex, flex-col, and min-h-screen.
+        This is a classic CSS trick to ensure the footer always pushes to the bottom
+        even if the page content (children) is completely empty!
       */}
       <body className="font-body antialiased flex flex-col min-h-screen">
 
