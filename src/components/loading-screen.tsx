@@ -118,7 +118,7 @@ export function LoadingScreen({ onLoaded }: { onLoaded: () => void }) {
           target={target}
           play={geniePlay}
           /** Deliberately slow: the pour should read as viscous, not a drop. */
-          duration={1150}
+          duration={1650}
           onComplete={handleGenieComplete}
         >
           {/* Title bar */}
