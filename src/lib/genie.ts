@@ -30,26 +30,6 @@ export interface Snapshot {
   geo: GenieGeo;
 }
 
-/**
- * The card is styled `bg-card/75` + `backdrop-blur-md`. Neither the alpha nor
- * the backdrop blur survives rasterisation — behind the card in the texture
- * there is nothing, so a translucent capture reads as an empty ghost once the
- * canvas takes over. Bake the card's own colour in at FULL alpha instead.
- */
-function opaqueCardColor(el: HTMLElement): string {
-  const bg = getComputedStyle(el).backgroundColor;
-  const m = bg.match(/^rgba?\(([^)]+)\)$/i);
-  if (m) {
-    const [r, g, b, a] = m[1].split(',').map((s) => s.trim());
-    if (a === undefined || parseFloat(a) > 0) return `rgb(${r}, ${g}, ${b})`;
-  }
-  // Fully transparent / unparseable: fall back to the theme's card token.
-  const token = getComputedStyle(document.documentElement)
-    .getPropertyValue('--card')
-    .trim();
-  return token ? `hsl(${token})` : '#ffffff';
-}
-
 /** Rasterise an element once. Rejects cheaply if the element has no layout. */
 export async function snapshotCard(el: HTMLElement, pixelRatio = 2): Promise<Snapshot | null> {
   // Fonts must be in before we rasterise, or the texture ships fallback glyphs.
@@ -64,20 +44,17 @@ export async function snapshotCard(el: HTMLElement, pixelRatio = 2): Promise<Sna
   const r = el.getBoundingClientRect();
   if (!r.width || !r.height) return null;
 
-  const bg = opaqueCardColor(el);
-
+  /**
+   * Deliberately NO `backgroundColor` option. html-to-image applies that with
+   * a `fillRect` over the whole canvas, which squares off the card's rounded
+   * corners in the texture. The card now paints its own opaque `bg-card`, so
+   * its corners are genuinely opaque and no fill is needed.
+   */
   const tex = await toCanvas(el, {
     pixelRatio,
     cacheBust: true,
     // Inline the webfonts (Poppins / JetBrains Mono) into the snapshot.
     skipFonts: false,
-    backgroundColor: bg,
-    // Drop the backdrop blur on the clone: it cannot be rasterised, and
-    // carrying it over would only muddy the texture.
-    style: {
-      backgroundColor: bg,
-      backdropFilter: 'none',
-    },
   });
 
   return {

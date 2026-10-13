@@ -112,7 +112,16 @@ export function LoadingScreen({ onLoaded }: { onLoaded: () => void }) {
       {!genieDone && (
         <GenieTerminalTransition
           ref={genieRef}
-          className={`w-full max-w-4xl overflow-hidden rounded-xl border border-border bg-card/75 shadow-2xl backdrop-blur-md ${
+          /**
+           * Opaque and shadowless on purpose — this must rasterise to exactly
+           * what the genie texture contains, or the handoff frame pops.
+           *
+           * `bg-card/75` + `backdrop-blur-md` (the translucent "riced terminal"
+           * look) cannot survive rasterisation, and `shadow-2xl` is clipped out
+           * because it paints outside the element's bounding box. Both would
+           * vanish the instant the canvas takes over.
+           */
+          className={`w-full max-w-4xl overflow-hidden rounded-xl border border-border bg-card ${
             terminalIn ? 'terminal-genie' : 'opacity-0'
           }`}
           target={target}
