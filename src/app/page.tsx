@@ -14,12 +14,10 @@ import { Skills } from '@/components/sections/skills';
 export default function Home() {
   const [loading, setLoading] = useState(true);
 
-  if (loading) {
-    return <LoadingScreen onLoaded={() => setLoading(false)} />;
-  }
-
   return (
     <div className="flex min-h-screen flex-col">
+      {/* Page renders underneath the loader so the hero shows through the blur */}
+      {loading && <LoadingScreen onLoaded={() => setLoading(false)} />}
       <Snowfall color="#FFFFFF" />
       <Header />
       <main className="flex-1">

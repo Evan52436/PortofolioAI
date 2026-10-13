@@ -58,12 +58,12 @@ export function LoadingScreen({ onLoaded }: { onLoaded: () => void }) {
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center bg-background px-4 transition-opacity duration-500 ${isLoaded ? 'opacity-0' : 'opacity-100'
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-background/70 px-4 backdrop-blur-xl transition-opacity duration-500 ${isLoaded ? 'pointer-events-none opacity-0' : 'opacity-100'
         }`}
     >
-      <div className="w-full max-w-4xl overflow-hidden rounded-xl border border-border bg-card shadow-2xl">
+      <div className="w-full max-w-4xl overflow-hidden rounded-xl border border-border bg-card/75 shadow-2xl backdrop-blur-md">
         {/* Title bar */}
-        <div className="flex items-center gap-2 border-b border-border bg-muted/60 px-5 py-3">
+        <div className="flex items-center gap-2 border-b border-border bg-muted/40 px-5 py-3">
           <span className="h-3.5 w-3.5 rounded-full bg-primary" />
           <span className="h-3.5 w-3.5 rounded-full bg-accent" />
           <span className="h-3.5 w-3.5 rounded-full bg-muted-foreground/40" />
