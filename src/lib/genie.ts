@@ -15,7 +15,7 @@
  * hide them. The sheet just bends.
  */
 
-import { toCanvas } from 'html-to-image';
+import { toSvg } from 'html-to-image';
 
 export interface GenieGeo {
   left: number;
@@ -30,8 +30,59 @@ export interface Snapshot {
   geo: GenieGeo;
 }
 
+/**
+ * Load an image with a HARD timeout.
+ *
+ * html-to-image's own `createImage` has a real bug: its `onload` handler calls
+ * `img.decode().then(...)` with no `.catch()`. Firefox (mobile especially)
+ * rejects `decode()` for large SVG data-URIs, and because there is no catch
+ * path, that promise NEVER settles — `toCanvas` hangs forever and the exit
+ * animation is blocked permanently. Loading the image ourselves means we can
+ * always resolve or reject, never hang.
+ */
+function loadImage(src: string, timeoutMs: number): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    let done = false;
+
+    const settle = (fn: () => void) => {
+      if (done) return;
+      done = true;
+      clearTimeout(timer);
+      fn();
+    };
+
+    const timer = setTimeout(
+      () => settle(() => reject(new Error('snapshot image load timed out'))),
+      timeoutMs,
+    );
+
+    img.onload = () =>
+      settle(() => {
+        // decode() is a nice-to-have (guarantees paint-ready pixels); a
+        // rejection must not be fatal here, which is the bug we're avoiding.
+        if (typeof img.decode === 'function') {
+          img.decode().then(
+            () => resolve(img),
+            () => resolve(img),
+          );
+        } else {
+          resolve(img);
+        }
+      });
+    img.onerror = () => settle(() => reject(new Error('snapshot image failed to load')));
+
+    img.crossOrigin = 'anonymous';
+    img.src = src;
+  });
+}
+
 /** Rasterise an element once. Rejects cheaply if the element has no layout. */
-export async function snapshotCard(el: HTMLElement, pixelRatio = 2): Promise<Snapshot | null> {
+export async function snapshotCard(
+  el: HTMLElement,
+  pixelRatio = 2,
+  timeoutMs = 4000,
+): Promise<Snapshot | null> {
   // Fonts must be in before we rasterise, or the texture ships fallback glyphs.
   if (document.fonts?.ready) {
     try {
@@ -49,13 +100,26 @@ export async function snapshotCard(el: HTMLElement, pixelRatio = 2): Promise<Sna
    * a `fillRect` over the whole canvas, which squares off the card's rounded
    * corners in the texture. The card now paints its own opaque `bg-card`, so
    * its corners are genuinely opaque and no fill is needed.
+   *
+   * We take the SVG route and rasterise it ourselves rather than calling
+   * `toCanvas`, so the image-load step is the timeout-guarded one above.
    */
-  const tex = await toCanvas(el, {
-    pixelRatio,
+  const dataUrl = await toSvg(el, {
     cacheBust: true,
     // Inline the webfonts (Poppins / JetBrains Mono) into the snapshot.
     skipFonts: false,
   });
+
+  const img = await loadImage(dataUrl, timeoutMs);
+
+  const w = Math.round(r.width * pixelRatio);
+  const h = Math.round(r.height * pixelRatio);
+  const tex = document.createElement('canvas');
+  tex.width = w;
+  tex.height = h;
+  const ctx = tex.getContext('2d');
+  if (!ctx) return null;
+  ctx.drawImage(img, 0, 0, w, h);
 
   return {
     tex,
