@@ -205,6 +205,24 @@ export const resume = {
             period: 'Finished | 2024',
             description: 'Focused on the front-end (UI/UX) development for an e-commerce platform for a school project. The work included designing and implementing product listings, a shopping cart, and user authentication flows. This project demonstrated skills in front-end development and creating an intuitive user interface.'
         },
+        {
+            company: 'Backend Developer',
+            role: 'Finalist AI Open Innovation Competition',
+            period: 'Finished | 2025',
+            description: 'Backend Developer for competition by President University with TUV NORD. completing Case 2: PPE Compliance Monitoring via computer vision.'
+        },
+        {
+            company: 'System Administrator & Project Manager',
+            role: 'Jagoan Hosting Innovation Competition',
+            period: 'Finished | 2026',
+            description: 'National Wide Website Building Competition held by Jagoan Hosting. Held the role of System Administrator, in charge of managing the stability of the website that lead our team to pass multiple elimination rounds'
+        },
+        {
+            company: 'Wakil Devaccto RPL',
+            role: 'Vice President of Devaccto RPL',
+            period: 'Ongoing | 2026',
+            description: 'Vice President of Devaccto RPL (Development Acceleration Troops). School organization for the students leading in their Major. Also Responsible for the making and managing of the schools digital infrastructure'
+        },
         // {
         //     company: 'Praktik Kerja Lapangan (PKL) / Internship',
         //     role: 'Internship',
