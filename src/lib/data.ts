@@ -183,13 +183,13 @@ export const resume = {
     experience: [
         {
             company: 'Magang / Internship',
-            role: 'Internship',
+            role: 'Askar Photography',
             period: 'Finished | 2024',
             description: 'Internship at Askarphotography. Assisted lead photographers and videographers in capturing 10+ weddings, and managing lighting equipment. Edited a high-resolution RAW photos and 4K video of highlights using Adobe Premiere to ensuring timely delivery of premium client galleries.)',
         },
         {
             company: 'Magang / Internship',
-            role: 'Internship',
+            role: 'School of Universe',
             period: 'Finished | 2025',
             description: 'Internship at School IT Department.Supported school IT infrastructure by troubleshooting hardware and network issues for students and staff. Managed device deployments, updated system software, and resolved technical issues to ensure minimal downtime for  educational operations and school administration.)',
         },
