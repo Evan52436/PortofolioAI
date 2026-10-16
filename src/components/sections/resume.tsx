@@ -2,6 +2,8 @@
 
 import * as React from 'react';
 import Image from 'next/image';
+import { ExternalLink } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { resume } from '@/lib/data';
 import type { ImagePlaceholder } from '@/lib/placeholder-images';
 import { ExperienceModal } from '@/components/experience-modal';
@@ -65,71 +67,62 @@ export function Resume() {
       const count = outers.length;
       if (count === 0) return;
 
-      // 1. Calculate continuous front progress of the stack (0.0 to count - 1)
-      let frontProgress = 0;
-      for (let j = 0; j < count; j++) {
-        const outerJ = outers[j];
-        if (!outerJ) continue;
-        const stickyJ = BASE_STICKY_TOP + j * STACK_STEP;
-        const rectJ = outerJ.getBoundingClientRect();
-        const distJ = rectJ.top - stickyJ;
-
-        if (distJ <= 0) {
-          // Card j has reached its sticky top
-          frontProgress = j;
-        } else {
-          // Card j is approaching its sticky top
-          const prevOuter = j > 0 ? outers[j - 1] : null;
-          const stepDist = prevOuter
-            ? Math.max(outerJ.offsetTop - prevOuter.offsetTop - STACK_STEP, 300)
-            : Math.max(rectJ.height * 0.85, 360);
-          const frac = Math.min(Math.max(1 - distJ / stepDist, 0), 1);
-          frontProgress = Math.max(0, j - 1) + frac;
-          break;
-        }
-      }
-
-      // 2. Flight timing:
-      // Each card takes flightDuration to fly off.
-      // Next card starts at step = flightDuration * 0.5 (when the previous card is exactly halfway through).
-      const flightDuration = 1.4;
-      const step = flightDuration * 0.5; // 0.7: triggers next card when current is at 50%
-      const startBase = 2.0; // Card 0 starts when 3 cards have arrived in stack
-
       for (let i = 0; i < count; i++) {
         const currentInner = inners[i];
         if (!currentInner) continue;
 
-        // Card i only swipes away if there are at least 3 cards ahead in stack (i + 3 < count)
-        const canDiscard = i + 3 < count;
-        let discardProgress = 0;
+        // Effect 1: Next card (i + 1) arriving over Card i (1 card behind front)
+        let p1 = 0;
+        const target1 = i + 1;
+        if (target1 < count && outers[target1]) {
+          const sticky1 = BASE_STICKY_TOP + target1 * STACK_STEP;
+          const rect1 = outers[target1]!.getBoundingClientRect();
+          const dist1 = rect1.top - sticky1;
+          const travel1 = Math.max(rect1.height * 0.8, 360);
+          p1 = Math.min(Math.max((travel1 - dist1) / travel1, 0), 1);
+        }
 
-        if (canDiscard) {
-          const start = startBase + i * step;
-          if (frontProgress > start) {
-            discardProgress = Math.min(Math.max((frontProgress - start) / flightDuration, 0), 1);
-          }
+        // Effect 2: Card (i + 2) arriving over Card (i + 1) (2 cards behind front)
+        // Remains solid in the stack.
+        let p2 = 0;
+        const target2 = i + 2;
+        if (target2 < count && outers[target2]) {
+          const sticky2 = BASE_STICKY_TOP + target2 * STACK_STEP;
+          const rect2 = outers[target2]!.getBoundingClientRect();
+          const dist2 = rect2.top - sticky2;
+          const travel2 = Math.max(rect2.height * 0.8, 360);
+          p2 = Math.min(Math.max((travel2 - dist2) / travel2, 0), 1);
+        }
+
+        // Effect 3: Card (i + 3) arriving over Card (i + 2) (3 cards behind front).
+        // Only Card i swipes away when Card (i + 3) arrives. Only one card moves at a time!
+        let discardProgress = 0;
+        const target3 = i + 3;
+        if (target3 < count && outers[target3]) {
+          const sticky3 = BASE_STICKY_TOP + target3 * STACK_STEP;
+          const rect3 = outers[target3]!.getBoundingClientRect();
+          const dist3 = rect3.top - sticky3;
+          const travel3 = Math.max(rect3.height * 0.8, 360);
+          discardProgress = Math.min(Math.max((travel3 - dist3) / travel3, 0), 1);
         }
 
         const direction = i % 2 === 0 ? -1 : 1;
         const eased = Math.pow(discardProgress, 1.2);
 
-        const x = direction * eased * 125;
+        // Clears the viewport completely without lingering
+        const x = direction * eased * 165;
         const rot = direction * eased * 14;
         const y = -eased * 25;
-
-        // Depth scale for cards resting in stack
-        const depth = Math.max(0, Math.min(2, frontProgress - i));
-        const baseScale = 1 - depth * 0.015;
+        const baseScale = 1 - p1 * 0.015 - p2 * 0.015;
         const scale = Math.max(0.85, baseScale - eased * 0.03);
-        const opacity = eased > 0.85 ? Math.max(0, 1 - (eased - 0.85) / 0.15) : 1;
+        const opacity = discardProgress > 0 ? Math.max(0, 1 - Math.pow(discardProgress, 1.4)) : 1;
 
         if (discardProgress > 0) {
           currentInner.style.transform = `translate3d(${x.toFixed(2)}%, ${y.toFixed(1)}px, 0) rotate(${rot.toFixed(2)}deg) scale(${scale.toFixed(4)})`;
           currentInner.style.opacity = opacity.toFixed(3);
-          currentInner.style.pointerEvents = discardProgress > 0.6 ? 'none' : 'auto';
+          currentInner.style.pointerEvents = discardProgress > 0.4 ? 'none' : 'auto';
         } else {
-          currentInner.style.transform = depth > 0.05 ? `scale(${baseScale.toFixed(4)})` : 'scale(1)';
+          currentInner.style.transform = p1 > 0.005 || p2 > 0.005 ? `scale(${baseScale.toFixed(4)})` : 'scale(1)';
           currentInner.style.opacity = '1';
           currentInner.style.pointerEvents = 'auto';
         }
@@ -214,7 +207,7 @@ export function Resume() {
                     }
                   }}
                   aria-label={`Open details for ${exp.role}`}
-                  className="experience-stacked-card group relative flex origin-top flex-col overflow-hidden rounded-2xl md:rounded-3xl w-full md:aspect-[16/10] min-h-[420px] md:min-h-[480px] cursor-pointer transition-all duration-300 hover:border-primary/50 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary/40"
+                  className="experience-stacked-card group relative flex origin-top flex-col overflow-hidden rounded-2xl md:rounded-3xl w-full min-h-[460px] md:min-h-[500px] cursor-pointer transition-all duration-300 hover:border-primary/50 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary/40"
                 >
                   {/* Separated Top Header Part - Extends all the way across to the right */}
                   <div className="flex w-full items-center justify-between border-b border-border bg-muted/25 px-6 py-3.5 sm:px-8 sm:py-4">
@@ -228,18 +221,35 @@ export function Resume() {
 
                   {/* Main Card Body (Left Details + Right Picture Showcase) */}
                   <div className="flex flex-1 flex-col md:flex-row md:items-stretch overflow-hidden">
-                    {/* Left: Experience Details - Anchored to top with blue divider */}
-                    <div className="flex w-full flex-col justify-start p-6 sm:p-7 md:w-1/2 lg:p-8">
-                      <h3 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl whitespace-pre-line">
-                        {exp.role}
-                      </h3>
+                    {/* Left: Experience Details - Anchored to top with blue divider & View More button */}
+                    <div className="flex w-full flex-col justify-between p-6 sm:p-7 md:w-1/2 lg:p-8">
+                      <div className="flex flex-col flex-1">
+                        <h3 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl whitespace-pre-line">
+                          {exp.role}
+                        </h3>
 
-                      {/* Blue divider line below title and above description - really long and extends past text on hover */}
-                      <div className="my-4 sm:my-5 h-[2px] w-[85%] bg-primary rounded-full transition-all duration-500 ease-out group-hover:w-[calc(100%+1.5rem)] lg:group-hover:w-[calc(100%+2rem)]" />
+                        {/* Blue divider line below title and above description - really long and extends past text on hover */}
+                        <div className="my-3.5 sm:my-4 h-[2px] w-[85%] bg-primary rounded-full transition-all duration-500 ease-out group-hover:w-[calc(100%+1.5rem)] lg:group-hover:w-[calc(100%+2rem)]" />
 
-                      <p className="text-sm sm:text-base leading-relaxed text-muted-foreground line-clamp-6">
-                        {exp.description}
-                      </p>
+                        <p className="text-sm sm:text-base leading-relaxed text-muted-foreground">
+                          {exp.description}
+                        </p>
+                      </div>
+
+                      {/* View More button matching the blue button in My Works (long and squareish) */}
+                      <div className="pt-5 sm:pt-6 mt-auto">
+                        <Button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedExperience(exp);
+                          }}
+                          className="w-full justify-center shadow-md h-11 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-all rounded-md gap-2 group/btn"
+                        >
+                          <span>View More</span>
+                          <ExternalLink className="w-4 h-4 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                        </Button>
+                      </div>
                     </div>
 
                     {/* Right: Picture Showcase */}

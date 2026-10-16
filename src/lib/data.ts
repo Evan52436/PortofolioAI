@@ -187,8 +187,8 @@ export const resume = {
             period: 'Finished | 2024',
             description: 'Internship at Askarphotography. Assisted lead photographers and videographers in capturing 10+ weddings, and managing lighting equipment. Edited a high-resolution RAW photos and 4K video of highlights using Adobe Premiere to ensuring timely delivery of premium client galleries.',
             images: [
-                getImage('Thumbnail Laravel.png'),
-                getImage('File Preview.png'),
+                getImage('askar1.png'),
+                getImage('askar2.png'),
             ],
         },
         {
@@ -227,8 +227,8 @@ export const resume = {
             period: 'Finished | 2026',
             description: 'National Wide Website Building Competition held by Jagoan Hosting. Held the role of System Administrator, in charge of managing the stability of the website that lead our team to pass multiple elimination rounds',
             images: [
-                getImage('Dashboard_Mobile.png'),
-                getImage('Dashboard_Mobile.png'),
+                getImage('jhic1.png'),
+                getImage('jhic2.png'),
             ],
             isPortrait: true,
         },
