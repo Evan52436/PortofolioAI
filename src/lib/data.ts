@@ -218,8 +218,8 @@ export const resume = {
             description: 'National Wide Website Building Competition held by Jagoan Hosting. Held the role of System Administrator, in charge of managing the stability of the website that lead our team to pass multiple elimination rounds'
         },
         {
-            company: 'Wakil Devaccto RPL',
-            role: 'Vice President of Devaccto RPL',
+            company: 'Vice President of RPL',
+            role: 'Development Acceleration Troops Organization',
             period: 'Ongoing | 2026',
             description: 'Vice President of Devaccto RPL (Development Acceleration Troops). School organization for the students leading in their Major. Also Responsible for the making and managing of the schools digital infrastructure'
         },
