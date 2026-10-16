@@ -53,7 +53,7 @@ export function Portfolio() {
     <section id="portfolio" className="bg-muted/50 py-20 md:py-28 overflow-hidden">
       <div className="max-w-[1560px] mx-auto px-4 sm:px-12 relative">
         <div className="mb-12 text-center">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">My Work</h2>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">My Works</h2>
           <p className="mx-auto mt-4 max-w-3xl text-muted-foreground md:text-xl">
             A collection of my Projects and Achievements.
           </p>

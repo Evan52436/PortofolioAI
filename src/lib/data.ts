@@ -183,45 +183,64 @@ export const resume = {
     experience: [
         {
             company: 'Magang / Internship',
-            role: 'Askar Photography',
+            role: 'Internship at \n Askar Photography',
             period: 'Finished | 2024',
-            description: 'Internship at Askarphotography. Assisted lead photographers and videographers in capturing 10+ weddings, and managing lighting equipment. Edited a high-resolution RAW photos and 4K video of highlights using Adobe Premiere to ensuring timely delivery of premium client galleries.)',
+            description: 'Internship at Askarphotography. Assisted lead photographers and videographers in capturing 10+ weddings, and managing lighting equipment. Edited a high-resolution RAW photos and 4K video of highlights using Adobe Premiere to ensuring timely delivery of premium client galleries.',
+            images: [
+                getImage('Thumbnail Laravel.png'),
+                getImage('File Preview.png'),
+            ],
         },
         {
             company: 'Magang / Internship',
-            role: 'School of Universe',
+            role: 'Internship at \n School of Universe',
             period: 'Finished | 2025',
-            description: 'Internship at School IT Department.Supported school IT infrastructure by troubleshooting hardware and network issues for students and staff. Managed device deployments, updated system software, and resolved technical issues to ensure minimal downtime for  educational operations and school administration.)',
+            description: 'Internship at School IT Department. Supported school IT infrastructure by troubleshooting hardware and network issues for students and staff. Managed device deployments, updated system software, and resolved technical issues to ensure minimal downtime for educational operations and school administration.',
+            images: [
+                getImage('sou.jpg'),
+                getImage('sou2.JPG'),
+            ],
         },
         {
             company: 'Personal Project',
-            role: 'Building a small home server',
+            role: 'Building a small \n home server',
             period: 'Finished | 2025',
             description: 'Designed and built a home lab server for hosting various services, including a media server, local file storage, and a private cloud. This project involved hardware selection, OS installation (Linux), network configuration, and containerization with Docker.',
-        },
-        {
-            company: 'School Project',
-            role: 'School E-commerce System',
-            period: 'Finished | 2024',
-            description: 'Focused on the front-end (UI/UX) development for an e-commerce platform for a school project. The work included designing and implementing product listings, a shopping cart, and user authentication flows. This project demonstrated skills in front-end development and creating an intuitive user interface.'
+            images: [
+                getImage('homelab1.png'),
+                getImage('homelab2.png'),
+            ],
         },
         {
             company: 'Backend Developer',
             role: 'Finalist AI Open Innovation Competition',
             period: 'Finished | 2025',
-            description: 'Backend Developer for competition by President University with TUV NORD. completing Case 2: PPE Compliance Monitoring via computer vision.'
+            description: 'Backend Developer for competition by President University with TUV NORD. completing Case 2: PPE Compliance Monitoring via computer vision.',
+            images: [
+                getImage('lombah1.webp'),
+                getImage('lombah2.jpg'),
+            ],
         },
         {
             company: 'System Administrator & Project Manager',
             role: 'Jagoan Hosting Innovation Competition',
             period: 'Finished | 2026',
-            description: 'National Wide Website Building Competition held by Jagoan Hosting. Held the role of System Administrator, in charge of managing the stability of the website that lead our team to pass multiple elimination rounds'
+            description: 'National Wide Website Building Competition held by Jagoan Hosting. Held the role of System Administrator, in charge of managing the stability of the website that lead our team to pass multiple elimination rounds',
+            images: [
+                getImage('Dashboard_Mobile.png'),
+                getImage('Dashboard_Mobile.png'),
+            ],
+            isPortrait: true,
         },
         {
-            company: 'Vice President of RPL',
-            role: 'Development Acceleration Troops Organization',
+            company: 'Development Acceleration Troops (Devaccto)',
+            role: 'Vice President of Devaccto RPL',
             period: 'Ongoing | 2026',
-            description: 'Vice President of Devaccto RPL (Development Acceleration Troops). School organization for the students leading in their Major. Also Responsible for the making and managing of the schools digital infrastructure'
+            description: 'Vice President of Devaccto RPL (Development Acceleration Troops). School organization for the students leading in their Major. Also Responsible for the making and managing of the schools digital infrastructure',
+            images: [
+                getImage('penus1.jpg'),
+                getImage('penus2.jpg'),
+            ],
         },
         // {
         //     company: 'Praktik Kerja Lapangan (PKL) / Internship',
@@ -232,3 +251,4 @@ export const resume = {
     ],
     // skills: skills
 };
+

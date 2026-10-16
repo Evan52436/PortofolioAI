@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { NavLink } from './nav-link';
 
 const navLinks = [
-  { href: '#portfolio', label: 'My Work' },
+  { href: '#portfolio', label: 'My Works' },
   { href: '#skills', label: 'Skills' },
   { href: '#resume', label: 'Journey' },
   { href: '#contact', label: 'Contact' },

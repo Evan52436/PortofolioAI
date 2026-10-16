@@ -166,3 +166,32 @@
   line-height: 1;
   letter-spacing: -0.02em;
 }
+
+/* Stacked experience cards matching the portfolio design system */
+.experience-stacked-card {
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  border: 1px solid hsl(var(--border));
+  opacity: 1;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.08),
+    0 2px 4px -2px rgba(0, 0, 0, 0.06),
+    0 -8px 24px -8px rgba(0, 0, 0, 0.12),
+    0 20px 32px -12px rgba(0, 0, 0, 0.18);
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+  will-change: transform, opacity;
+}
+
+.dark .experience-stacked-card {
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.3),
+    0 2px 4px -2px rgba(0, 0, 0, 0.2),
+    0 -12px 32px -8px rgba(0, 0, 0, 0.45),
+    0 24px 40px -12px rgba(0, 0, 0, 0.55);
+}
+
+
+
+
