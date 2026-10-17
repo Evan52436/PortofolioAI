@@ -24,12 +24,12 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-[calc(100vh-4rem)] flex flex-col justify-center overflow-hidden pb-14 pt-4 sm:pb-16 sm:pt-6 md:pb-20 md:pt-8 scroll-mt-16"
+      className="relative min-h-[calc(100vh-4rem)] flex flex-col justify-center overflow-hidden py-10 sm:py-14 md:py-16 scroll-mt-16"
     >
-      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -translate-y-2 sm:-translate-y-4 md:-translate-y-6">
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-14">
           {/* Left Column: Whoami, Name, Subtitle, Bio, Buttons, Achievements */}
-          <div className="flex flex-col items-start text-left lg:col-span-7">
+          <div className="flex flex-col items-center text-center lg:items-start lg:text-left lg:col-span-7">
             <p className="font-code text-sm sm:text-base text-primary/90 font-medium mb-3 tracking-tight select-none">
               chargerleptop@Archpad:~$ whoami
             </p>
@@ -43,10 +43,10 @@ export function Hero() {
             </h2>
 
             <p className="max-w-xl text-base sm:text-lg text-muted-foreground leading-relaxed mb-8">
-              I&apos;m a Junior System Administrator (SysAdmin) based in Bogor, Indonesia. Currently still in school but I&apos;ve worked on various personal projects including home class servers and network mapping that have helped me develop a strong foundation in Cybersecurity. I also have experience in music industry such as performing on stage, Event Audio Engineer, playing with DAW and many more. I major in Computer Science Cybersecurity and Networking
+              I&apos;m a Junior System Administrator (SysAdmin) based in Bogor, Indonesia, majoring in CS Cybersecurity &amp; Networking. I build homelab servers and network mapping projects that shape my foundation in cybersecurity, alongside hands-on music experience as a live performer, Event Audio Engineer, and DAW producer.
             </p>
 
-            <div className="flex flex-wrap items-center gap-4 mb-8">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-8 w-full sm:w-auto">
               <Button
                 asChild
                 size="lg"
@@ -64,11 +64,11 @@ export function Hero() {
               </Button>
             </div>
 
-            <div className="text-xs sm:text-sm text-muted-foreground/90 font-medium flex flex-wrap items-center gap-2 select-none">
+            <div className="text-xs sm:text-sm text-muted-foreground/90 font-medium flex flex-wrap items-center justify-center lg:justify-start gap-2 select-none">
               <span>Finalist AI Open Innovation</span>
               <span className="text-muted-foreground/40 font-bold">·</span>
               <span>Top 10 Clash of Cyberheist</span>
-              <span className="w-full">Vice President of Devaccto RPL</span>
+              <span className="w-full text-center lg:text-left">Vice President of Devaccto RPL</span>
             </div>
           </div>
 
@@ -117,14 +117,14 @@ export function Hero() {
                   </div>
                 </div>
 
-                {/* Top-Right Flip Button */}
+                {/* Top-Right Flip Button: Almost fully transparent, only visible when photo is hovered */}
                 <button
                   type="button"
                   onClick={(e) => {
                     e.stopPropagation();
                     handlePhotoClick();
                   }}
-                  className="absolute top-4 right-4 z-20 flex items-center gap-1.5 rounded-lg bg-background/85 hover:bg-background px-3 py-1.5 text-xs font-semibold text-foreground shadow-md backdrop-blur-md border border-border/60 transition-all duration-200 hover:scale-105 select-none"
+                  className="absolute top-4 right-4 z-20 flex items-center gap-1.5 rounded-lg bg-background/25 hover:bg-background/80 px-3 py-1.5 text-xs font-semibold text-foreground shadow-sm backdrop-blur-sm border border-border/30 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-105 select-none pointer-events-none group-hover:pointer-events-auto"
                   aria-label="Flip photo"
                 >
                   <RefreshCw className="h-3.5 w-3.5 transition-transform duration-500 group-hover:rotate-180" />

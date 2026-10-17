@@ -20,7 +20,7 @@ const getImage = (id: string): ImagePlaceholder => {
 export const studentData = {
     name: 'Evan Pranawa Armansyah',
     major: 'Rekayasa Perangkat Lunak & Cybersecurity',
-    bio: "I'm a Junior System Administrator (SysAdmin) based in Bogor, Indonesia. Currently still in school but I've worked on various personal projects including home class servers and network mapping that have helped me develop a strong foundation in Cybersecurity. I also have experience in music industry such as performing on stage, Event Audio Engineer, playing with DAW and many more. I major in Computer Science Cybersecurity and Networking",
+    bio: "I'm a Junior System Administrator (SysAdmin) based in Bogor, Indonesia, majoring in Software Engineering. I build home class servers and network mapping projects that shape my foundation in cybersecurity, alongside hands-on music experience as a live performer, Event Audio Engineer, and DAW producer.",
 
     profilePicture: getImage('profile'),
     profilePictures: [
@@ -34,7 +34,7 @@ export const projects = [
         id: 'project-1',
         title: 'Decoupled Storage System',
         category: 'code',
-        description: 'A CRUD Storage system with JavaScript and TypeScript FrontEnd and ARMBIAN Network Attached Storage (NAS)',
+        description: 'A S3 Object Storage system with JavaScript and TypeScript FrontEnd and ARMBIAN Network Attached Storage (NAS)',
         technologies: ['Docker', 'MinIO', 'SupaBase', 'JavaScript', 'TypeScript'],
         image: getImage('Dashboard_Desktop.png'),
         gallery: [
@@ -252,3 +252,96 @@ export const resume = {
     // skills: skills
 };
 
+export interface SkillItem {
+    name: string;
+    icon: string | string[];
+}
+
+export interface InfrastructureSkillSection {
+    image?: string;
+    imagePlaceholderText: string;
+    hardwareDetails?: string[];
+    title: string;
+    linkText?: string;
+    linkHref?: string;
+    description: string;
+    skills: SkillItem[];
+}
+
+export interface SkillCategory {
+    id: string;
+    title: string;
+    linkHref?: string;
+    description: string;
+    skills: SkillItem[];
+    footerText?: string;
+}
+
+export interface SkillsData {
+    header: {
+        title: string;
+        subtitle: string;
+    };
+    infrastructure: InfrastructureSkillSection;
+    categories: SkillCategory[];
+}
+
+export const skillsData: SkillsData = {
+    header: {
+        title: 'Skills',
+        subtitle: "What I build with, and where I've used it.",
+    },
+    infrastructure: {
+        image: '/image.png',
+        imagePlaceholderText: 'photo of the Wyse box and the HG680-P stacked',
+        hardwareDetails: [
+            'Dell Wyse 5010 · Fedora Server',
+            'HG680-P · Armbian NAS',
+        ],
+        title: 'Infrastructure',
+        linkText: 'Home server',
+        linkHref: '#experience',
+        description: 'Self-hosted homelab clusters running headless Fedora Server and Armbian NAS environments. Orchestrates containerized microservices with Docker, manages reverse-proxy routing and SSL certificates with Nginx, automates system administration routines via Bash scripting, and simplifies server management with aaPanel.',
+        skills: [
+            { name: 'Arch', icon: '/icons/arch.svg' },
+            { name: 'Armbian', icon: '/icons/armbian.png' },
+            { name: 'Docker', icon: '/icons/docker.svg' },
+            { name: 'Nginx', icon: '/icons/nginx.svg' },
+            { name: 'Bash', icon: '/icons/bash.svg' },
+            { name: 'aaPanel', icon: '/icons/aapanel.png' },
+        ],
+    },
+    categories: [
+        {
+            id: 'web-backend',
+            title: 'Web and backend',
+            linkHref: '#portfolio',
+            description: 'Building responsive modern full-stack web applications with React and Vite on the frontend, structured Laravel MVC APIs on the backend, and strict TypeScript types throughout.',
+            skills: [
+                { name: 'TypeScript', icon: '/icons/ts.svg' },
+                { name: 'Laravel', icon: '/icons/laravel.svg' },
+                { name: 'React Vite', icon: ['/icons/react.svg', '/icons/vite.svg'] },
+            ],
+        },
+        {
+            id: 'security',
+            title: 'Security',
+            linkHref: '#portfolio',
+            description: 'Practical experience in network traffic mapping, protocol analysis, defensive systems hardening, and practical CTF competition puzzles.',
+            skills: [
+                { name: 'Networking', icon: '/icons/networking.svg' },
+                { name: 'CTF', icon: '/icons/kali.svg' },
+            ],
+        },
+        {
+            id: 'music',
+            title: 'Music',
+            description: 'Digital audio workstation production, sound design, event audio engineering, and live acoustic performance.',
+            skills: [
+                { name: 'Ableton Live', icon: '/icons/ableton.svg' },
+                { name: 'Studio One', icon: '/icons/studio1.png' },
+            ],
+            footerText: 'Piano, guitar, drums',
+        },
+    ],
+};
