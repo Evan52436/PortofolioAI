@@ -1,6 +1,8 @@
 'use client';
 
+import React from 'react';
 import { cn } from "@/lib/utils";
+import { useDoorTransition } from "@/components/ui/door-transition";
 
 type NavLinkProps = {
   href: string;
@@ -10,12 +12,24 @@ type NavLinkProps = {
 };
 
 export function NavLink({ href, children, className, onClick }: NavLinkProps) {
+  const { triggerDoorTransition } = useDoorTransition();
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (href === '#portfolio' || href === '#resume') {
+      e.preventDefault();
+      onClick?.();
+      triggerDoorTransition(href);
+    } else {
+      onClick?.();
+    }
+  };
+
   return (
     <a
       href={href}
-      onClick={onClick}
+      onClick={handleClick}
       className={cn(
-        "text-sm font-medium text-muted-foreground transition-colors hover:text-primary",
+        "text-sm font-medium text-muted-foreground transition-colors hover:text-primary cursor-pointer",
         className
       )}
     >

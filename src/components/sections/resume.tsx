@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Image from 'next/image';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Layers } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { resume } from '@/lib/data';
 import type { ImagePlaceholder } from '@/lib/placeholder-images';
@@ -147,7 +147,7 @@ export function Resume() {
   }, []);
 
   return (
-    <section id="resume" className="bg-muted/50 py-20 md:py-28 overflow-x-clip">
+    <section id="resume" className="bg-muted/50 py-20 md:py-28 overflow-x-clip scroll-mt-16">
       <div className="container">
         <div className="mb-12 text-center">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">My Experience</h2>
@@ -207,14 +207,14 @@ export function Resume() {
                     }
                   }}
                   aria-label={`Open details for ${exp.role}`}
-                  className="experience-stacked-card group relative flex origin-top flex-col overflow-hidden rounded-2xl md:rounded-3xl w-full min-h-[460px] md:min-h-[500px] cursor-pointer transition-all duration-300 hover:border-primary/50 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary/40"
+                  className="experience-stacked-card group relative flex origin-top flex-col overflow-hidden rounded-2xl md:rounded-3xl w-full min-h-0 md:min-h-[480px] cursor-pointer transition-all duration-300 hover:border-primary/50 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary/40"
                 >
                   {/* Separated Top Header Part - Extends all the way across to the right */}
-                  <div className="flex w-full items-center justify-between border-b border-border bg-muted/25 px-6 py-3.5 sm:px-8 sm:py-4">
-                    <span className="font-semibold text-primary text-sm sm:text-base">
+                  <div className="flex w-full items-center justify-between border-b border-border bg-muted/25 px-4 py-2.5 sm:px-6 sm:py-3.5 md:px-8 md:py-4">
+                    <span className="font-semibold text-primary text-xs sm:text-sm md:text-base truncate max-w-[65%]">
                       {exp.company}
                     </span>
-                    <span className="text-xs text-muted-foreground sm:text-sm font-medium">
+                    <span className="text-[11px] text-muted-foreground sm:text-xs md:text-sm font-medium whitespace-nowrap">
                       {exp.period}
                     </span>
                   </div>
@@ -222,125 +222,157 @@ export function Resume() {
                   {/* Main Card Body (Left Details + Right Picture Showcase) */}
                   <div className="flex flex-1 flex-col md:flex-row md:items-stretch overflow-hidden">
                     {/* Left: Experience Details - Anchored to top with blue divider & View More button */}
-                    <div className="flex w-full flex-col justify-between p-6 sm:p-7 md:w-1/2 lg:p-8">
-                      <div className="flex flex-col flex-1">
-                        <h3 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl whitespace-pre-line">
+                    <div className="flex w-full flex-col justify-between p-4 sm:p-6 md:p-7 lg:p-8 md:w-1/2">
+                      <div className="flex flex-col flex-1 min-w-0">
+                        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-foreground whitespace-pre-line leading-snug">
                           {exp.role}
                         </h3>
 
                         {/* Blue divider line below title and above description - really long and extends past text on hover */}
-                        <div className="my-3.5 sm:my-4 h-[2px] w-[85%] bg-primary rounded-full transition-all duration-500 ease-out group-hover:w-[calc(100%+1.5rem)] lg:group-hover:w-[calc(100%+2rem)]" />
+                        <div className="my-2 sm:my-3 md:my-4 h-[2px] w-[85%] bg-primary rounded-full transition-all duration-500 ease-out group-hover:w-[calc(100%+1.5rem)] lg:group-hover:w-[calc(100%+2rem)]" />
 
-                        <p className="text-sm sm:text-base leading-relaxed text-muted-foreground">
+                        {/* Description: truncated on mobile with ... so card fits on screen, fully displayed on desktop */}
+                        <p className="text-xs sm:text-sm md:text-base leading-relaxed text-muted-foreground line-clamp-3 sm:line-clamp-4 md:line-clamp-none">
                           {exp.description}
                         </p>
                       </div>
 
-                      {/* View More button matching the blue button in My Works (long and squareish) */}
-                      <div className="pt-5 sm:pt-6 mt-auto">
+                      {/* View More button with reduced top/bottom spacing */}
+                      <div className="pt-2.5 sm:pt-4 md:pt-5 mt-auto">
                         <Button
                           type="button"
                           onClick={(e) => {
                             e.stopPropagation();
                             setSelectedExperience(exp);
                           }}
-                          className="w-full justify-center shadow-md h-11 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-all rounded-md gap-2 group/btn"
+                          className="w-full justify-center shadow-md h-9 sm:h-10 md:h-11 text-xs sm:text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-all rounded-md gap-2 group/btn"
                         >
                           <span>View More</span>
-                          <ExternalLink className="w-4 h-4 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                          <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
                         </Button>
                       </div>
                     </div>
 
                     {/* Right: Picture Showcase */}
-                    <div className="flex w-full flex-col justify-center p-6 sm:p-7 md:w-1/2 lg:p-8 md:pl-0">
-                      {isDualPortrait ? (
-                        /* 2 portrait images: side by side */
-                        <div className="flex h-full w-full flex-row items-center justify-center gap-3 py-1">
-                          {imageList.slice(0, 2).map((img, imgIdx) => (
-                            <div
-                              key={imgIdx}
-                              className="relative aspect-[9/16] h-full max-h-[340px] sm:max-h-[360px] w-auto max-w-[48%] overflow-hidden rounded-xl border border-border/80 bg-muted shadow-sm transition-all duration-300 group-hover:border-primary/40"
-                            >
+                    <div className="flex w-full flex-col justify-center p-4 pt-0 sm:p-6 sm:pt-0 md:p-7 md:w-1/2 lg:p-8 md:pl-0">
+                      {/* MOBILE PREVIEW (< md): Single image with +N more indicator */}
+                      {imageList[0] && (
+                        <div className="block md:hidden w-full">
+                          <div className="relative aspect-[16/10] max-h-[170px] sm:max-h-[200px] w-full overflow-hidden rounded-xl border border-border/80 bg-muted shadow-sm transition-all duration-300">
+                            <Image
+                              src={imageList[0].imageUrl}
+                              alt={imageList[0].description || exp.role}
+                              fill
+                              sizes="(max-width: 768px) 100vw, 360px"
+                              className="object-cover"
+                              data-ai-hint={imageList[0].imageHint}
+                            />
+                            {imageList.length > 1 && (
+                              <div className="absolute bottom-2 right-2 flex items-center gap-1.5 rounded-full bg-black/75 px-2.5 py-1 text-[11px] font-medium text-white shadow-md backdrop-blur-md border border-white/15">
+                                <Layers className="h-3 w-3" />
+                                <span>+{imageList.length - 1} more</span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* DESKTOP PREVIEW (md+): Up to 2 images max */}
+                      <div className="hidden md:flex md:h-full md:w-full md:flex-col md:justify-center">
+                        {isDualPortrait ? (
+                          /* 2 portrait images: side by side */
+                          <div className="relative flex h-full w-full flex-row items-center justify-center gap-3 py-1">
+                            {imageList.slice(0, 2).map((img, imgIdx) => (
+                              <div
+                                key={imgIdx}
+                                className="relative aspect-[9/16] h-full max-h-[340px] sm:max-h-[360px] w-auto max-w-[48%] overflow-hidden rounded-xl border border-border/80 bg-muted shadow-sm transition-all duration-300 group-hover:border-primary/40"
+                              >
+                                <Image
+                                  src={img.imageUrl}
+                                  alt={img.description || exp.role}
+                                  fill
+                                  sizes="(max-width: 768px) 50vw, 240px"
+                                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                                  data-ai-hint={img.imageHint}
+                                />
+                                {imgIdx === 1 && imageList.length > 2 && (
+                                  <div className="absolute bottom-2.5 right-2.5 flex items-center gap-1.5 rounded-full bg-black/75 px-2.5 py-1 text-[11px] font-medium text-white shadow-md backdrop-blur-md border border-white/15">
+                                    <Layers className="h-3 w-3" />
+                                    <span>+{imageList.length - 2} more</span>
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        ) : isDualImages ? (
+                          /* 2 landscape images: one on top, one below (only first 2 displayed on card) */
+                          <div className="flex h-full w-full flex-col justify-center gap-3">
+                            {imageList.slice(0, 2).map((img, imgIdx) => (
+                              <div
+                                key={imgIdx}
+                                className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-border/80 bg-muted shadow-sm transition-all duration-300 group-hover:border-primary/40"
+                              >
+                                <Image
+                                  src={img.imageUrl}
+                                  alt={img.description || exp.role}
+                                  fill
+                                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 520px"
+                                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                                  data-ai-hint={img.imageHint}
+                                />
+                                {imgIdx === 1 && imageList.length > 2 && (
+                                  <div className="absolute bottom-2.5 right-2.5 flex items-center gap-1.5 rounded-full bg-black/75 px-2.5 py-1 text-[11px] font-medium text-white shadow-md backdrop-blur-md border border-white/15">
+                                    <Layers className="h-3 w-3" />
+                                    <span>+{imageList.length - 2} more</span>
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        ) : isSinglePortrait && imageList[0] ? (
+                          /* Single portrait image: centered and big */
+                          <div className="flex h-full w-full items-center justify-center">
+                            <div className="relative aspect-[9/16] h-full max-h-[350px] sm:max-h-[380px] w-auto overflow-hidden rounded-xl border border-border/80 bg-muted shadow-sm transition-all duration-300 group-hover:border-primary/40">
                               <Image
-                                src={img.imageUrl}
-                                alt={img.description || exp.role}
+                                src={imageList[0].imageUrl}
+                                alt={imageList[0].description || exp.role}
                                 fill
-                                sizes="(max-width: 768px) 50vw, 240px"
+                                sizes="(max-width: 768px) 80vw, 360px"
                                 className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                                data-ai-hint={img.imageHint}
+                                data-ai-hint={imageList[0].imageHint}
                               />
                             </div>
-                          ))}
-                        </div>
-                      ) : isDualImages ? (
-                        /* 2 landscape images: one on top, one below */
-                        <div className="flex h-full w-full flex-col justify-center gap-3">
-                          {imageList.slice(0, 2).map((img, imgIdx) => (
-                            <div
-                              key={imgIdx}
-                              className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-border/80 bg-muted shadow-sm transition-all duration-300 group-hover:border-primary/40"
-                            >
+                          </div>
+                        ) : isSingleSquare && imageList[0] ? (
+                          /* Single semi-square image: centered and big */
+                          <div className="flex h-full w-full items-center justify-center">
+                            <div className="relative aspect-square h-full max-h-[350px] sm:max-h-[380px] w-auto max-w-full overflow-hidden rounded-xl border border-border/80 bg-muted shadow-sm transition-all duration-300 group-hover:border-primary/40">
                               <Image
-                                src={img.imageUrl}
-                                alt={img.description || exp.role}
+                                src={imageList[0].imageUrl}
+                                alt={imageList[0].description || exp.role}
+                                fill
+                                sizes="(max-width: 768px) 80vw, 380px"
+                                className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                                data-ai-hint={imageList[0].imageHint}
+                              />
+                            </div>
+                          </div>
+                        ) : imageList[0] ? (
+                          /* Single landscape image: centered and big */
+                          <div className="flex h-full w-full items-center justify-center">
+                            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-border/80 bg-muted shadow-sm transition-all duration-300 group-hover:border-primary/40">
+                              <Image
+                                src={imageList[0].imageUrl}
+                                alt={imageList[0].description || exp.role}
                                 fill
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 520px"
                                 className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                                data-ai-hint={img.imageHint}
+                                data-ai-hint={imageList[0].imageHint}
                               />
                             </div>
-                          ))}
-                        </div>
-                      ) : isSinglePortrait && imageList[0] ? (
-                        /* Single portrait image: centered and big */
-                        <div className="flex h-full w-full items-center justify-center">
-                          <div
-                            className="relative aspect-[9/16] h-full max-h-[350px] sm:max-h-[380px] w-auto overflow-hidden rounded-xl border border-border/80 bg-muted shadow-sm transition-all duration-300 group-hover:border-primary/40"
-                          >
-                            <Image
-                              src={imageList[0].imageUrl}
-                              alt={imageList[0].description || exp.role}
-                              fill
-                              sizes="(max-width: 768px) 80vw, 360px"
-                              className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                              data-ai-hint={imageList[0].imageHint}
-                            />
                           </div>
-                        </div>
-                      ) : isSingleSquare && imageList[0] ? (
-                        /* Single semi-square image: centered and big */
-                        <div className="flex h-full w-full items-center justify-center">
-                          <div
-                            className="relative aspect-square h-full max-h-[350px] sm:max-h-[380px] w-auto max-w-full overflow-hidden rounded-xl border border-border/80 bg-muted shadow-sm transition-all duration-300 group-hover:border-primary/40"
-                          >
-                            <Image
-                              src={imageList[0].imageUrl}
-                              alt={imageList[0].description || exp.role}
-                              fill
-                              sizes="(max-width: 768px) 80vw, 380px"
-                              className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                              data-ai-hint={imageList[0].imageHint}
-                            />
-                          </div>
-                        </div>
-                      ) : imageList[0] ? (
-                        /* Single landscape image: centered and big */
-                        <div className="flex h-full w-full items-center justify-center">
-                          <div
-                            className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-border/80 bg-muted shadow-sm transition-all duration-300 group-hover:border-primary/40"
-                          >
-                            <Image
-                              src={imageList[0].imageUrl}
-                              alt={imageList[0].description || exp.role}
-                              fill
-                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 520px"
-                              className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                              data-ai-hint={imageList[0].imageHint}
-                            />
-                          </div>
-                        </div>
-                      ) : null}
+                        ) : null}
+                      </div>
                     </div>
                   </div>
                 </div>

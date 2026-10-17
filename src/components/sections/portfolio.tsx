@@ -50,8 +50,8 @@ export function Portfolio() {
   };
 
   return (
-    <section id="portfolio" className="bg-muted/50 py-20 md:py-28 overflow-hidden">
-      <div className="max-w-[1560px] mx-auto px-4 sm:px-12 relative">
+    <section id="portfolio" className="bg-muted/50 py-16 md:py-20 min-h-[calc(100vh-4rem)] flex flex-col justify-center overflow-hidden scroll-mt-16">
+      <div className="max-w-[1560px] mx-auto px-4 sm:px-12 relative w-full">
         <div className="mb-12 text-center">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">My Works</h2>
           <p className="mx-auto mt-4 max-w-3xl text-muted-foreground md:text-xl">

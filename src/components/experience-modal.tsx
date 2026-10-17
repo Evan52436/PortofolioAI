@@ -69,6 +69,11 @@ export function ExperienceModal({ experience, isOpen, onClose }: ExperienceModal
                 <div className="absolute bottom-3 left-3 max-w-[calc(100%-1.5rem)] px-3 py-1.5 rounded-md bg-black/60 backdrop-blur-md text-white text-xs font-medium inline-block truncate shadow-sm">
                   {currentImage.description || experience.role}
                 </div>
+                {gallery.length > 1 && (
+                  <div className="absolute top-3 right-3 px-2.5 py-1 rounded-md bg-black/65 backdrop-blur-md text-white text-xs font-semibold shadow-sm border border-white/10">
+                    {gallery.findIndex((g) => g.imageUrl === currentImage.imageUrl) + 1} / {gallery.length}
+                  </div>
+                )}
               </div>
             )}
 
@@ -77,9 +82,9 @@ export function ExperienceModal({ experience, isOpen, onClose }: ExperienceModal
               <div>
                 <div className="flex items-center gap-1.5 mb-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                   <Layers className="w-3.5 h-3.5" />
-                  <span>More Previews</span>
+                  <span>All Previews ({gallery.length})</span>
                 </div>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2.5 sm:gap-3 max-h-[220px] overflow-y-auto pr-1">
                   {gallery.map((img, idx) => {
                     const isActive = currentImage?.imageUrl === img.imageUrl;
                     return (
@@ -88,7 +93,7 @@ export function ExperienceModal({ experience, isOpen, onClose }: ExperienceModal
                         type="button"
                         onClick={() => setActiveImage(img)}
                         className={cn(
-                          'relative h-20 w-28 overflow-hidden rounded-lg border-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary',
+                          'relative h-16 w-24 sm:h-20 sm:w-28 flex-shrink-0 overflow-hidden rounded-lg border-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary',
                           isActive
                             ? 'border-primary ring-2 ring-primary/40 scale-105 opacity-100 shadow-md'
                             : 'border-transparent opacity-70 hover:opacity-100 hover:scale-105 hover:border-muted-foreground/30'
@@ -96,7 +101,7 @@ export function ExperienceModal({ experience, isOpen, onClose }: ExperienceModal
                       >
                         <Image
                           src={img.imageUrl}
-                          alt={img.description}
+                          alt={img.description || `Preview ${idx + 1}`}
                           fill
                           className="object-cover"
                         />
