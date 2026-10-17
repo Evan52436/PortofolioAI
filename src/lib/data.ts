@@ -20,7 +20,7 @@ const getImage = (id: string): ImagePlaceholder => {
 export const studentData = {
     name: 'Evan Pranawa Armansyah',
     major: 'Rekayasa Perangkat Lunak & Cybersecurity',
-    bio: 'A tech enthusiast based in Bogor, Indonesia. Currently still in school but I\'ve worked on various personal projects including home class servers and network mapping that have helped me develop a strong foundation in Cybersecurity. I also have experience in music industry such as performing on stage, playing with DAW and many more',
+    bio: "I'm a Junior System Administrator (SysAdmin) based in Bogor, Indonesia. Currently still in school but I've worked on various personal projects including home class servers and network mapping that have helped me develop a strong foundation in Cybersecurity. I also have experience in music industry such as performing on stage, Event Audio Engineer, playing with DAW and many more. I major in Computer Science Cybersecurity and Networking",
 
     profilePicture: getImage('profile'),
     profilePictures: [

@@ -4,12 +4,13 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { studentData } from '@/lib/data';
 import { Button } from '@/components/ui/button';
-import { ArrowDown, RefreshCw, Sparkles } from 'lucide-react';
+import { RefreshCw } from 'lucide-react';
 
 export function Hero() {
-  const photos = studentData.profilePictures && studentData.profilePictures.length > 0
-    ? studentData.profilePictures
-    : [studentData.profilePicture];
+  const photos =
+    studentData.profilePictures && studentData.profilePictures.length > 0
+      ? studentData.profilePictures
+      : [studentData.profilePicture];
 
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -21,89 +22,145 @@ export function Hero() {
   const backPhoto = photos[1] || photos[0];
 
   return (
-    <section id="home" className="relative overflow-hidden py-20 md:py-32">
-      <div className="container">
-        <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
-          <div className="flex flex-col items-center text-center md:items-start md:text-left">
-            <h1 className="mb-4 text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
-              {studentData.name}
-            </h1>
-            <div className="mb-2 text-lg font-medium text-primary md:text-xl">
-              {studentData.major.split(' & ').map((part, index) => (
-                <p key={index}>{part}</p>
-              ))}
-            </div>
-            <p className="max-w-xl text-muted-foreground md:text-lg">
-              {studentData.bio}
-              <img style={{ marginTop: '20px', marginBottom: '0px' }} src="https://skillicons.dev/icons?i=arch,vscode,bash,cloudflare,docker,nginx" alt="My Skills" />
-              <img style={{ marginTop: '10px', marginBottom: '0px' }} src="https://skillicons.dev/icons?i=cmake,figma,blender,ts,js" alt="My Skills"/>
+    <section
+      id="home"
+      className="relative min-h-[calc(100vh-4rem)] flex flex-col justify-center overflow-hidden pb-14 pt-4 sm:pb-16 sm:pt-6 md:pb-20 md:pt-8 scroll-mt-16"
+    >
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -translate-y-2 sm:-translate-y-4 md:-translate-y-6">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-14">
+          {/* Left Column: Whoami, Name, Subtitle, Bio, Buttons, Achievements */}
+          <div className="flex flex-col items-start text-left lg:col-span-7">
+            <p className="font-code text-sm sm:text-base text-primary/90 font-medium mb-3 tracking-tight select-none">
+              chargerleptop@Archpad:~$ whoami
             </p>
-            <Button asChild size="lg" className="mt-8 transition-transform duration-300 hover:scale-105">
-              <a href="#contact">
-                Contact Me <ArrowDown className="ml-2 h-5 w-5" />
-              </a>
-            </Button>
+
+            <h1 className="mb-3 text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl leading-[1.08] text-foreground">
+              Evan Pranawa<br />Armansyah
+            </h1>
+
+            <h2 className="mb-4 text-lg font-medium text-primary sm:text-xl md:text-2xl tracking-tight">
+              Software engineering student and SysAdmin
+            </h2>
+
+            <p className="max-w-xl text-base sm:text-lg text-muted-foreground leading-relaxed mb-8">
+              I&apos;m a Junior System Administrator (SysAdmin) based in Bogor, Indonesia. Currently still in school but I&apos;ve worked on various personal projects including home class servers and network mapping that have helped me develop a strong foundation in Cybersecurity. I also have experience in music industry such as performing on stage, Event Audio Engineer, playing with DAW and many more. I major in Computer Science Cybersecurity and Networking
+            </p>
+
+            <div className="flex flex-wrap items-center gap-4 mb-8">
+              <Button
+                asChild
+                size="lg"
+                className="bg-[#89abd2] hover:bg-[#789ac1] text-slate-950 font-semibold px-7 py-6 rounded-xl shadow-md transition-all duration-300 hover:scale-105"
+              >
+                <a href="#contact">Contact me</a>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="border-2 border-foreground/30 hover:border-foreground/80 hover:bg-foreground/5 text-foreground font-semibold px-7 py-6 rounded-xl transition-all duration-300 hover:scale-105"
+              >
+                <a href="#portfolio">See my works</a>
+              </Button>
+            </div>
+
+            <div className="text-xs sm:text-sm text-muted-foreground/90 font-medium flex flex-wrap items-center gap-2 select-none">
+              <span>Finalist AI Open Innovation</span>
+              <span className="text-muted-foreground/40 font-bold">·</span>
+              <span>Top 10 Clash of Cyberheist</span>
+              <span className="w-full">Vice President of Devaccto RPL</span>
+            </div>
           </div>
 
-          <div className="relative mx-auto w-fit">
-            {/* Interactive 3D Flip Profile Container */}
-            <div
-              onClick={handlePhotoClick}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  handlePhotoClick();
-                }
-              }}
-              tabIndex={0}
-              role="button"
-              aria-label="Click to flip profile photo"
-              className="group relative cursor-pointer perspective-1000 focus:outline-none"
-            >
+          {/* Right Column: Natural Ratio Flippable Photo Card & Corner Status Widget */}
+          <div className="lg:col-span-5 flex justify-center items-center w-full">
+            <div className="relative w-full max-w-[360px] sm:max-w-[400px] lg:max-w-[420px] aspect-square">
+              {/* 3D Flip Card Container */}
               <div
-                className={`relative h-64 w-64 rounded-full shadow-lg transition-all duration-600 ease-in-out transform-style-3d md:h-80 md:w-80 lg:h-96 lg:w-96 group-hover:shadow-2xl group-hover:ring-4 group-hover:ring-primary/40 ${isFlipped ? 'rotate-y-180' : ''
-                  }`}
+                onClick={handlePhotoClick}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handlePhotoClick();
+                  }
+                }}
+                tabIndex={0}
+                role="button"
+                aria-label="Click to flip profile photo"
+                className="group relative h-full w-full cursor-pointer perspective-1000 focus:outline-none"
               >
-                {/* Front Side */}
-                <div className="absolute inset-0 overflow-hidden rounded-full backface-hidden border-4 border-background/60">
-                  <Image
-                    src={frontPhoto.imageUrl}
-                    alt={frontPhoto.description}
-                    fill
-                    sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 384px"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    data-ai-hint={frontPhoto.imageHint}
-                    priority
-                  />
+                <div
+                  className={`relative h-full w-full rounded-2xl sm:rounded-3xl transition-all duration-700 ease-in-out transform-style-3d shadow-xl hover:shadow-2xl ${isFlipped ? 'rotate-y-180' : ''
+                    }`}
+                >
+                  {/* Front Side */}
+                  <div className="absolute inset-0 overflow-hidden rounded-2xl sm:rounded-3xl backface-hidden border-2 border-border/80 bg-muted/40">
+                    <Image
+                      src={frontPhoto.imageUrl}
+                      alt={frontPhoto.description}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 420px"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      priority
+                    />
+                  </div>
+
+                  {/* Back Side */}
+                  <div className="absolute inset-0 overflow-hidden rounded-2xl sm:rounded-3xl backface-hidden rotate-y-180 border-2 border-border/80 bg-muted/40">
+                    <Image
+                      src={backPhoto.imageUrl}
+                      alt={backPhoto.description}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 420px"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
                 </div>
 
-                {/* Back Side */}
-                <div className="absolute inset-0 overflow-hidden rounded-full backface-hidden rotate-y-180 border-4 border-background/60">
-                  <Image
-                    src={backPhoto.imageUrl}
-                    alt={backPhoto.description}
-                    fill
-                    sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 384px"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    data-ai-hint={backPhoto.imageHint}
-                  />
-                </div>
+                {/* Top-Right Flip Button */}
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handlePhotoClick();
+                  }}
+                  className="absolute top-4 right-4 z-20 flex items-center gap-1.5 rounded-lg bg-background/85 hover:bg-background px-3 py-1.5 text-xs font-semibold text-foreground shadow-md backdrop-blur-md border border-border/60 transition-all duration-200 hover:scale-105 select-none"
+                  aria-label="Flip photo"
+                >
+                  <RefreshCw className="h-3.5 w-3.5 transition-transform duration-500 group-hover:rotate-180" />
+                  <span>flip</span>
+                </button>
               </div>
 
-              {/* Subtle Easter-Egg Hint Badge */}
-              <div className="absolute bottom-2 right-2 flex items-center gap-1.5 rounded-full bg-background/80 px-2.5 py-1 text-[11px] font-medium text-muted-foreground shadow-md backdrop-blur-md border border-border/50 opacity-40 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105 group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary select-none z-10">
-                <RefreshCw className="h-3 w-3 transition-transform duration-500 group-hover:rotate-180" />
-                <span className="hidden group-hover:inline transition-all duration-300">flip</span>
+              {/* Corner Bottom-Left Overlapping Equalizer Widget (Dense, Landscape, White-Bluish BG, #89abd2 Bars, No Text) */}
+              <div className="absolute -bottom-4 -left-3 sm:-bottom-5 sm:-left-5 z-20 w-36 h-16 sm:w-44 sm:h-20 rounded-xl bg-[#dfe7f2]/95 dark:bg-[#1a2332]/95 border border-[#c4d5e7] dark:border-slate-700/80 p-2.5 sm:p-3 shadow-xl backdrop-blur-md select-none pointer-events-auto flex items-end justify-center">
+                <div className="flex items-end justify-between gap-[2px] sm:gap-[2.5px] h-full w-full">
+                  <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-1" />
+                  <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-2" />
+                  <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-3" />
+                  <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-4" />
+                  <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-5" />
+                  <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-6" />
+                  <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-7" />
+                  <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-8" />
+                  <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-9" />
+                  <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-10" />
+                  <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-11" />
+                  <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-12" />
+                  <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-13" />
+                  <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-14" />
+                  <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-15" />
+                  <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-16" />
+                  <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-17" />
+                  <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-18" />
+                  <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-19" />
+                  <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-20" />
+                </div>
               </div>
             </div>
-
-            {/* Glowing Backdrop Ambient Lights */}
-            <div className="absolute -bottom-4 -right-4 h-24 w-24 rounded-full bg-accent opacity-20 blur-2xl pointer-events-none" />
-            <div className="absolute -top-4 -left-4 h-24 w-24 rounded-full bg-primary opacity-20 blur-2xl pointer-events-none" />
           </div>
         </div>
       </div>
     </section>
   );
 }
-
