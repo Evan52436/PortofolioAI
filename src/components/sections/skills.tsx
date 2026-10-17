@@ -29,7 +29,7 @@ export function Skills() {
   const { header, infrastructure, categories } = skillsData;
 
   return (
-    <section id="skills" className="py-20 md:py-28">
+    <section id="skills" className="py-20 md:py-28 scroll-mt-16">
       <div className="container max-w-5xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="mb-9 text-center">

@@ -15,7 +15,7 @@ export function NavLink({ href, children, className, onClick }: NavLinkProps) {
   const { triggerDoorTransition } = useDoorTransition();
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (href === '#portfolio' || href === '#resume') {
+    if (href.startsWith('#')) {
       e.preventDefault();
       onClick?.();
       triggerDoorTransition(href);
