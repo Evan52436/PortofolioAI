@@ -301,14 +301,15 @@ export const skillsData: SkillsData = {
         title: 'Infrastructure',
         linkText: 'Home server',
         linkHref: '#experience',
-        description: 'Self-hosted homelab clusters running headless Fedora Server and Armbian NAS environments. Orchestrates containerized microservices with Docker, manages reverse-proxy routing and SSL certificates with Nginx, automates system administration routines via Bash scripting, and simplifies server management with aaPanel.',
+        description: 'Self-hosted homelab clusters running headless Fedora Server environments. Orchestrates containerized microservices with Docker, manages reverse-proxy routing and SSL certificates with Nginx, automates system administration routines via Bash scripting, controls server environments with aaPanel, and secures remote access through Cloudflare Tunnels and Tailscale mesh networking.',
         skills: [
-            { name: 'Arch', icon: '/icons/arch.svg' },
-            { name: 'Armbian', icon: '/icons/armbian.png' },
+            { name: 'Fedora', icon: '/icons/fedora.svg' },
             { name: 'Docker', icon: '/icons/docker.svg' },
             { name: 'Nginx', icon: '/icons/nginx.svg' },
             { name: 'Bash', icon: '/icons/bash.svg' },
             { name: 'aaPanel', icon: '/icons/aapanel.png' },
+            { name: 'Cloudflare', icon: '/icons/cloudflare.svg' },
+            { name: 'Tailscale', icon: '/icons/tailscale.svg' },
         ],
     },
     categories: [
