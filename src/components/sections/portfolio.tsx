@@ -13,9 +13,15 @@ type Project = (typeof projects)[0];
 
 export function Portfolio() {
   const [selectedProject, setSelectedProject] = React.useState<Project | null>(null);
+  const [originCardEl, setOriginCardEl] = React.useState<HTMLElement | null>(null);
   const [canScrollLeft, setCanScrollLeft] = React.useState(false);
   const [canScrollRight, setCanScrollRight] = React.useState(true);
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+
+  const handleCardClick = (project: Project, cardEl: HTMLElement) => {
+    setOriginCardEl(cardEl);
+    setSelectedProject(project);
+  };
 
   const checkScroll = React.useCallback(() => {
     if (scrollContainerRef.current) {
@@ -98,7 +104,10 @@ export function Portfolio() {
           >
             {projects.map((project) => (
               <div key={project.id} className="w-[310px] shrink-0 snap-start">
-                <ProjectCard project={project} onClick={() => setSelectedProject(project)} />
+                <ProjectCard
+                  project={project}
+                  onClick={(cardEl) => handleCardClick(project, cardEl)}
+                />
               </div>
             ))}
           </div>
@@ -121,8 +130,12 @@ export function Portfolio() {
 
       <ProjectModal
         project={selectedProject}
+        originCardEl={originCardEl}
         isOpen={selectedProject !== null}
-        onClose={() => setSelectedProject(null)}
+        onClose={() => {
+          setSelectedProject(null);
+          setOriginCardEl(null);
+        }}
       />
     </section>
   );

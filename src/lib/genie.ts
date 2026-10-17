@@ -193,6 +193,13 @@ export interface WarpOptions {
   fold?: number;
 }
 
+export interface GenieTarget {
+  x: number;
+  y: number;
+  width?: number;
+  height?: number;
+}
+
 /**
  * Render the sheet at progress `t` (0 = rest, 1 = fully poured into the lamp).
  * `ctx` is expected to already be sized to the viewport in device pixels.
@@ -201,15 +208,15 @@ export function renderGenie(
   ctx: CanvasRenderingContext2D,
   tex: CanvasImageSource,
   geo: GenieGeo,
-  target: { x: number; y: number },
+  target: GenieTarget,
   t: number,
   dpr: number,
   opts: WarpOptions = {},
 ) {
-  const cols = opts.cols ?? 16;
-  const rows = opts.rows ?? 20;
-  const STAGGER = opts.stagger ?? 0.4;
-  const FOLD = opts.fold ?? 0.16;
+  const cols = opts.cols ?? 18;
+  const rows = opts.rows ?? 22;
+  const STAGGER = opts.stagger ?? 0.38;
+  const FOLD = opts.fold ?? 0.14;
 
   const W = geo.width;
   const H = geo.height;
@@ -222,32 +229,43 @@ export function renderGenie(
   const clamp01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
 
   /**
-   * The single continuous warp. Everything derives from this, which is what
-   * guarantees the sheet stays connected.
-   *
-   *   ti    : per-row progress — bottom rows lead, top rows trail
-   *   e     : eased ti, accelerating INTO the lamp
-   *   dest  : lerp from source position toward the lamp by e
-   *   pinch : horizontal convergence on the lamp, fading as e -> 1
-   *   fold  : lateral S-bulge, peaks mid-flight then resolves
+   * Continuous warp function supporting both point targets (e.g. taskbar)
+   * and rectangular card targets (e.g. parent project card).
    */
   const warp = (u: number, v: number): [number, number] => {
     const sx = geo.left + u * W;
     const sy = geo.top + v * H;
 
-    const ti = clamp01((t - (1 - v) * STAGGER) / (1 - STAGGER));
+    // Direct the leading edge toward the target
+    const isBelow = target.y >= (geo.top + H / 2);
+    const lead = isBelow ? (1 - v) : v;
+    const ti = clamp01((t - lead * STAGGER) / (1 - STAGGER));
     const e = Math.pow(ti, 1.35);
 
-    let dx = sx + (target.x - sx) * e;
-    const dy = sy + (target.y - sy) * e;
+    const targetLeft = target.width ? (target.x - target.width / 2) : target.x;
+    const destX = target.width ? (targetLeft + u * target.width) : target.x;
+    const targetTop = target.height ? (target.y - target.height / 2) : target.y;
+    const destY = target.height ? (targetTop + v * target.height) : target.y;
 
-    // Squeeze toward the lamp. `1 - 0.92*e` leaves a 8% neck, which the
-    // tail fade takes to nothing.
-    const pinch = 0.92 * e;
-    dx = target.x + (dx - target.x) * (1 - pinch);
+    const baseDx = sx + (destX - sx) * e;
+    const baseDy = sy + (destY - sy) * e;
 
-    // Bulge out sideways through the middle of the sheet, strongest mid-flight
-    // so it resolves back to a point rather than leaving a stump.
+    let dx = baseDx;
+    let dy = baseDy;
+
+    if (target.width) {
+      // Sinusoidal neck pinch mid-flight
+      const midT = Math.sin(Math.PI * ti);
+      const pinch = midT * 0.38;
+      const currentCenterX = (geo.left + W / 2) + (target.x - (geo.left + W / 2)) * e;
+      dx = currentCenterX + (dx - currentCenterX) * (1 - pinch);
+    } else {
+      // Squeeze toward the single-point lamp
+      const pinch = 0.92 * e;
+      dx = target.x + (dx - target.x) * (1 - pinch);
+    }
+
+    // Bulge out sideways through the middle of the sheet (macOS magic lamp curve)
     dx += FOLD * W * e * (1 - e) * Math.sin(Math.PI * v) * foldDir;
 
     return [dx, dy];
@@ -268,8 +286,12 @@ export function renderGenie(
     ys.push(ry);
   }
 
-  // Everything converges to a point at the lamp; the last sliver fades.
-  ctx.globalAlpha = t > 0.92 ? Math.max(0, 1 - (t - 0.92) / 0.08) : 1;
+  // Everything converges to the lamp; smooth fade at the very tip
+  if (target.width) {
+    ctx.globalAlpha = t > 0.94 ? Math.max(0, 1 - (t - 0.94) / 0.06) : 1;
+  } else {
+    ctx.globalAlpha = t > 0.92 ? Math.max(0, 1 - (t - 0.92) / 0.08) : 1;
+  }
   ctx.imageSmoothingEnabled = true;
 
   const tw = texW / cols;

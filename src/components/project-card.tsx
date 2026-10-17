@@ -1,5 +1,6 @@
 'use client';
 
+import * as React from 'react';
 import Image from 'next/image';
 import {
   Card,
@@ -18,11 +19,18 @@ export function ProjectCard({
   onClick,
 }: {
   project: Project;
-  onClick?: () => void;
+  onClick?: (cardEl: HTMLElement) => void;
 }) {
+  const cardRef = React.useRef<HTMLDivElement>(null);
+
   return (
     <Card
-      onClick={onClick}
+      ref={cardRef}
+      onClick={() => {
+        if (cardRef.current && onClick) {
+          onClick(cardRef.current);
+        }
+      }}
       className="group flex h-full cursor-pointer transform flex-col overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-primary/50"
     >
       <CardHeader>

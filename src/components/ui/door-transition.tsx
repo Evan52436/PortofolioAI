@@ -95,7 +95,7 @@ export function DoorTransitionProvider({ children }: DoorTransitionProviderProps
         leftDoor,
         {
           xPercent: 0,
-          duration: 0.65,
+          duration: 0.45,
           ease: 'power3.inOut',
         },
         0
@@ -104,7 +104,7 @@ export function DoorTransitionProvider({ children }: DoorTransitionProviderProps
         rightDoor,
         {
           xPercent: 0,
-          duration: 0.65,
+          duration: 0.45,
           ease: 'power3.inOut',
         },
         0
@@ -125,23 +125,23 @@ export function DoorTransitionProvider({ children }: DoorTransitionProviderProps
         if (typeof window !== 'undefined') {
           window.history.pushState(null, '', '#' + id);
         }
-      }, '+=0.08');
+      }, '+=0.06');
 
       // 3. Opening animation: doors slide out from center to reveal target section
       tl.to(
         leftDoor,
         {
           xPercent: -100,
-          duration: 0.65,
+          duration: 0.45,
           ease: 'power3.inOut',
         },
-        '+=0.08'
+        '+=0.06'
       );
       tl.to(
         rightDoor,
         {
           xPercent: 100,
-          duration: 0.65,
+          duration: 0.45,
           ease: 'power3.inOut',
         },
         '<'
