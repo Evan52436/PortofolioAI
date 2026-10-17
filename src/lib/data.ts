@@ -337,12 +337,12 @@ export const skillsData: SkillsData = {
         {
             id: 'music',
             title: 'Music',
-            description: 'Digital audio workstation production, sound design, event audio engineering, and live acoustic performance.',
+            description: 'Digital audio workstation production, sound design, event audio engineering, and live performance. skills playing: Piano, Guitar, Drums.',
             skills: [
                 { name: 'Ableton Live', icon: '/icons/ableton.svg' },
                 { name: 'Studio One', icon: '/icons/studio1.png' },
             ],
-            footerText: 'Piano, guitar, drums',
+            // footerText: 'Piano, guitar, drums',
         },
     ],
 };
