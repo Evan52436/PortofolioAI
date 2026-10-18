@@ -1,9 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-
-const TOTAL_BLOCKS = 20;
-const REVEAL = { whoami: 5, role: 22, load: 40 };
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 function Prompt() {
   return (
@@ -19,60 +16,104 @@ function Prompt() {
 }
 
 export function LoadingScreen({ onLoaded }: { onLoaded: () => void }) {
-  const [progress, setProgress] = useState(0);
-  const [ready, setReady] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [terminalIn, setTerminalIn] = useState(false);
   const [terminalOut, setTerminalOut] = useState(false);
-  const [overlayHidden, setOverlayHidden] = useState(false);
+  const [step, setStep] = useState(1);
+  const [barLoaded, setBarLoaded] = useState(false);
+  const dismissedRef = useRef(false);
 
-  useEffect(() => {
-    // 1. Entrance pop-in (faster)
-    const popIn = setTimeout(() => setTerminalIn(true), 120);
-
-    // 2. Progress increments smoothly and much faster
-    const timer = setTimeout(() => {
-      const interval = setInterval(() => {
-        setProgress((prev) => {
-          if (prev >= 100) {
-            clearInterval(interval);
-            // Done loading: briefly show completion prompt then trigger clean exit
-            setTimeout(() => setReady(true), 200);
-            setTimeout(() => {
-              setTerminalOut(true);
-              setTimeout(() => setOverlayHidden(true), 380);
-              setTimeout(onLoaded, 750);
-            }, 650);
-            return 100;
-          }
-          return prev + 1;
-        });
-      }, 9);
-      return () => clearInterval(interval);
-    }, 200);
-
-    return () => {
-      clearTimeout(popIn);
-      clearTimeout(timer);
-    };
+  const dismiss = useCallback(() => {
+    if (dismissedRef.current) return;
+    dismissedRef.current = true;
+    try {
+      sessionStorage.setItem('portfolio_booted', '1');
+    } catch {
+      // ignore
+    }
+    setTerminalOut(true);
+    setTimeout(() => {
+      setMounted(false);
+      onLoaded();
+    }, 250);
   }, [onLoaded]);
 
-  const loadProgress =
-    progress <= REVEAL.load
-      ? 0
-      : Math.round(((progress - REVEAL.load) / (100 - REVEAL.load)) * 100);
-  const filled = Math.round((loadProgress / 100) * TOTAL_BLOCKS);
-  const bar = '█'.repeat(filled) + '░'.repeat(TOTAL_BLOCKS - filled);
+  useEffect(() => {
+    // 1. Session check: only run once per session
+    try {
+      if (sessionStorage.getItem('portfolio_booted')) {
+        onLoaded();
+        return;
+      }
+    } catch {
+      // ignore
+    }
 
-  const shown = (at: number) => (progress >= at ? 'opacity-100' : 'opacity-0');
+    // 2. Reduced motion check: skip entirely if user prefers reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      try {
+        sessionStorage.setItem('portfolio_booted', '1');
+      } catch {
+        // ignore
+      }
+      onLoaded();
+      return;
+    }
+
+    setMounted(true);
+    setTerminalIn(true);
+
+    // Sequence capped at ~1s total
+    const t1 = setTimeout(() => setStep(2), 180);
+    const t2 = setTimeout(() => {
+      setStep(3);
+      requestAnimationFrame(() => setBarLoaded(true));
+    }, 360);
+    const t3 = setTimeout(() => setStep(4), 800);
+    const t4 = setTimeout(() => {
+      try {
+        sessionStorage.setItem('portfolio_booted', '1');
+      } catch {
+        // ignore
+      }
+      setTerminalOut(true);
+    }, 1020);
+    const t5 = setTimeout(() => {
+      setMounted(false);
+      onLoaded();
+    }, 1250);
+
+    // Allow skip by any key
+    const handleKeyDown = () => dismiss();
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
+      clearTimeout(t5);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [dismiss, onLoaded]);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <div
-      className={`fixed inset-0 z-[70] flex items-center justify-center bg-background/70 px-4 backdrop-blur-xl transition-opacity duration-400 ${
-        overlayHidden ? 'pointer-events-none opacity-0' : 'opacity-100'
+      onClick={dismiss}
+      onTouchStart={dismiss}
+      role="button"
+      tabIndex={0}
+      aria-label="Terminal boot screen. Click or press any key to skip."
+      className={`fixed inset-0 z-[70] flex flex-col items-center justify-center bg-background/70 px-4 backdrop-blur-xl transition-opacity duration-300 cursor-pointer ${
+        terminalOut ? 'pointer-events-none opacity-0' : 'opacity-100'
       }`}
     >
       <div
-        className={`w-full max-w-4xl overflow-hidden rounded-xl border border-border bg-card shadow-2xl ${
+        className={`w-full max-w-4xl overflow-hidden rounded-xl border border-border bg-card shadow-2xl transition-all ${
           terminalOut
             ? 'terminal-genie-out'
             : terminalIn
@@ -81,18 +122,24 @@ export function LoadingScreen({ onLoaded }: { onLoaded: () => void }) {
         }`}
       >
         {/* Title bar */}
-        <div className="flex items-center gap-2 border-b border-border bg-muted/40 px-5 py-3">
-          <span className="h-3.5 w-3.5 rounded-full bg-primary" />
-          <span className="h-3.5 w-3.5 rounded-full bg-accent" />
-          <span className="h-3.5 w-3.5 rounded-full bg-muted-foreground/40" />
-          <p className="ml-2 font-code text-sm text-muted-foreground">
-            chargerleptop — bash
-          </p>
+        <div className="flex items-center justify-between border-b border-border bg-muted/40 px-5 py-3 select-none">
+          <div className="flex items-center gap-2">
+            <span className="h-3.5 w-3.5 rounded-full bg-primary" />
+            <span className="h-3.5 w-3.5 rounded-full bg-accent" />
+            <span className="h-3.5 w-3.5 rounded-full bg-muted-foreground/40" />
+            <p className="ml-2 font-code text-sm text-muted-foreground">
+              chargerleptop — bash
+            </p>
+          </div>
+          <span className="text-xs text-muted-foreground/70 hidden sm:inline">
+            [ESC / click to skip]
+          </span>
         </div>
 
         {/* Terminal body */}
-        <div className="min-h-[30rem] px-7 py-6 font-code text-base leading-relaxed">
-          <div className={`mb-3 transition-opacity duration-300 ${shown(REVEAL.whoami)}`}>
+        <div className="min-h-[22rem] sm:min-h-[28rem] px-6 sm:px-7 py-5 sm:py-6 font-code text-sm sm:text-base leading-relaxed">
+          {/* whoami */}
+          <div className={`mb-3 transition-opacity duration-200 ${step >= 1 ? 'opacity-100' : 'opacity-0'}`}>
             <p>
               <Prompt />
               <span className="text-foreground">whoami</span>
@@ -100,7 +147,8 @@ export function LoadingScreen({ onLoaded }: { onLoaded: () => void }) {
             <p className="text-foreground/80">Evan Pranawa Armansyah</p>
           </div>
 
-          <div className={`mb-3 transition-opacity duration-300 ${shown(REVEAL.role)}`}>
+          {/* role */}
+          <div className={`mb-3 transition-opacity duration-200 ${step >= 2 ? 'opacity-100' : 'opacity-0'}`}>
             <p>
               <Prompt />
               <span className="text-foreground">cat role.txt</span>
@@ -108,29 +156,39 @@ export function LoadingScreen({ onLoaded }: { onLoaded: () => void }) {
             <p className="text-foreground/80">Software Engineer &amp; Cybersecurity Enthusiast</p>
           </div>
 
-          <div className={`mb-3 transition-opacity duration-300 ${shown(REVEAL.load)}`}>
+          {/* appimage progress bar */}
+          <div className={`mb-3 transition-opacity duration-200 ${step >= 3 ? 'opacity-100' : 'opacity-0'}`}>
             <p>
               <Prompt />
               <span className="text-foreground">./porfolio-epuy.AppImage</span>
             </p>
-            <p className="text-foreground/80">
-              <span className="text-primary">{bar}</span>
-              <span className="ml-2 tabular-nums text-muted-foreground">{loadProgress}%</span>
-            </p>
+            <div className="flex items-center gap-3 mt-1.5">
+              <div className="h-3 w-48 sm:w-64 rounded bg-muted/70 overflow-hidden border border-border/70">
+                <div
+                  className={`h-full bg-primary origin-left transition-transform duration-500 ease-out ${
+                    barLoaded ? 'scale-x-100' : 'scale-x-0'
+                  }`}
+                  style={{ willChange: 'transform' }}
+                />
+              </div>
+              <span className="text-xs font-mono text-muted-foreground tabular-nums">
+                {barLoaded ? '100%' : '0%'}
+              </span>
+            </div>
           </div>
 
-          {/* Finished line + fresh empty prompt: only after the whole load is done */}
+          {/* Finished line */}
           <p
-            className={`mb-3 text-accent transition-opacity duration-300 ${
-              ready ? 'opacity-100' : 'opacity-0'
+            className={`mb-3 text-accent transition-opacity duration-200 ${
+              step >= 4 ? 'opacity-100' : 'opacity-0'
             }`}
           >
             ✓ done <span className="text-muted-foreground">— welcome</span>
           </p>
 
           <p
-            className={`flex items-center transition-opacity duration-300 ${
-              ready ? 'opacity-100' : 'opacity-0'
+            className={`flex items-center transition-opacity duration-200 ${
+              step >= 4 ? 'opacity-100' : 'opacity-0'
             }`}
           >
             <Prompt />
@@ -138,6 +196,9 @@ export function LoadingScreen({ onLoaded }: { onLoaded: () => void }) {
           </p>
         </div>
       </div>
+      <p className="mt-3 text-xs text-muted-foreground/60 select-none">
+        Click anywhere, tap, or press any key to skip
+      </p>
     </div>
   );
 }
