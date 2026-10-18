@@ -307,8 +307,8 @@ export function ProjectModal({
                 src={currentImage.imageUrl}
                 alt={currentImage.description || project.title}
                 fill
+                sizes="(max-width: 768px) 100vw, 700px"
                 className="object-cover transition-all duration-300 group-hover:scale-105"
-                priority
               />
               <div className="absolute bottom-3 left-3 max-w-[calc(100%-1.5rem)] px-3 py-1.5 rounded-md bg-black/60 backdrop-blur-md text-white text-xs font-medium inline-block truncate shadow-sm">
                 {currentImage.description || project.title}
@@ -340,6 +340,7 @@ export function ProjectModal({
                         src={img.imageUrl}
                         alt={img.description}
                         fill
+                        sizes="112px"
                         className="object-cover"
                       />
                     </button>

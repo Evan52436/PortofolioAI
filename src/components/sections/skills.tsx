@@ -52,6 +52,7 @@ export function Skills() {
                   src={infrastructure.image}
                   alt={infrastructure.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 500px"
                   className="object-cover transition-transform duration-300 group-hover/photo:scale-105"
                 />
               ) : (

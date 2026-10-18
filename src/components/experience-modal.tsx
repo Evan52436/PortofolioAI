@@ -63,8 +63,8 @@ export function ExperienceModal({ experience, isOpen, onClose }: ExperienceModal
                   src={currentImage.imageUrl}
                   alt={currentImage.description || experience.role}
                   fill
+                  sizes="(max-width: 768px) 100vw, 700px"
                   className="object-contain transition-all duration-300 group-hover:scale-105"
-                  priority
                 />
                 <div className="absolute bottom-3 left-3 max-w-[calc(100%-1.5rem)] px-3 py-1.5 rounded-md bg-black/60 backdrop-blur-md text-white text-xs font-medium inline-block truncate shadow-sm">
                   {currentImage.description || experience.role}
@@ -103,6 +103,7 @@ export function ExperienceModal({ experience, isOpen, onClose }: ExperienceModal
                           src={img.imageUrl}
                           alt={img.description || `Preview ${idx + 1}`}
                           fill
+                          sizes="(max-width: 640px) 96px, 112px"
                           className="object-cover"
                         />
                       </button>
