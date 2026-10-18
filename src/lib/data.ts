@@ -6,13 +6,14 @@ const getImage = (id: string): ImagePlaceholder => {
     const found = PlaceHolderImages.find((img) => img.id === id);
     if (found) return found;
 
-    const path = id.startsWith('/') ? id : `/${id}`;
+    const webpId = id.replace(/\.(png|jpg|jpeg|JPG)$/i, '.webp');
+    const path = webpId.startsWith('/') ? webpId : `/${webpId}`;
     const cleanLabel = id.replace(/\.[^/.]+$/, '').replace(/_/g, ' ');
 
     return {
         id,
         description: cleanLabel || 'Dashboard Desktop',
-        imageUrl: id.includes('.') ? path : '/Dashboard_Desktop.png',
+        imageUrl: id.includes('.') ? path : '/Dashboard_Desktop.webp',
         imageHint: cleanLabel || 'dashboard desktop',
     };
 };
@@ -24,8 +25,8 @@ export const studentData = {
 
     profilePicture: getImage('profile'),
     profilePictures: [
-        getImage('epuy.jpeg'),
-        getImage('belakang.jpeg'),
+        getImage('epuy.webp'),
+        getImage('belakang.webp'),
     ],
 };
 
@@ -36,13 +37,13 @@ export const projects = [
         category: 'code',
         description: 'A S3 Object Storage system with JavaScript and TypeScript FrontEnd and ARMBIAN Network Attached Storage (NAS)',
         technologies: ['Docker', 'MinIO', 'SupaBase', 'JavaScript', 'TypeScript'],
-        image: getImage('Dashboard_Desktop.png'),
+        image: getImage('Dashboard_Desktop.webp'),
         gallery: [
-            getImage('Dashboard_Desktop.png'),
-            getImage('Admin Panel_Desktop.png'),
-            getImage('Upload File Prompt_Desktop.png'),
-            getImage('Delete File Prompt_Desktop.png'),
-            getImage('Password Prompt Admin_Desktop.png')
+            getImage('Dashboard_Desktop.webp'),
+            getImage('Admin Panel_Desktop.webp'),
+            getImage('Upload File Prompt_Desktop.webp'),
+            getImage('Delete File Prompt_Desktop.webp'),
+            getImage('Password Prompt Admin_Desktop.webp')
         ],
         url: 'https://storage.ackteams.com',
         githubUrl: 'https://github.com/Evan52436/file-pooling',
@@ -54,12 +55,12 @@ export const projects = [
         category: 'code',
         description: 'A CRUD Gallery system with Laravel FrontEnd and a Network Attached Storage (NAS) running ARMBIAN Linux And MySQL database',
         technologies: ['Docker', 'Laravel', 'MySQL', 'ARMBIAN', 'MinIO'],
-        image: getImage('Thumbnail Laravel.png'),
+        image: getImage('Thumbnail Laravel.webp'),
         gallery: [
-            getImage('Laravel Dashboard.png'),
-            getImage('File Preview.png'),
-            getImage('Folder Feature.png'),
-            getImage('Selecting Files.png')
+            getImage('Laravel Dashboard.webp'),
+            getImage('File Preview.webp'),
+            getImage('Folder Feature.webp'),
+            getImage('Selecting Files.webp')
         ],
         url: 'https://gallery.evanpranawa.my.id',
         githubUrl: 'https://github.com/Evan52436/larapel-pkl',
@@ -71,13 +72,13 @@ export const projects = [
         category: 'code',
         description: 'A Hackathon Project built while attending the event "Google Developer Group" at Binus Alam Sutera.',
         technologies: ['GDG', 'PostgreSQL', 'TypeScript', 'JavaScript'],
-        image: getImage('ruanglokal_dashboard.png'),
+        image: getImage('ruanglokal_dashboard.webp'),
         gallery: [
-            getImage('ruanglokal_dashboard.png'),
-            getImage('ruanglokal_guru.png'),
-            getImage('ruanglokal_muridbaca.png'),
-            getImage('ruanglokal_murid-landing.png'),
-            getImage('ruanglokal_dashboard.png')
+            getImage('ruanglokal_dashboard.webp'),
+            getImage('ruanglokal_guru.webp'),
+            getImage('ruanglokal_muridbaca.webp'),
+            getImage('ruanglokal_murid-landing.webp'),
+            getImage('ruanglokal_dashboard.webp')
         ],
         url: 'https://hackathon.ackteams.com/',
         githubUrl: 'https://github.com/Evan52436/Hackaton_GDG-Binus',
@@ -89,13 +90,13 @@ export const projects = [
         category: 'code',
         description: 'A Prototype Project for a competition held by President University',
         technologies: ['Three.js', 'Flask', 'TypeScript', 'JavaScript'],
-        image: getImage('PREVIEW.png'),
+        image: getImage('PREVIEW.webp'),
         gallery: [
-            getImage('truckpolos.png'),
-            getImage('truckisi1.png'),
-            getImage('truckisi2.png'),
-            getImage('truckisi3.png'),
-            getImage('truckisi4.png')
+            getImage('truckpolos.webp'),
+            getImage('truckisi1.webp'),
+            getImage('truckisi2.webp'),
+            getImage('truckisi3.webp'),
+            getImage('truckisi4.webp')
         ],
         url: 'https://packer.evanpranawa.my.id/',
         githubUrl: 'https://github.com/Evan52436/truck-packer-ui',
@@ -127,7 +128,7 @@ export const projects = [
         image: getImage('project-webapp'),
         gallery: [
             getImage('project-webapp'),
-            getImage('sertifkelompok.png'),
+            getImage('sertifkelompok.webp'),
         ],
         url: 'https://drive.google.com/drive/folders/16Pfrm09J6RPiQidAWItv1YO6y2peF88s?usp=sharing',
         githubUrl: 'https://drive.google.com/file/d/103eKeoEpHEEu9y9HRo6iesdZ7z6P5qCm/view?usp=drive_link',
@@ -139,9 +140,9 @@ export const projects = [
         category: 'Sertificate',
         description: 'Attended a Webinar for Introduction to Capture The Flag from ID-Networkers 02 August 2025',
         technologies: ['Webinar', 'CTF', 'ID-Networkers'],
-        image: getImage('ctf intro.png'),
+        image: getImage('ctf intro.webp'),
         gallery: [
-            getImage('ctf intro.png')
+            getImage('ctf intro.webp')
         ],
         url: 'https://drive.google.com/drive/folders/16Pfrm09J6RPiQidAWItv1YO6y2peF88s?usp=sharing',
         githubUrl: 'https://drive.google.com/file/d/1KOuzVR1jl0Vu4Q2gTDnshkiPRRfPihxl/view?usp=drive_link',
@@ -153,9 +154,9 @@ export const projects = [
         category: 'Sertificate',
         description: 'Project Owner of "Decoupled Storage System" at school project showcase',
         technologies: ['Next.js', 'TypeScript', 'Supabase', 'PostgreSQL'],
-        image: getImage('depakto.png'),
+        image: getImage('depakto.webp'),
         gallery: [
-            getImage('depakto.png')
+            getImage('depakto.webp')
         ],
         url: 'https://drive.google.com/drive/folders/16Pfrm09J6RPiQidAWItv1YO6y2peF88s?usp=sharing',
         githubUrl: 'https://drive.google.com/file/d/1JQGwmah74LS3t4j9rrVzhQRno6HHlJ7g/view?usp=drive_link',
@@ -187,8 +188,8 @@ export const resume = {
             period: 'Finished | 2024',
             description: 'Internship at Askarphotography. Assisted lead photographers and videographers in capturing 10+ weddings, and managing lighting equipment. Edited a high-resolution RAW photos and 4K video of highlights using Adobe Premiere to ensuring timely delivery of premium client galleries.',
             images: [
-                getImage('askar1.png'),
-                getImage('askar2.png'),
+                getImage('askar1.webp'),
+                getImage('askar2.webp'),
             ],
         },
         {
@@ -197,8 +198,8 @@ export const resume = {
             period: 'Finished | 2025',
             description: 'Internship at School IT Department. Supported school IT infrastructure by troubleshooting hardware and network issues for students and staff. Managed device deployments, updated system software, and resolved technical issues to ensure minimal downtime for educational operations and school administration.',
             images: [
-                getImage('sou.jpg'),
-                getImage('sou2.JPG'),
+                getImage('sou.webp'),
+                getImage('sou2.webp'),
             ],
         },
         {
@@ -207,8 +208,8 @@ export const resume = {
             period: 'Finished | 2025',
             description: 'Designed and built a home lab server for hosting various services, including a media server, local file storage, and a private cloud. This project involved hardware selection, OS installation (Linux), network configuration, and containerization with Docker.',
             images: [
-                getImage('homelab1.png'),
-                getImage('homelab2.png'),
+                getImage('homelab1.webp'),
+                getImage('homelab2.webp'),
             ],
         },
         {
@@ -218,7 +219,7 @@ export const resume = {
             description: 'Backend Developer for competition by President University with TUV NORD. completing Case 2: PPE Compliance Monitoring via computer vision.',
             images: [
                 getImage('lombah1.webp'),
-                getImage('lombah2.jpg'),
+                getImage('lombah2.webp'),
             ],
         },
         {
@@ -227,8 +228,8 @@ export const resume = {
             period: 'Finished | 2026',
             description: 'National Wide Website Building Competition held by Jagoan Hosting. Held the role of System Administrator, in charge of managing the stability of the website that lead our team to pass multiple elimination rounds',
             images: [
-                getImage('jhic1.png'),
-                getImage('jhic2.png'),
+                getImage('jhic1.webp'),
+                getImage('jhic2.webp'),
             ],
             isPortrait: true,
         },
@@ -238,8 +239,8 @@ export const resume = {
             period: 'Ongoing | 2026',
             description: 'Vice President of Devaccto RPL (Development Acceleration Troops). School organization for the students leading in their Major. Also Responsible for the making and managing of the schools digital infrastructure',
             images: [
-                getImage('penus1.jpg'),
-                getImage('penus2.jpg'),
+                getImage('penus1.webp'),
+                getImage('penus2.webp'),
             ],
         },
         // {
@@ -292,7 +293,7 @@ export const skillsData: SkillsData = {
         subtitle: "What I build with, and where I've used it.",
     },
     infrastructure: {
-        image: '/image.png',
+        image: '/image.webp',
         imagePlaceholderText: 'photo of the Wyse box and the HG680-P stacked',
         hardwareDetails: [
             'Dell Wyse 5010 · Fedora Server',
@@ -307,7 +308,7 @@ export const skillsData: SkillsData = {
             { name: 'Docker', icon: '/icons/docker.svg' },
             { name: 'Nginx', icon: '/icons/nginx.svg' },
             { name: 'Bash', icon: '/icons/bash.svg' },
-            { name: 'aaPanel', icon: '/icons/aapanel.png' },
+            { name: 'aaPanel', icon: '/icons/aapanel.webp' },
             { name: 'Cloudflare', icon: '/icons/cloudflare.svg' },
             { name: 'Tailscale', icon: '/icons/tailscale.svg' },
         ],
@@ -340,7 +341,7 @@ export const skillsData: SkillsData = {
             description: 'Digital audio workstation production, sound design, event audio engineering, and live performance. skills playing: Piano, Guitar, Drums.',
             skills: [
                 { name: 'Ableton Live', icon: '/icons/ableton.svg' },
-                { name: 'Studio One', icon: '/icons/studio1.png' },
+                { name: 'Studio One', icon: '/icons/studio1.webp' },
             ],
             // footerText: 'Piano, guitar, drums',
         },

@@ -46,3 +46,6 @@ firestore-debug.log
 
 # local browser binary
 /chrome
+
+# backups
+/public(backup)

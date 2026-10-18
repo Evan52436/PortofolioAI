@@ -63,13 +63,13 @@ export function LoadingScreen({ onLoaded }: { onLoaded?: () => void } = {}) {
     setMounted(true);
     setTerminalIn(true);
 
-    // Sequence capped at ~1s total
-    const t1 = setTimeout(() => setStep(2), 180);
+    // Pacing adjusted to be clearly legible (~3.2s total), skippable anytime
+    const t1 = setTimeout(() => setStep(2), 550);
     const t2 = setTimeout(() => {
       setStep(3);
       requestAnimationFrame(() => setBarLoaded(true));
-    }, 360);
-    const t3 = setTimeout(() => setStep(4), 800);
+    }, 1250);
+    const t3 = setTimeout(() => setStep(4), 2450);
     const t4 = setTimeout(() => {
       try {
         sessionStorage.setItem('portfolio_booted', '1');
@@ -77,11 +77,11 @@ export function LoadingScreen({ onLoaded }: { onLoaded?: () => void } = {}) {
         // ignore
       }
       setTerminalOut(true);
-    }, 1020);
+    }, 3200);
     const t5 = setTimeout(() => {
       setMounted(false);
       onLoaded?.();
-    }, 1250);
+    }, 3650);
 
     // Allow skip by any key
     const handleKeyDown = () => dismiss();
@@ -160,12 +160,12 @@ export function LoadingScreen({ onLoaded }: { onLoaded?: () => void } = {}) {
           <div className={`mb-3 transition-opacity duration-200 ${step >= 3 ? 'opacity-100' : 'opacity-0'}`}>
             <p>
               <Prompt />
-              <span className="text-foreground">./porfolio-epuy.AppImage</span>
+              <span className="text-foreground">./portfolio-epuy.AppImage</span>
             </p>
             <div className="flex items-center gap-3 mt-1.5">
               <div className="h-3 w-48 sm:w-64 rounded bg-muted/70 overflow-hidden border border-border/70">
                 <div
-                  className={`h-full bg-primary origin-left transition-transform duration-500 ease-out ${
+                  className={`h-full bg-primary origin-left transition-transform duration-1000 ease-out ${
                     barLoaded ? 'scale-x-100' : 'scale-x-0'
                   }`}
                   style={{ willChange: 'transform' }}

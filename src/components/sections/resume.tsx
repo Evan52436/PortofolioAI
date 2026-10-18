@@ -17,14 +17,22 @@ type ExperienceItem = (typeof resume.experience)[number] & {
 // Known aspect ratios for files in /public (width / height)
 const KNOWN_ASPECT_RATIOS: Record<string, number> = {
   'dashboard_mobile.png': 0.46,
+  'dashboard_mobile.webp': 0.46,
   'file preview_mobile.png': 0.46,
+  'file preview_mobile.webp': 0.46,
   'belakang.jpeg': 1.0,
+  'belakang.webp': 1.0,
   'epuy.jpeg': 1.0,
+  'epuy.webp': 1.0,
   'iroha.jpeg': 1.0,
+  'iroha.webp': 1.0,
   'logo.png': 1.0,
+  'logo.webp': 1.0,
   'main.jpeg': 1.0,
+  'main.webp': 1.0,
   'profile-placeholder.svg': 1.0,
   'preview.png': 1.22,
+  'preview.webp': 1.22,
 };
 
 type ImageShape = 'portrait' | 'square' | 'landscape';

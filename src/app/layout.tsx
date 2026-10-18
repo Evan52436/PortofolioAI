@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Evan Pranawa Armansyah - Software Engineer & Cybersecurity Enthusiast',
     description: 'Explore the portfolio of Evan Pranawa Armansyah, showcasing projects in software engineering and cybersecurity.',
-    images: ['/main.jpeg'], // Should be a path to a good Twitter card image
+    images: ['/main.webp'], // Should be a path to a good Twitter card image
   },
   robots: {
     index: true,
