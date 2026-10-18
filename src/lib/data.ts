@@ -137,7 +137,7 @@ export const projects = [
         id: 'project-7',
         title: 'ID-Networkers - Introduction to CTF',
         category: 'Sertificate',
-        description: 'Attended a Webinar for Introduction to Capture The Flah from ID-Networkers 02 August 2025',
+        description: 'Attended a Webinar for Introduction to Capture The Flag from ID-Networkers 02 August 2025',
         technologies: ['Webinar', 'CTF', 'ID-Networkers'],
         image: getImage('ctf intro.png'),
         gallery: [
@@ -145,7 +145,7 @@ export const projects = [
         ],
         url: 'https://drive.google.com/drive/folders/16Pfrm09J6RPiQidAWItv1YO6y2peF88s?usp=sharing',
         githubUrl: 'https://drive.google.com/file/d/1KOuzVR1jl0Vu4Q2gTDnshkiPRRfPihxl/view?usp=drive_link',
-        content: 'Attended a Webinar for Introduction to Capture The Flah from ID-Networkers 02 August 2025'
+        content: 'Attended a Webinar for Introduction to Capture The Flag from ID-Networkers 02 August 2025'
     },
     {
         id: 'project-8',
