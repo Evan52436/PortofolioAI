@@ -296,3 +296,20 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Offscreen section rendering optimization: skips layout and paint until scrolled near viewport */
+#skills {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 750px;
+}
+
+#resume {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 1000px;
+}
+
+#contact {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 600px;
+}
+
