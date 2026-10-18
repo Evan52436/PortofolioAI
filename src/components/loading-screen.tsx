@@ -15,7 +15,7 @@ function Prompt() {
   );
 }
 
-export function LoadingScreen({ onLoaded }: { onLoaded: () => void }) {
+export function LoadingScreen({ onLoaded }: { onLoaded?: () => void } = {}) {
   const [mounted, setMounted] = useState(false);
   const [terminalIn, setTerminalIn] = useState(false);
   const [terminalOut, setTerminalOut] = useState(false);
@@ -34,7 +34,7 @@ export function LoadingScreen({ onLoaded }: { onLoaded: () => void }) {
     setTerminalOut(true);
     setTimeout(() => {
       setMounted(false);
-      onLoaded();
+      onLoaded?.();
     }, 250);
   }, [onLoaded]);
 
@@ -42,7 +42,7 @@ export function LoadingScreen({ onLoaded }: { onLoaded: () => void }) {
     // 1. Session check: only run once per session
     try {
       if (sessionStorage.getItem('portfolio_booted')) {
-        onLoaded();
+        onLoaded?.();
         return;
       }
     } catch {
@@ -56,7 +56,7 @@ export function LoadingScreen({ onLoaded }: { onLoaded: () => void }) {
       } catch {
         // ignore
       }
-      onLoaded();
+      onLoaded?.();
       return;
     }
 
@@ -80,7 +80,7 @@ export function LoadingScreen({ onLoaded }: { onLoaded: () => void }) {
     }, 1020);
     const t5 = setTimeout(() => {
       setMounted(false);
-      onLoaded();
+      onLoaded?.();
     }, 1250);
 
     // Allow skip by any key
