@@ -287,3 +287,12 @@
 .animate-eq-18 { animation: eq-smooth-2 1.6s ease-in-out infinite -0.35s; transform-origin: bottom; will-change: transform; }
 .animate-eq-19 { animation: eq-smooth-3 1.8s ease-in-out infinite -0.9s; transform-origin: bottom; will-change: transform; }
 .animate-eq-20 { animation: eq-smooth-4 1.5s ease-in-out infinite -0.65s; transform-origin: bottom; will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
