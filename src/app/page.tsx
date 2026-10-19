@@ -9,12 +9,14 @@ import { Skills } from '@/components/sections/skills';
 import { DoorTransitionProvider } from '@/components/ui/door-transition';
 import { SnowfallEffect } from '@/components/snowfall-effect';
 import { SmoothScrollProvider } from '@/components/smooth-scroll-provider';
+import { ConsoleEasterEgg } from '@/components/console-easter-egg';
 
 export default function Home() {
   return (
     <DoorTransitionProvider>
       <SmoothScrollProvider>
         <div className="flex min-h-screen flex-col">
+          <ConsoleEasterEgg />
           {/* Page renders underneath the loader so the hero shows through the blur */}
           <LoadingScreen />
           <SnowfallEffect />
