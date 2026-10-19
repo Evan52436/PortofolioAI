@@ -105,7 +105,7 @@ export function Resume() {
 
       const currentScroll = typeof scrollPos === 'number'
         ? scrollPos
-        : (typeof window !== 'undefined' ? (window.lenis?.scroll ?? window.scrollY ?? 0) : 0);
+        : (typeof window !== 'undefined' ? ((window as any).lenis?.scroll ?? window.scrollY ?? 0) : 0);
 
       for (let i = 0; i < count; i++) {
         const currentInner = inners[i];

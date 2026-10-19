@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
 import { skillsData, type SkillItem } from '@/lib/data';
+import { SpringCard } from '@/components/ui/spring-card';
 
 function SkillPill({ name, icon }: SkillItem) {
   const icons = Array.isArray(icon) ? icon : [icon];
@@ -42,7 +43,7 @@ export function Skills() {
         {/* 2-Column Bento Grid with optimized compact gaps */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 items-stretch">
           {/* Left Column: Infrastructure Card */}
-          <div className="rounded-2xl sm:rounded-3xl bg-[#e8f0f8]/80 dark:bg-card/75 border border-[#c7d8e8] dark:border-border/80 p-4 sm:p-5 shadow-sm backdrop-blur-sm flex flex-col justify-between">
+          <SpringCard className="rounded-2xl sm:rounded-3xl bg-[#e8f0f8]/80 dark:bg-card/75 border border-[#c7d8e8] dark:border-border/80 p-4 sm:p-5 shadow-sm backdrop-blur-sm flex flex-col justify-between">
             {/* Photo container */}
             <div className="relative aspect-[16/10] w-full rounded-xl sm:rounded-2xl overflow-hidden bg-[#d6e3f0] dark:bg-muted/40 border border-[#c2d4e6] dark:border-border/60 flex items-center justify-center p-6 text-center select-none shadow-inner group/photo">
               {infrastructure.image ? (
@@ -91,12 +92,12 @@ export function Skills() {
                 ))}
               </div>
             </div>
-          </div>
+          </SpringCard>
 
           {/* Right Column: 3 Stacked Cards with tighter spacing */}
           <div className="flex flex-col gap-3 sm:gap-3.5 justify-between">
             {categories.map((category) => (
-              <div
+              <SpringCard
                 key={category.id}
                 className="rounded-2xl sm:rounded-3xl bg-[#e8f0f8]/80 dark:bg-card/75 border border-[#c7d8e8] dark:border-border/80 p-4 sm:p-5 shadow-sm backdrop-blur-sm flex flex-col justify-between"
               >
@@ -137,7 +138,7 @@ export function Skills() {
                     </p>
                   )}
                 </div>
-              </div>
+              </SpringCard>
             ))}
           </div>
         </div>

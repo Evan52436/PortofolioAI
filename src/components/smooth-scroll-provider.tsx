@@ -4,11 +4,6 @@ import React, { createContext, useContext, useEffect, useRef, useState } from 'r
 import Lenis from 'lenis';
 import { animate, scroll, frame, cancelFrame, easeInOut } from 'motion';
 
-declare global {
-  interface Window {
-    lenis?: Lenis;
-  }
-}
 
 interface SmoothScrollContextType {
   lenis: Lenis | null;
@@ -38,7 +33,7 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
 
     lenisRef.current = lenis;
     setLenisInstance(lenis);
-    window.lenis = lenis;
+    (window as any).lenis = lenis;
 
     // 2. "setup" runs before Motion measures scroll in "read", so scroll()
     // sees the scroll position Lenis writes in the same frame.
@@ -65,7 +60,7 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
       lenis.destroy();
       lenisRef.current = null;
       if (typeof window !== 'undefined') {
-        delete window.lenis;
+        delete (window as any).lenis;
       }
     };
   }, []);

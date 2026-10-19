@@ -53,7 +53,7 @@ export function Footer() {
       }
 
       const viewportHeight = window.innerHeight;
-      const scrollY = typeof window !== 'undefined' ? (window.lenis?.scroll ?? window.scrollY ?? 0) : 0;
+      const scrollY = typeof window !== 'undefined' ? ((window as any).lenis?.scroll ?? window.scrollY ?? 0) : 0;
       const top = stackDocTop - scrollY;
       const total = stackHeight || 200;
 
