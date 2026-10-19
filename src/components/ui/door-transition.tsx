@@ -65,7 +65,9 @@ export function DoorTransitionProvider({ children }: DoorTransitionProviderProps
         const id = targetHref.replace(/^#/, '');
         const targetEl = document.getElementById(id);
         if (targetEl) {
-          if (id === 'portfolio') {
+          if (typeof window !== 'undefined' && window.lenis) {
+            window.lenis.scrollTo(targetEl, { duration: 1.2 });
+          } else if (id === 'portfolio') {
             targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
           } else {
             targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -116,7 +118,9 @@ export function DoorTransitionProvider({ children }: DoorTransitionProviderProps
         const id = targetHref.replace(/^#/, '');
         const targetEl = document.getElementById(id);
         if (targetEl) {
-          if (id === 'portfolio') {
+          if (typeof window !== 'undefined' && window.lenis) {
+            window.lenis.scrollTo(targetEl, { immediate: true });
+          } else if (id === 'portfolio') {
             targetEl.scrollIntoView({ behavior: 'instant', block: 'center' });
           } else {
             targetEl.scrollIntoView({ behavior: 'instant', block: 'start' });

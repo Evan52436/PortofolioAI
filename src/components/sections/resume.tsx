@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { resume } from '@/lib/data';
 import type { ImagePlaceholder } from '@/lib/placeholder-images';
 import { ExperienceModal } from '@/components/experience-modal';
+import { scroll } from 'motion';
+import { useSmoothScroll } from '@/components/smooth-scroll-provider';
 
 type ExperienceItem = (typeof resume.experience)[number] & {
   image?: ImagePlaceholder;
@@ -60,20 +62,50 @@ function getImageShape(img?: ImagePlaceholder): ImageShape {
 const BASE_STICKY_TOP = 84;
 const STACK_STEP = 24;
 
+interface CardMetric {
+  docTop: number;
+  height: number;
+}
+
 export function Resume() {
+  const { lenis } = useSmoothScroll();
   const outerRefs = React.useRef<(HTMLDivElement | null)[]>([]);
   const innerRefs = React.useRef<(HTMLDivElement | null)[]>([]);
+  const metricsRef = React.useRef<CardMetric[]>([]);
   const [selectedExperience, setSelectedExperience] = React.useState<ExperienceItem | null>(null);
 
   React.useEffect(() => {
-    let rafId = 0;
-
-    const updateStackEffects = () => {
-      rafId = 0;
+    const measureMetrics = () => {
       const outers = outerRefs.current;
+      metricsRef.current = outers.map((el) => {
+        if (!el) return { docTop: 0, height: 400 };
+        let top = 0;
+        let curr: HTMLElement | null = el;
+        while (curr) {
+          top += curr.offsetTop;
+          curr = curr.offsetParent as HTMLElement | null;
+        }
+        if (top === 0) {
+          top = el.getBoundingClientRect().top + (window.scrollY || 0);
+        }
+        return {
+          docTop: top,
+          height: el.offsetHeight || 400,
+        };
+      });
+    };
+
+    measureMetrics();
+
+    const updateStackEffects = (scrollPos?: number) => {
+      const metrics = metricsRef.current;
       const inners = innerRefs.current;
-      const count = outers.length;
+      const count = metrics.length;
       if (count === 0) return;
+
+      const currentScroll = typeof scrollPos === 'number'
+        ? scrollPos
+        : (typeof window !== 'undefined' ? (window.lenis?.scroll ?? window.scrollY ?? 0) : 0);
 
       for (let i = 0; i < count; i++) {
         const currentInner = inners[i];
@@ -82,11 +114,11 @@ export function Resume() {
         // Effect 1: Next card (i + 1) arriving over Card i (1 card behind front)
         let p1 = 0;
         const target1 = i + 1;
-        if (target1 < count && outers[target1]) {
+        if (target1 < count && metrics[target1]) {
           const sticky1 = BASE_STICKY_TOP + target1 * STACK_STEP;
-          const rect1 = outers[target1]!.getBoundingClientRect();
-          const dist1 = rect1.top - sticky1;
-          const travel1 = Math.max(rect1.height * 0.8, 360);
+          const m1 = metrics[target1];
+          const dist1 = Math.max(0, m1.docTop - currentScroll - sticky1);
+          const travel1 = Math.max(m1.height * 0.8, 360);
           p1 = Math.min(Math.max((travel1 - dist1) / travel1, 0), 1);
         }
 
@@ -94,11 +126,11 @@ export function Resume() {
         // Remains solid in the stack.
         let p2 = 0;
         const target2 = i + 2;
-        if (target2 < count && outers[target2]) {
+        if (target2 < count && metrics[target2]) {
           const sticky2 = BASE_STICKY_TOP + target2 * STACK_STEP;
-          const rect2 = outers[target2]!.getBoundingClientRect();
-          const dist2 = rect2.top - sticky2;
-          const travel2 = Math.max(rect2.height * 0.8, 360);
+          const m2 = metrics[target2];
+          const dist2 = Math.max(0, m2.docTop - currentScroll - sticky2);
+          const travel2 = Math.max(m2.height * 0.8, 360);
           p2 = Math.min(Math.max((travel2 - dist2) / travel2, 0), 1);
         }
 
@@ -106,11 +138,11 @@ export function Resume() {
         // Only Card i swipes away when Card (i + 3) arrives. Only one card moves at a time!
         let discardProgress = 0;
         const target3 = i + 3;
-        if (target3 < count && outers[target3]) {
+        if (target3 < count && metrics[target3]) {
           const sticky3 = BASE_STICKY_TOP + target3 * STACK_STEP;
-          const rect3 = outers[target3]!.getBoundingClientRect();
-          const dist3 = rect3.top - sticky3;
-          const travel3 = Math.max(rect3.height * 0.8, 360);
+          const m3 = metrics[target3];
+          const dist3 = Math.max(0, m3.docTop - currentScroll - sticky3);
+          const travel3 = Math.max(m3.height * 0.8, 360);
           discardProgress = Math.min(Math.max((travel3 - dist3) / travel3, 0), 1);
         }
 
@@ -130,29 +162,44 @@ export function Resume() {
           currentInner.style.opacity = opacity.toFixed(3);
           currentInner.style.pointerEvents = discardProgress > 0.4 ? 'none' : 'auto';
         } else {
-          currentInner.style.transform = p1 > 0.005 || p2 > 0.005 ? `scale(${baseScale.toFixed(4)})` : 'scale(1)';
+          currentInner.style.transform = `translate3d(0, 0, 0) scale(${baseScale.toFixed(4)})`;
           currentInner.style.opacity = '1';
           currentInner.style.pointerEvents = 'auto';
         }
       }
     };
 
-    const onScrollOrResize = () => {
-      if (!rafId) {
-        rafId = window.requestAnimationFrame(updateStackEffects);
-      }
+    updateStackEffects();
+
+    // Attach single scroll listener directly to active Lenis instance
+    const onLenisScroll = (instance: { scroll: number }) => {
+      updateStackEffects(instance.scroll);
     };
 
-    updateStackEffects();
-    window.addEventListener('scroll', onScrollOrResize, { passive: true });
-    window.addEventListener('resize', onScrollOrResize, { passive: true });
+    let cancelMotionScroll: (() => void) | undefined;
+    if (lenis) {
+      lenis.on('scroll', onLenisScroll);
+    } else {
+      cancelMotionScroll = scroll(() => updateStackEffects());
+    }
+
+    const onResize = () => {
+      measureMetrics();
+      updateStackEffects();
+    };
+
+    window.addEventListener('resize', onResize, { passive: true });
+    window.addEventListener('load', onResize, { passive: true });
 
     return () => {
-      window.removeEventListener('scroll', onScrollOrResize);
-      window.removeEventListener('resize', onScrollOrResize);
-      if (rafId) window.cancelAnimationFrame(rafId);
+      cancelMotionScroll?.();
+      if (lenis) {
+        lenis.off('scroll', onLenisScroll);
+      }
+      window.removeEventListener('resize', onResize);
+      window.removeEventListener('load', onResize);
     };
-  }, []);
+  }, [lenis]);
 
   return (
     <section id="resume" className="bg-muted/50 py-20 md:py-28 overflow-x-clip scroll-mt-16">
@@ -215,7 +262,7 @@ export function Resume() {
                     }
                   }}
                   aria-label={`Open details for ${exp.role}`}
-                  className="experience-stacked-card group relative flex origin-top flex-col overflow-hidden rounded-2xl md:rounded-3xl w-full min-h-0 md:min-h-[480px] cursor-pointer transition-all duration-300 hover:border-primary/50 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary/40"
+                  className="experience-stacked-card group relative flex origin-top flex-col overflow-hidden rounded-2xl md:rounded-3xl w-full min-h-0 md:min-h-[480px] cursor-pointer transition-[border-color,box-shadow] duration-200 hover:border-primary/50 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary/40"
                 >
                   {/* Separated Top Header Part - Extends all the way across to the right */}
                   <div className="flex w-full items-center justify-between border-b border-border bg-muted/25 px-4 py-2.5 sm:px-6 sm:py-3.5 md:px-8 md:py-4">

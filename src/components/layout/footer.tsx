@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { scroll } from 'motion';
 
 const FAN_SPREAD_EM = 0.2;
 
@@ -17,6 +18,8 @@ export function Footer() {
     const measure = stack.querySelector<HTMLElement>('.footer-stack-measure');
     let raf = 0;
     let fontSizePx = 0;
+    let stackDocTop = 0;
+    let stackHeight = 0;
 
     const fit = () => {
       if (!measure) return;
@@ -28,6 +31,17 @@ export function Footer() {
         const px = ((stack.clientWidth * 0.96) / wordWidth) * 100;
         fontSizePx = px;
         stack.style.setProperty('--fs', `${px}px`);
+        const heightPx = px * (1.1 + FAN_SPREAD_EM * 2);
+        stack.style.height = `${heightPx.toFixed(1)}px`;
+        stackHeight = heightPx;
+
+        let top = 0;
+        let curr: HTMLElement | null = stack;
+        while (curr) {
+          top += curr.offsetTop;
+          curr = curr.offsetParent as HTMLElement | null;
+        }
+        stackDocTop = top || (stack.getBoundingClientRect().top + (window.scrollY || 0));
       }
     };
 
@@ -35,13 +49,13 @@ export function Footer() {
       raf = 0;
       if (!stack.offsetParent) {
         lines.forEach((line) => (line.style.transform = ''));
-        stack.style.height = '';
         return;
       }
 
       const viewportHeight = window.innerHeight;
-      const top = stack.getBoundingClientRect().top;
-      const total = stack.getBoundingClientRect().height;
+      const scrollY = typeof window !== 'undefined' ? (window.lenis?.scroll ?? window.scrollY ?? 0) : 0;
+      const top = stackDocTop - scrollY;
+      const total = stackHeight || 200;
 
       let progress = Math.min(Math.max((viewportHeight - top) / total, 0), 1);
       progress = 1 - Math.pow(1 - progress, 1.5);
@@ -53,13 +67,6 @@ export function Footer() {
           FAN_SPREAD_EM
         ).toFixed(3)}em)`;
       });
-
-      // Animate the box height so it hugs the fanned layers and the
-      // copyright below rides along with the lowest layer.
-      if (fontSizePx > 0) {
-        const heightPx = fontSizePx * (1.1 + FAN_SPREAD_EM * 2 * (1 - progress));
-        stack.style.height = `${heightPx.toFixed(1)}px`;
-      }
     };
 
     const schedule = () => {
@@ -79,7 +86,7 @@ export function Footer() {
     document.fonts.load('400 100px "Archivo Black"').then(refit).catch(() => {});
     document.fonts.addEventListener('loadingdone', refit);
     const retry = window.setTimeout(refit, 300);
-    window.addEventListener('scroll', schedule, { passive: true });
+    const cancelMotionScroll = scroll(() => schedule());
     window.addEventListener('resize', onResize, { passive: true });
     window.addEventListener('load', refit);
     schedule();
@@ -87,7 +94,7 @@ export function Footer() {
     return () => {
       window.clearTimeout(retry);
       document.fonts.removeEventListener('loadingdone', refit);
-      window.removeEventListener('scroll', schedule);
+      cancelMotionScroll();
       window.removeEventListener('resize', onResize);
       window.removeEventListener('load', refit);
       if (raf) cancelAnimationFrame(raf);

@@ -61,7 +61,7 @@
 
 @layer base {
   html {
-    @apply scroll-smooth;
+    scroll-behavior: auto !important;
   }
   * {
     @apply border-border;
@@ -297,19 +297,35 @@
   }
 }
 
-/* Offscreen section rendering optimization: skips layout and paint until scrolled near viewport */
-#skills {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 750px;
+/* Lenis Smooth Scroll Core Styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+  scroll-behavior: auto !important;
 }
 
-#resume {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 1000px;
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
-#contact {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 600px;
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* GPU promotion for Experience stacking cards to avoid layer repainting */
+.experience-stacked-card {
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
 
