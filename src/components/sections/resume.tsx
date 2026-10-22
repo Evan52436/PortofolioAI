@@ -9,6 +9,7 @@ import type { ImagePlaceholder } from '@/lib/placeholder-images';
 import { ExperienceModal } from '@/components/experience-modal';
 import { scroll } from 'motion';
 import { useSmoothScroll } from '@/components/smooth-scroll-provider';
+import { SnowCap } from '@/components/ui/snow-cap';
 
 type ExperienceItem = (typeof resume.experience)[number] & {
   image?: ImagePlaceholder;
@@ -157,6 +158,9 @@ export function Resume() {
         const scale = Math.max(0.85, baseScale - eased * 0.03);
         const opacity = discardProgress > 0 ? Math.max(0, 1 - Math.pow(discardProgress, 1.4)) : 1;
 
+        currentInner.dataset.discard = discardProgress > 0 ? discardProgress.toFixed(3) : '0';
+        currentInner.dataset.direction = String(direction);
+
         if (discardProgress > 0) {
           currentInner.style.transform = `translate3d(${x.toFixed(2)}%, ${y.toFixed(1)}px, 0) rotate(${rot.toFixed(2)}deg) scale(${scale.toFixed(4)})`;
           currentInner.style.opacity = opacity.toFixed(3);
@@ -262,10 +266,11 @@ export function Resume() {
                     }
                   }}
                   aria-label={`Open details for ${exp.role}`}
-                  className="experience-stacked-card group relative flex origin-top flex-col overflow-hidden rounded-2xl md:rounded-3xl w-full min-h-0 md:min-h-[480px] cursor-pointer transition-[border-color,box-shadow] duration-200 hover:border-primary/50 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary/40"
+                  className="experience-stacked-card group relative flex origin-top flex-col overflow-visible rounded-2xl md:rounded-3xl w-full min-h-0 md:min-h-[480px] cursor-pointer transition-[border-color,box-shadow] duration-200 hover:border-primary/50 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary/40"
                 >
+                  <SnowCap size="lg" />
                   {/* Separated Top Header Part - Extends all the way across to the right */}
-                  <div className="flex w-full items-center justify-between border-b border-border bg-muted/25 px-4 py-2.5 sm:px-6 sm:py-3.5 md:px-8 md:py-4">
+                  <div className="flex w-full items-center justify-between border-b border-border bg-muted/25 px-4 py-2.5 sm:px-6 sm:py-3.5 md:px-8 md:py-4 rounded-t-2xl md:rounded-t-3xl">
                     <span className="font-semibold text-primary text-xs sm:text-sm md:text-base truncate max-w-[65%]">
                       {exp.company}
                     </span>
@@ -275,7 +280,7 @@ export function Resume() {
                   </div>
 
                   {/* Main Card Body (Left Details + Right Picture Showcase) */}
-                  <div className="flex flex-1 flex-col md:flex-row md:items-stretch overflow-hidden">
+                  <div className="flex flex-1 flex-col md:flex-row md:items-stretch overflow-hidden rounded-b-2xl md:rounded-b-3xl">
                     {/* Left: Experience Details - Anchored to top with blue divider & View More button */}
                     <div className="flex w-full flex-col justify-between p-4 sm:p-6 md:p-7 lg:p-8 md:w-1/2">
                       <div className="flex flex-col flex-1 min-w-0">

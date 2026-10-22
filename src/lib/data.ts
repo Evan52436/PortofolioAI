@@ -115,7 +115,7 @@ export const projects = [
             getImage('project-webapp'),
             getImage('profile')
         ],
-        url: 'https://legacy.evanpranawa.my.id',
+        url: 'https://plain.evanpranawa.my.id',
         githubUrl: 'https://github.com',
         content: 'My Personal HandMade Portofolio featuring custom responsive design, smooth transitions, and showcased projects.'
     },

@@ -6,7 +6,9 @@ export function SnowfallEffect() {
   return (
     <Snowfall
       color="#FFFFFF"
-      snowflakeCount={40}
+      snowflakeCount={45}
+      wind={[1.0, 2.5]}
+      speed={[1.0, 2.2]}
       style={{
         position: 'fixed',
         width: '100vw',

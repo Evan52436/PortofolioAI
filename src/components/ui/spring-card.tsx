@@ -3,22 +3,26 @@
 import React, { useRef, useCallback } from 'react';
 import { motion, useMotionValue, useSpring, type HTMLMotionProps } from 'motion/react';
 import { cn } from '@/lib/utils';
+import { SnowCap } from '@/components/ui/snow-cap';
 
 interface SpringCardProps extends HTMLMotionProps<'div'> {
   children: React.ReactNode;
   maxX?: number;
   maxY?: number;
+  enableSnow?: boolean;
   className?: string;
 }
 
 /**
  * SpringCard provides a bounded spring cursor-follow effect inspired by
- * https://motion.dev/examples/js-spring-follow-cursor with limited movement space.
+ * https://motion.dev/examples/js-spring-follow-cursor with limited movement space,
+ * coupled with realistic snow accumulation on top and shake-off physics.
  */
 export function SpringCard({
   children,
   maxX = 28,
   maxY = 20,
+  enableSnow = true,
   className = '',
   ...props
 }: SpringCardProps) {
@@ -75,6 +79,7 @@ export function SpringCard({
       className={cn('relative hover:z-20', className)}
       {...props}
     >
+      {enableSnow && <SnowCap containerRef={cardRef} size="md" springX={springX} springY={springY} />}
       {children}
     </motion.div>
   );

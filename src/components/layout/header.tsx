@@ -37,7 +37,7 @@ export function Header() {
 
         <div className="flex flex-1 items-center justify-end gap-2">
           <Button asChild variant="outline" className="hidden md:inline-flex">
-            <a href="https://old.evanpranawa.my.id" target="_blank">
+            <a href="https://plain.evanpranawa.my.id" target="_blank">
               Legacy Site
             </a>
           </Button>
@@ -56,7 +56,7 @@ export function Header() {
                       {link.label}
                     </NavLink>
                   ))}
-                   <a href="https://old.evanpranawa.my.id/" target="_blank" className="text-lg text-muted-foreground transition-colors hover:text-primary" onClick={closeSheet}>
+                   <a href="https://plain.evanpranawa.my.id" target="_blank" className="text-lg text-muted-foreground transition-colors hover:text-primary" onClick={closeSheet}>
                     Legacy Site
                   </a>
                 </div>

@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import type { projects } from '@/lib/data';
+import { SnowCap } from '@/components/ui/snow-cap';
 
 type Project = (typeof projects)[0];
 
@@ -31,8 +32,9 @@ export function ProjectCard({
           onClick(cardRef.current);
         }
       }}
-      className="group flex h-full cursor-pointer transform flex-col overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-primary/50"
+      className="group relative flex h-full cursor-pointer transform flex-col overflow-visible transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-primary/50"
     >
+      <SnowCap size="md" shedOnHover />
       <CardHeader>
         <div className="relative mb-4 h-48 w-full overflow-hidden rounded-lg">
           <Image

@@ -1,6 +1,7 @@
 import { studentData } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { HeroPhotoCard } from '@/components/hero-photo-card';
+import { SnowCap } from '@/components/ui/snow-cap';
 
 export function Hero() {
   const photos =
@@ -40,17 +41,23 @@ export function Hero() {
               <Button
                 asChild
                 size="lg"
-                className="bg-[#89abd2] hover:bg-[#789ac1] text-slate-950 font-semibold px-7 py-6 rounded-xl shadow-md transition-all duration-300 hover:scale-105"
+                className="relative overflow-visible bg-[#89abd2] hover:bg-[#789ac1] text-slate-950 font-semibold px-7 py-6 rounded-xl shadow-md transition-all duration-300 hover:scale-105"
               >
-                <a href="#contact">Contact me</a>
+                <a href="#contact" className="relative">
+                  <SnowCap size="sm" shedOnHover />
+                  <span>Contact me</span>
+                </a>
               </Button>
               <Button
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-2 border-foreground/30 hover:border-foreground/80 hover:bg-foreground/5 text-foreground font-semibold px-7 py-6 rounded-xl transition-all duration-300 hover:scale-105"
+                className="relative overflow-visible border-2 border-foreground/30 hover:border-foreground/80 hover:bg-foreground/5 text-foreground font-semibold px-7 py-6 rounded-xl transition-all duration-300 hover:scale-105"
               >
-                <a href="#portfolio">See my works</a>
+                <a href="#portfolio" className="relative">
+                  <SnowCap size="sm" shedOnHover />
+                  <span>See my works</span>
+                </a>
               </Button>
             </div>
 
@@ -69,7 +76,8 @@ export function Hero() {
               <HeroPhotoCard frontPhoto={frontPhoto} backPhoto={backPhoto} />
 
               {/* Corner Bottom-Left Overlapping Equalizer Widget (Dense, Landscape, White-Bluish BG, #89abd2 Bars, No Text) */}
-              <div className="absolute -bottom-4 -left-3 sm:-bottom-5 sm:-left-5 z-20 w-36 h-16 sm:w-44 sm:h-20 rounded-xl bg-[#dfe7f2] dark:bg-[#1a2332] border border-[#c4d5e7] dark:border-slate-700/80 p-2.5 sm:p-3 shadow-xl select-none pointer-events-auto flex items-end justify-center">
+              <div className="absolute -bottom-4 -left-3 sm:-bottom-5 sm:-left-5 z-20 w-36 h-16 sm:w-44 sm:h-20 rounded-xl bg-[#dfe7f2] dark:bg-[#1a2332] border border-[#c4d5e7] dark:border-slate-700/80 p-2.5 sm:p-3 shadow-xl select-none pointer-events-auto flex items-end justify-center overflow-visible">
+                <SnowCap size="sm" />
                 <div className="flex items-end justify-between gap-[2px] sm:gap-[2.5px] h-full w-full">
                   <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-1" />
                   <div className="flex-1 h-full bg-[#89abd2] rounded-none animate-eq-2" />

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { RefreshCw } from 'lucide-react';
 import type { ImagePlaceholder } from '@/lib/placeholder-images';
+import { SnowCap } from '@/components/ui/snow-cap';
 
 interface HeroPhotoCardProps {
   frontPhoto: ImagePlaceholder;
@@ -31,6 +32,7 @@ export function HeroPhotoCard({ frontPhoto, backPhoto }: HeroPhotoCardProps) {
       aria-label="Click to flip profile photo"
       className="group relative h-full w-full cursor-pointer perspective-1000 focus:outline-none"
     >
+      <SnowCap size="lg" flingTrigger={isFlipped} />
       <div
         className={`relative h-full w-full rounded-2xl sm:rounded-3xl transition-all duration-700 ease-in-out transform-style-3d shadow-xl hover:shadow-2xl ${
           isFlipped ? 'rotate-y-180' : ''

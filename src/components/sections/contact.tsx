@@ -1,6 +1,6 @@
 import { ContactForm } from '@/components/contact-form';
-
 import { Button } from '@/components/ui/button';
+import { SnowCap } from '@/components/ui/snow-cap';
 
 export function Contact() {
   return (
@@ -15,9 +15,10 @@ export function Contact() {
         <div className="mx-auto mt-12 max-w-xl">
           <ContactForm />
           <div className="mt-8 flex justify-center">
-            <Button asChild size="lg" className="w-full sm:w-64">
-              <a href="https://s.id/chargerleptp" rel="noopener noreferrer">
-                More Contact Details
+            <Button asChild size="lg" className="w-full sm:w-64 relative overflow-visible">
+              <a href="https://s.id/chargerleptp" rel="noopener noreferrer" className="relative">
+                <SnowCap size="sm" />
+                <span>More Contact Details</span>
               </a>
             </Button>
           </div>

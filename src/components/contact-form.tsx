@@ -5,10 +5,12 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
+import { SnowCap } from '@/components/ui/snow-cap';
 
 export function ContactForm() {
   return (
-    <Card>
+    <Card className="relative overflow-visible">
+      <SnowCap size="lg" />
       <form action="https://formsubmit.co/contact@evanpranawa.my.id" method="POST">
         <CardContent className="space-y-6 pt-6">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -27,8 +29,9 @@ export function ContactForm() {
           </div>
         </CardContent>
         <CardFooter>
-          <Button type="submit" className="w-full">
-            Send Message
+          <Button type="submit" className="w-full relative overflow-visible">
+            <SnowCap size="sm" />
+            <span>Send Message</span>
           </Button>
         </CardFooter>
       </form>
