@@ -51,7 +51,12 @@ export function HeroPhotoCard({ frontPhoto, backPhoto }: HeroPhotoCardProps) {
         </div>
 
         {/* Back Side */}
-        <div className="absolute inset-0 overflow-hidden rounded-2xl sm:rounded-3xl backface-hidden rotate-y-180 border-2 border-border/80 bg-muted/40">
+        <div
+          data-swarm-ignore="true"
+          className={`absolute inset-0 overflow-hidden rounded-2xl sm:rounded-3xl backface-hidden rotate-y-180 border-2 border-border/80 bg-muted/40 ${
+            !isFlipped ? 'invisible' : ''
+          }`}
+        >
           <Image
             src={backPhoto.imageUrl}
             alt={backPhoto.description}

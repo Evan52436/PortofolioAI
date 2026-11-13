@@ -150,6 +150,22 @@ export const projects = [
     },
     {
         id: 'project-8',
+        title: 'Quarter Finalist Competition "JHIC" ',
+        category: 'Sertificate',
+        description: 'Quarter Finalist in "Jagoan Hosting Innovation Competition" at National Level',
+        technologies: ['React', 'Vite', 'Nginx', 'Cloudflare'],
+        image: getImage('jhic.webp'),
+        gallery: [
+            getImage('jhic.webp'),
+            getImage('jhic1.webp'),
+            getImage('jhic2.webp')
+        ],
+        url: 'https://drive.google.com/drive/folders/16Pfrm09J6RPiQidAWItv1YO6y2peF88s?usp=sharing',
+        githubUrl: 'https://drive.google.com/file/d/1JQGwmah74LS3t4j9rrVzhQRno6HHlJ7g/view?usp=drive_link',
+        content: 'Competed in national level website building competition held by Jagoan Hosting. The competition was held in multiple elimination rounds, and our team managed to pass the quarter final round.'
+    },
+    {
+        id: 'project-9',
         title: 'Project Owner of the "Decoupled Storage System" ',
         category: 'Sertificate',
         description: 'Project Owner of "Decoupled Storage System" at school project showcase',
@@ -160,7 +176,7 @@ export const projects = [
         ],
         url: 'https://drive.google.com/drive/folders/16Pfrm09J6RPiQidAWItv1YO6y2peF88s?usp=sharing',
         githubUrl: 'https://drive.google.com/file/d/1JQGwmah74LS3t4j9rrVzhQRno6HHlJ7g/view?usp=drive_link',
-        content: 'Competed in province-level Cybersecurity challenges covering cryptography, web exploitation, and reverse engineering.'
+        content: 'Project Owner of Decoupled Storage System.'
     },
 ];
 

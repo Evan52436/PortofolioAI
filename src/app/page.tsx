@@ -4,7 +4,7 @@ import { Hero } from '@/components/sections/hero';
 import { Portfolio } from '@/components/sections/portfolio';
 import { Resume } from '@/components/sections/resume';
 import { Contact } from '@/components/sections/contact';
-import { LoadingScreen } from '@/components/loading-screen';
+import { SwarmIntro } from '@/components/swarm-intro';
 import { Skills } from '@/components/sections/skills';
 import { DoorTransitionProvider } from '@/components/ui/door-transition';
 import { SnowfallEffect } from '@/components/snowfall-effect';
@@ -17,8 +17,8 @@ export default function Home() {
       <SmoothScrollProvider>
         <div className="flex min-h-screen flex-col">
           <ConsoleEasterEgg />
-          {/* Page renders underneath the loader so the hero shows through the blur */}
-          <LoadingScreen />
+          {/* Swarm Cursors rebuild & prototyping intro animation */}
+          <SwarmIntro />
           <SnowfallEffect />
           <Header />
           <main className="flex-1">

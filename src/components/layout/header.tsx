@@ -36,6 +36,21 @@ export function Header() {
         </nav>
 
         <div className="flex flex-1 items-center justify-end gap-2">
+          <Button
+            variant="outline"
+            className="hidden md:inline-flex"
+            onClick={() => {
+              if (typeof window !== 'undefined') {
+                const swarm = (window as any).__swarmRebuild;
+                if (swarm) {
+                  swarm.start?.();
+                }
+              }
+            }}
+            title="Rebuild page with Swarm Cursors"
+          >
+            Rebuild
+          </Button>
           <Button asChild variant="outline" className="hidden md:inline-flex">
             <a href="https://plain.evanpranawa.my.id" target="_blank">
               Legacy Site
@@ -56,6 +71,21 @@ export function Header() {
                       {link.label}
                     </NavLink>
                   ))}
+                  <button
+                    type="button"
+                    className="text-lg text-muted-foreground transition-colors hover:text-primary text-left"
+                    onClick={() => {
+                      closeSheet();
+                      if (typeof window !== 'undefined') {
+                        const swarm = (window as any).__swarmRebuild;
+                        if (swarm) {
+                          swarm.start?.();
+                        }
+                      }
+                    }}
+                  >
+                    Rebuild Site
+                  </button>
                    <a href="https://plain.evanpranawa.my.id" target="_blank" className="text-lg text-muted-foreground transition-colors hover:text-primary" onClick={closeSheet}>
                     Legacy Site
                   </a>
